@@ -1,4 +1,4 @@
-package fr.isep.super_morpion;
+package fr.isep.adopte_un_logement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
