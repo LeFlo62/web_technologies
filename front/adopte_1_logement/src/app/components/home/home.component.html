@@ -1,0 +1,16 @@
+<div class="housing-list">
+    <div class="housing-card" *ngFor="let housing of housingList">
+        <img [src]="housing.image" alt="housing image">
+        <div class="housing-card-content">
+            <div class="housing-card-content-title">
+                {{ housing.title }}
+            </div>
+            <div class="housing-card-content-ranking">
+                <p-rating [(ngModel)]="housing.rating" [readonly]="true" [cancel]="false"></p-rating>
+            </div>
+            <div class="housing-card-content-author">
+                {{ housing.author }}
+            </div>
+        </div>
+    </div>
+</div>
