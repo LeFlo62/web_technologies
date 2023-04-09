@@ -1,16 +1,20 @@
 <div class="housing-list">
-    <div class="housing-card" *ngFor="let housing of housingList">
+    <div class="housing-card" *ngFor="let housing of housingList" [routerLink]="'/housing/' + housing.id">
         <img [src]="housing.image" alt="housing image">
         <div class="housing-card-content">
-            <div class="housing-card-content-title">
-                {{ housing.title }}
+            <div class="housing-card-description">
+                <div class="housing-card-content-title">
+                    {{ housing.title }}
+                </div>
+                <div class="housing-card-content-ranking">
+                    <p-rating [(ngModel)]="housing.rating" [readonly]="true" [cancel]="false"></p-rating>
+                    <p>{{ housing.rating | number:'1.0-1' }}</p>
+                </div>
+                <div class="housing-card-content-author">
+                    {{ housing.authorId }}
+                </div>
             </div>
-            <div class="housing-card-content-ranking">
-                <p-rating [(ngModel)]="housing.rating" [readonly]="true" [cancel]="false"></p-rating>
-            </div>
-            <div class="housing-card-content-author">
-                {{ housing.author }}
-            </div>
+            <p-avatar icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
         </div>
     </div>
 </div>

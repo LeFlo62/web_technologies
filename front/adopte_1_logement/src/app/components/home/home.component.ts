@@ -16,7 +16,7 @@ export class HomeComponent {
         {
           id: 'zdaz45d4s321dz81',
           title: 'House ' + i,
-          author: 'Author ' + i,
+          authorId: 'Author ' + i,
           rating: Math.random() * 5,
           image: 'https://picsum.photos/300/300'
         }

@@ -1,7 +1,7 @@
 export interface HousingListItem {
     id: string;
     title: string;
-    author: string;
+    authorId: string;
     rating: number;
     image: string;
 };

@@ -26,7 +26,28 @@
         }
 
         .housing-card-content {
-            
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .housing-card-description{
+                .housing-card-content-title {
+                    font-weight: bold;
+                }
+
+                .housing-card-content-ranking{
+                    p-rating{
+                        display: inline-block;
+                    }
+
+                    p{
+                        display: inline-block;
+                        padding: 0 10px 0 10px;
+                        margin: 0;
+                    }
+                }
+            }
         }
     }
 }
