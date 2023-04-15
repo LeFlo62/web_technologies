@@ -1,27 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HousingListItem } from 'src/app/data/housing';
+import { HousingService } from 'src/app/services/housing.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   housingList : HousingListItem[] = [];
 
-  constructor() {
-    for(let i : number = 0; i < 10; i++) {
-      this.housingList.push(
-        {
-          id: 'zdaz45d4s321dz81',
-          title: 'House ' + i,
-          authorId: 'Author ' + i,
-          rating: Math.random() * 5,
-          image: 'https://picsum.photos/300/300'
-        }
-      );
-    }
+  constructor(private housingService : HousingService) {}
+
+  ngOnInit(): void {
+    this.housingService.getAllHousing().subscribe(
+      (data) => {
+        this.housingList = data;
+      }
+    );
   }
 
 }
