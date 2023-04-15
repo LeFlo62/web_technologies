@@ -6,6 +6,7 @@ import fr.isep.adopte_un_logement.repositories.HousingRepository;
 import fr.isep.adopte_un_logement.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class HousingService {
     }
 
     public void createHousing(Housing toEntity) {
-        imageRepository.saveAll(toEntity.getImages());
         housingRepository.save(toEntity);
     }
 }

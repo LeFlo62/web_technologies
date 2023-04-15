@@ -5,6 +5,7 @@ import fr.isep.adopte_un_logement.entities.Image;
 import fr.isep.adopte_un_logement.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -23,4 +24,7 @@ public class ImageService {
         return imageRepository.findById(id);
     }
 
+    public Image createImage(Image image) {
+        return imageRepository.save(image);
+    }
 }

@@ -8,6 +8,7 @@ import fr.isep.adopte_un_logement.entities.Image;
 import fr.isep.adopte_un_logement.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -23,14 +24,14 @@ public class HousingMapper implements EntityToDTOMapper<Housing, HousingListItem
         this.applicationConfig = applicationConfig;
     }
 
-    @Override
+    @Override @Transactional(readOnly = true)
     public HousingListItemDTO toDTO(Housing housing) {
         return HousingListItemDTO.builder()
                 .id(housing.getId().toString())
                 .title(housing.getTitle())
                 .authorName(housing.getAuthor().getFirstName() + " " + housing.getAuthor().getLastName())
                 .rating(housing.getRating())
-                .image(applicationConfig.getApiUrl() + "images/" + housing.getImages().get(0).getId())
+                .image(applicationConfig.getApiUrl() + "image/" + housing.getImages().get(0))
                 .build();
     }
 
@@ -39,13 +40,6 @@ public class HousingMapper implements EntityToDTOMapper<Housing, HousingListItem
         return Housing.builder()
                 .title(housingCreationDTO.getTitle())
                 .description(housingCreationDTO.getDescription())
-                .images(Arrays.stream(housingCreationDTO.getImages()).map(image -> {
-                            try {
-                                return Image.builder().content(image.getBytes()).build();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }).toList())
                 .address(housingCreationDTO.getAddress())
                 .author(User.builder().id(UUID.fromString(housingCreationDTO.getAuthorId())).build())
                 .build();

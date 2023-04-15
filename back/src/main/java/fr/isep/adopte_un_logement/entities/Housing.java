@@ -1,6 +1,7 @@
 package fr.isep.adopte_un_logement.entities;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.*;
 
 import java.util.List;
@@ -23,9 +24,7 @@ public class Housing {
 
     private float rating = 0;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "housing_id")
-    private List<Image> images;
+    private List<UUID> images;
 
     private String description;
 
