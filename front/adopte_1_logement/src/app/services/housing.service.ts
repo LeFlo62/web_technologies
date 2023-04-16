@@ -16,4 +16,12 @@ export class HousingService {
   public getAllHousing() : Observable<HousingListItem[]> {
     return this.http.get<HousingListItem[]>(this.url + "/list");
   }
+
+  public getPagedHousing(page : number, pageSize : number, sorting : string = "") : Observable<HousingListItem[]> {
+    let sortString = "";
+    if (sorting != "") {
+      sortString = "&sort=" + sorting;
+    }
+    return this.http.get<HousingListItem[]>(this.url + "/list/paginated?page=" + page + "&size=" + pageSize + sortString);
+  }
 }
