@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HousingListItem } from 'src/app/data/housing';
+import { HousingListItem } from '../../data/housing';
 
 @Component({
   selector: 'app-home',
