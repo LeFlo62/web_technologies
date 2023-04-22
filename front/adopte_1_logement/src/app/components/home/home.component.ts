@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HousingListItem } from 'src/app/data/housing';
-import { HousingService } from 'src/app/services/housing.service';
+import { HousingListItem } from '../../data/housing';
+import { HousingService } from '../../services/housing.service';
 
 @Component({
   selector: 'app-home',

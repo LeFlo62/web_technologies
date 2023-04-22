@@ -1,0 +1,102 @@
+.container {
+    margin: 0 2rem;
+    position: absolute; // To set a specific width and height
+    width: calc(100% - 4rem); // 4rem = margin
+    height: calc(100% - 66px - 2rem); //66px = navbar height & 2rem = margin
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        display: flex;
+        margin: 1rem 0;
+
+        .back-to-results {
+            display: flex;
+            align-items: center;
+            &:hover {
+                cursor: pointer;
+            }
+            p {
+                margin-left: 0.5rem;
+            }
+        }
+        .research {
+            margin-left: auto;
+        }
+
+    }
+
+    h2 {
+        margin: 0.5rem 0 1rem 0;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+
+            img {
+                height: 20rem;
+                border-radius: 10px;
+            }
+            .tenants-review {
+                display: flex;
+                align-items: center;
+                margin: 1rem 0;
+                
+                p-rating {
+                    margin: 0 0.5rem;
+                }
+                a {
+                    margin-left: auto;
+                }
+            }
+            .landlord-requests {
+                display: flex;
+                flex: 1;
+
+                .services {
+                    width: calc(50% - 0.5rem);
+                }
+                .constraints {
+                    margin-left: auto;
+                    width: calc(50% - 0.5rem);
+                }
+            }
+        }
+        .right-side {
+            flex: 1;
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+
+            .landlord-info {
+                display: flex;
+                
+                .landlord-description {
+                    height: 7rem;
+                    flex: 1;
+                    margin: 0 1rem 1rem 0;
+                }
+            }
+            .housing-description {
+                flex: 1;
+            }
+        }
+    }
+
+    h3 {
+        margin: 0 0 1rem 0;
+    }
+    p {
+        margin: 0;
+    }
+    ul, li {
+        margin: 0;
+    }
+}

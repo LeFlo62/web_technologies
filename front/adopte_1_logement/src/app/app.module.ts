@@ -11,11 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { AvatarModule } from 'primeng/avatar';
+import { HousingComponent } from './components/housing/housing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    HousingComponent
   ],
   imports: [
     BrowserModule,
