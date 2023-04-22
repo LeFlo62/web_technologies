@@ -1,23 +1,26 @@
 package fr.isep.adopte_un_logement.controller;
 
-import fr.isep.adopte_un_logement.entities.Image;
 import fr.isep.adopte_un_logement.service.ImageService;
+import org.apache.catalina.connector.ClientAbortException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 @RequestMapping("/image")
 @RestController
 public class ImageController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageController.class);
     private ImageService imageService;
 
     @Autowired
@@ -25,13 +28,24 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Resource> getImage(@PathVariable("id") String id) {
-        Optional<Image> imageOpt = imageService.getImage(UUID.fromString(id));
-        if(imageOpt.isPresent()){
-            return ResponseEntity.ok().body(new ByteArrayResource(imageOpt.get().getContent()));
-        }
-        return ResponseEntity.notFound().build();
+    @GetMapping(value="/{id}", produces = "image/jpg")
+    public StreamingResponseBody getImage(@PathVariable("id") String id) {
+        final UUID uuid = UUID.fromString(id);
+        return new StreamingResponseBody() {
+            @Override
+            public void writeTo(OutputStream outputStream) throws IOException {
+                try {
+                    InputStream input = imageService.getImage(uuid);
+
+                    input.transferTo(outputStream);
+                } catch (ClientAbortException e){
+                    LOGGER.debug("Client aborted");
+                } catch (Exception e) {
+                    throw new IOException(e);
+                }
+
+            }
+        };
     }
 
 }

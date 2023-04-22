@@ -2,7 +2,6 @@ package fr.isep.adopte_un_logement.service;
 
 import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.repositories.HousingRepository;
-import fr.isep.adopte_un_logement.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,13 +13,11 @@ import java.util.UUID;
 @Service
 public class HousingService {
 
-    private ImageRepository imageRepository;
     private HousingRepository housingRepository;
 
     @Autowired
-    public HousingService(HousingRepository housingRepository, ImageRepository imageRepository) {
+    public HousingService(HousingRepository housingRepository) {
         this.housingRepository = housingRepository;
-        this.imageRepository = imageRepository;
     }
 
     public List<Housing> getHousingList() {

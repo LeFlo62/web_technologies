@@ -4,14 +4,11 @@ import fr.isep.adopte_un_logement.config.ApplicationConfig;
 import fr.isep.adopte_un_logement.dto.HousingCreationDTO;
 import fr.isep.adopte_un_logement.dto.HousingListItemDTO;
 import fr.isep.adopte_un_logement.entities.Housing;
-import fr.isep.adopte_un_logement.entities.Image;
 import fr.isep.adopte_un_logement.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.UUID;
 
 @Component

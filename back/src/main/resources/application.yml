@@ -1,3 +1,8 @@
+minio:
+  url: ${MINIO_URL}
+  user: ${MINIO_USER}
+  password: ${MINIO_PASSWORD}
+
 spring:
   datasource:
     url: jdbc:postgresql://${DB_URL}:5432/adopteunlogement

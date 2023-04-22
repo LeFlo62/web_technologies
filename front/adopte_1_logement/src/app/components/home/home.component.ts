@@ -9,14 +9,23 @@ import { HousingService } from 'src/app/services/housing.service';
 })
 export class HomeComponent implements OnInit {
 
+  private static readonly PAGE_SIZE : number = 20;
+
   housingList : HousingListItem[] = [];
+
+  page : number = 0;
 
   constructor(private housingService : HousingService) {}
 
   ngOnInit(): void {
-    this.housingService.getAllHousing().subscribe(
+    this.loadMoreHousing();
+  }
+
+  loadMoreHousing() {
+    this.housingService.getPagedHousing(this.page, HomeComponent.PAGE_SIZE).subscribe(
       (data) => {
-        this.housingList = data;
+        this.housingList.push(...data);
+        ++this.page;
       }
     );
   }
