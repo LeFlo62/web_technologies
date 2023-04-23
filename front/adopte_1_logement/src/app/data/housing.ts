@@ -4,6 +4,7 @@ export interface HousingListItem {
     authorName: string;
     rating: number;
     image: string;
+    imageLoaded?: boolean;
 };
 
 export interface Housing {

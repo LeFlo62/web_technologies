@@ -5,13 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { HousingComponent } from './components/housing/housing.component';
 
 import { MenubarModule } from 'primeng/menubar';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { AvatarModule } from 'primeng/avatar';
-import { HousingComponent } from './components/housing/housing.component';
+import { SkeletonModule } from 'primeng/skeleton';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { HousingComponent } from './components/housing/housing.component';
     FormsModule,
     ButtonModule,
     RatingModule,
-    AvatarModule
+    AvatarModule,
+    SkeletonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
