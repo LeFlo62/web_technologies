@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.UUID;
 
 @RequestMapping("/image")
@@ -31,20 +30,17 @@ public class ImageController {
     @GetMapping(value="/{id}", produces = "image/jpg")
     public StreamingResponseBody getImage(@PathVariable("id") String id) {
         final UUID uuid = UUID.fromString(id);
-        return new StreamingResponseBody() {
-            @Override
-            public void writeTo(OutputStream outputStream) throws IOException {
-                try {
-                    InputStream input = imageService.getImage(uuid);
+        return outputStream -> {
+            try {
+                InputStream input = imageService.getImage(uuid);
 
-                    input.transferTo(outputStream);
-                } catch (ClientAbortException e){
-                    LOGGER.debug("Client aborted");
-                } catch (Exception e) {
-                    throw new IOException(e);
-                }
-
+                input.transferTo(outputStream);
+            } catch (ClientAbortException e){
+                LOGGER.debug("Client aborted");
+            } catch (Exception e) {
+                throw new IOException(e);
             }
+
         };
     }
 

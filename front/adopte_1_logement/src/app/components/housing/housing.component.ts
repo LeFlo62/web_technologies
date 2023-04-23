@@ -8,13 +8,9 @@ import { HousingService } from 'app/services/housing.service';
   templateUrl: './housing.component.html',
   styleUrls: ['./housing.component.scss']
 })
-export class HousingComponent implements OnInit, OnDestroy {
+export class HousingComponent implements OnInit {
   housingData: Housing | any;
   housingId: String | any;
-
-  // Subscribe - Unsubscribe
-  private idSub: any;
-  private housingDataSub: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +18,7 @@ export class HousingComponent implements OnInit, OnDestroy {
   ){}
 
   ngOnInit(): void {
-    this.idSub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.housingId = params['id']
     })
     // this.housingDataSub = this.housingService.getHousingDataFromId(this.housingId).subscribe({
@@ -40,10 +36,5 @@ export class HousingComponent implements OnInit, OnDestroy {
       housingDescription: "Description d'une annonce super super cool !!",
       landlordDescription: "A voir qu'est-ce qu'on met dans cette description du bailleur"
     }
-  }
-
-  ngOnDestroy(): void {
-    this.idSub.unsubscribe();
-    this.housingDataSub.unsubscribe();
   }
 }
