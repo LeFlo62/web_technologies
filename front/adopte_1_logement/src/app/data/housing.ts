@@ -7,12 +7,21 @@ export interface HousingListItem {
     imageLoaded?: boolean;
 };
 
+export interface Review {
+    author: string;
+    date: string;
+    content: string;
+    useful: number;
+    useless: number;
+};
+
 export interface Housing {
     title: string, 
-    img: string,
+    images: any[],
     rating: number,
     services: string[],
     constraints: string[],
     housingDescription: string,
-    landlordDescription: string
+    landlordDescription: string,
+    reviews: Review[]
 }

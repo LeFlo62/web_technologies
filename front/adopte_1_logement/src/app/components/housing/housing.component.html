@@ -9,11 +9,20 @@
     <h2>{{housingData.title}}</h2>
     <div class="content">
         <div class="left-side">
-            <img [src]="housingData.img" alt="">
+            <p-carousel [value]="housingData.images" [numVisible]="1" [circular]="true">
+                <ng-template let-images pTemplate="item">
+                    <img [src]="images.src"
+                    style="overflow: hidden; background-repeat: no-repeat;"
+                    width="100%" 
+                    height="100%"
+                    [alt]="images.alt"
+                    [title]="images.title">
+                </ng-template>
+            </p-carousel>
             <div class="tenants-review box">
                 <p>Notes des locataires : </p>
                 <p-rating [(ngModel)]="housingData.rating" [readonly]="true" [cancel]="false"></p-rating>
-                <a href="/">Voir les avis</a>
+                <button pButton pRipple type="button" label="Voir les avis" class="p-button-sm p-button-text p-button-plain" (click)="onShowComments()"></button>
             </div>
             <div class="landlord-requests">
                 <div class="services box">
@@ -34,6 +43,10 @@
             <div class="landlord-info">
                 <div class="landlord-description box">{{housingData.landlordDescription}}</div>
                 <p-avatar icon="pi pi-user" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+            </div>
+            <div class="buttons">
+                <button pButton label="Contacter le bailleur" class="p-button-success" style="width: 70%;"></button>
+                <button pButton pRipple label="Favoris" class="favorites" styleClass="p-button-sm p-button-primary" icon="pi pi-plus" style="width: 25%;"></button>
             </div>
             <div class="housing-description box">
                 <h3>Description :</h3>
