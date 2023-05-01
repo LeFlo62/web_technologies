@@ -1,0 +1,232 @@
+.container{
+    position: absolute;
+    width: 100%;
+    height: 92.79%;
+    background: white;
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);  */
+    display:flex ;
+    column-gap: 5%;
+    justify-content: center;
+    padding-right: 0.01em;
+    padding-left: 0.01em;
+}
+
+.liste-conversation{
+    width: 575px;
+    height: 800px;
+    float:left;
+    background: blue;
+    margin: 1%;
+    position:relative;
+}
+.right-container{
+    width: 1175px;
+    height: 800px;
+    float:right;
+    background: white;
+    margin : 1%;
+    position:relative; 
+
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-global{
+    width: 100%;
+    height : 100%;
+    margin:0 auto;
+    border-radius: 25px;
+    /*box-shadow: 0 30px 70px 0px rgba(0, 0, 0, 0.2);*/
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: relative;
+}
+.nav-top{
+    position : absolute;
+    top: 0;
+    background: #D9D9D9;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: left;
+    border-bottom: 1px solid rgba(51,51,51,0.2);
+    /*border-top-left-radius: 25px;
+    border-top-right-radius: 25px;*/
+    border-radius: 10px;
+    padding: 20px;
+}
+.nav-top p{
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+    position:relative;
+    top: 0px;
+
+}
+.location {
+    width: 100px;
+    display: flex;
+    align-items: center;
+}
+.location img{
+    width: 30px;
+    margin-left: 10px;
+}
+
+.location p{
+    font-size: 20px;
+    margin-left: 5px;
+} 
+
+.utilisateur{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.utilisateur p:nth-child(1){
+    font-size: 20px;
+    margin-left: 5px;
+}
+.utilisateur p:nth-child(2){
+    font-size: 14px;
+    margin-left: 5px;
+}
+.logos-call{
+    width:100px;
+    display: flex;
+}
+.logos-call img{
+    margin-right: 20px;
+    width: 30px;
+}
+
+/* **********CONVERSATION********** */
+.conversation {
+    width: 100%;
+    height: 70%;
+    margin: 0 auto;
+    display:flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #D9D9D9;
+    justify-content: center;
+    position: relative;
+    bottom: 40px;
+}
+.talk{
+    margin: 20px 0;
+    color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    width: 50%;
+}
+
+.talk img{
+    width: 50px;
+    border-radius: 50%;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+.talk p{
+    padding: 15px;
+    line-height: 25px;
+    border-radius: 0px; 
+}
+.right {
+    margin-left: auto;
+}
+.right p {
+    margin-right: 44%;
+    background: #B2C0C8;
+    position: relative;
+    left: 43%;
+}
+.left p{
+    margin-left: 10px;
+    background: #B2C0C8;
+    color:#000
+}
+
+/* **********FORM********** */
+
+.chat-form{
+    width:100%;
+    height: 90px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background: #D9D9D9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-inputs-stuffs{
+    background: #D9D9D9;
+    display: flex;
+    width: 90%;
+    height: 60px;
+    border-radius: 9999px;
+}
+
+.group-inp{
+    width: 90%;
+    justify-content: center;
+    padding-top: 10px;
+}
+.group-inp-img{
+    width:30px;
+}
+.group-inp textarea {
+    resize: none;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+    padding-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #c1c1c1;
+}
+
+.files-logo-cont{
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding-left: 10px;
+    display: block; 
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.files-logo-cont{
+    width: 30px;
+}
+
+.submit-msg-btn{
+    background: #D9D9D9;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    width:70px;
+    display:flex;
+    padding-right: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+img {
+    width: 30px;
+} 

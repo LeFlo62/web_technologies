@@ -18,6 +18,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessagerieComponent } from './components/messagerie/messagerie.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     HousingComponent,
     ReviewsComponent,
-    ReviewComponent
+    ReviewComponent,
+    MessagerieComponent,
   ],
   imports: [
     BrowserModule,
