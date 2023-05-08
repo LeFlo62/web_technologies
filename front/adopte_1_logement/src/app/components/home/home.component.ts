@@ -9,7 +9,7 @@ import { HousingService } from '../../services/housing.service';
 })
 export class HomeComponent implements OnInit {
 
-  private static readonly PAGE_SIZE : number = 10;
+  private static readonly PAGE_SIZE : number = 20;
 
   housingList : HousingListItem[] = [];
 
@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   loadMoreHousing() {
     if(this.hasElementsLeft){
       this.housingList.push(...Array(HomeComponent.PAGE_SIZE));
-      
 
       this.housingService.getPagedHousing(this.page, HomeComponent.PAGE_SIZE).subscribe(
         (data) => {

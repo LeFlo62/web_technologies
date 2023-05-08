@@ -1,43 +1,45 @@
-<div class="container">
-    <div class="header">
-        <div class="back-to-results" [routerLink]="'/home'">
-            <i class="pi pi-arrow-left"></i>
-            <p>Retour aux résultats</p>
+<div>
+    <div class="container">
+        <div class="header">
+            <div class="back-to-results" [routerLink]="'/home'">
+                <i class="pi pi-arrow-left"></i>
+                <p>Retour aux résultats</p>
+            </div>
+            <p class="research">Rechercher</p>
         </div>
-        <p class="research">Rechercher</p>
-    </div>
-    <h2>{{housingData.title}}</h2>
-    <div class="content">
-        <div class="left-side">
-            <img [src]="housingData.img" alt="">
-            <div class="tenants-review box">
-                <p>Notes des locataires : </p>
-                <p-rating [(ngModel)]="housingData.rating" [readonly]="true" [cancel]="false"></p-rating>
-                <a href="/">Voir les avis</a>
-            </div>
-            <div class="landlord-requests">
-                <div class="services box">
-                    <h3>Services :</h3>
-                    <ul class="servicesList">
-                        <li *ngFor="let service of housingData.services">{{service}}</li>
-                    </ul>
+        <h2>{{housingData.title}}</h2>
+        <div class="content">
+            <div class="left-side">
+                <img [src]="housingData.img" alt="">
+                <div class="tenants-review box">
+                    <p>Notes des locataires : </p>
+                    <p-rating [(ngModel)]="housingData.rating" [readonly]="true" [cancel]="false"></p-rating>
+                    <a href="/">Voir les avis</a>
                 </div>
-                <div class="constraints box">
-                    <h3>Contraintes :</h3>
-                    <ul class="constraintsList">
-                        <li *ngFor="let constraint of housingData.constraints">{{constraint}}</li>
-                    </ul>
+                <div class="landlord-requests">
+                    <div class="services box">
+                        <h3>Services :</h3>
+                        <ul class="servicesList">
+                            <li *ngFor="let service of housingData.services">{{service}}</li>
+                        </ul>
+                    </div>
+                    <div class="constraints box">
+                        <h3>Contraintes :</h3>
+                        <ul class="constraintsList">
+                            <li *ngFor="let constraint of housingData.constraints">{{constraint}}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="right-side">
-            <div class="landlord-info">
-                <div class="landlord-description box">{{housingData.landlordDescription}}</div>
-                <p-avatar icon="pi pi-user" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
-            </div>
-            <div class="housing-description box">
-                <h3>Description :</h3>
-                <span>{{housingData.housingDescription}}</span>
+            <div class="right-side">
+                <div class="landlord-info">
+                    <div class="landlord-description box">{{housingData.landlordDescription}}</div>
+                    <p-avatar icon="pi pi-user" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                </div>
+                <div class="housing-description box">
+                    <h3>Description :</h3>
+                    <span>{{housingData.housingDescription}}</span>
+                </div>
             </div>
         </div>
     </div>
