@@ -13,6 +13,7 @@
         .back-to-results {
             display: flex;
             align-items: center;
+            
             &:hover {
                 cursor: pointer;
             }
@@ -52,7 +53,7 @@
                 p-rating {
                     margin: 0 0.5rem;
                 }
-                a {
+                button {
                     margin-left: auto;
                 }
             }
@@ -81,9 +82,20 @@
                 .landlord-description {
                     height: 7rem;
                     flex: 1;
-                    margin: 0 1rem 1rem 0;
+                }
+                p-avatar {
+                    margin-left: 1rem;
                 }
             }
+            .buttons {
+                display: flex;
+                margin: 1rem 0;
+
+                .favorites {
+                    margin-left: auto;
+                }
+            }
+
             .housing-description {
                 flex: 1;
             }
