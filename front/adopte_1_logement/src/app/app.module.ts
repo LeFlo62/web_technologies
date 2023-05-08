@@ -8,9 +8,11 @@ import { HomeComponent } from './components/home/home.component';
 import { HousingComponent } from './components/housing/housing.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewComponent } from './components/review/review.component';
+import { HousingListItemComponent } from './components/housing-list-item/housing-list-item.component';
 
+import { DropdownModule } from 'primeng/dropdown';
 import { MenubarModule } from 'primeng/menubar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { AvatarModule } from 'primeng/avatar';
@@ -18,7 +20,6 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HousingListItemComponent } from './components/housing-list-item/housing-list-item.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,15 @@ import { HousingListItemComponent } from './components/housing-list-item/housing
     AppRoutingModule,
     MenubarModule,
     FormsModule,
+    ReactiveFormsModule,
     ButtonModule,
     RatingModule,
     AvatarModule,
     SkeletonModule,
     CarouselModule,
     DynamicDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

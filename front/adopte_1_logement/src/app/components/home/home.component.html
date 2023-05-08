@@ -1,6 +1,8 @@
 <div class="container">
     <div class="filters">
-        
+        <form [formGroup]="sorting">
+            <p-dropdown [options]="sortRating" formControlName="rating" optionLabel="label" placeholder="Tri de note" [showClear]="true"></p-dropdown>
+        </form>
     </div>
     <div class="housing-list">
         <div class="housing-card" *ngFor="let housing of housingList" [routerLink]="'/housing/' + housing?.id">
