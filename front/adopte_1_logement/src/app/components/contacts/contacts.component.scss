@@ -1,0 +1,34 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+
+.contact{
+    display: flex ;
+    font-size: 18px;
+    width: 100%;
+    color:blue;
+    align-items: center;
+    justify-content: center;
+    border: solid;
+    position: relative;
+    left: 15%;
+
+}
+.contact p {
+    color : black;
+    width: 70%;
+    height: 75px;
+    text-align: center;
+    padding-top: 20px;
+    background: #d9d9d9;
+    border-radius: 10px;
+}
+.conversation-image{
+    position: absolute;
+    left: 0px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    max-width: 70px;
+    min-width: 70px;
+}

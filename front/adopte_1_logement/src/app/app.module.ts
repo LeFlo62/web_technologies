@@ -21,6 +21,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessagerieComponent } from './components/messagerie/messagerie.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MessagerieComponent } from './components/messagerie/messagerie.componen
     ReviewsComponent,
     ReviewComponent,
     MessagerieComponent,
-    HousingListItemComponent
+    HousingListItemComponent,
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { MessagerieComponent } from './components/messagerie/messagerie.componen
     CarouselModule,
     DynamicDialogModule,
     BrowserAnimationsModule,
-    DropdownModule
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,17 +1,18 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<div class="container">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+<main class="container">
 
-    <div class="liste-conversation">  
-
+    <div class="liste-conversation w3-container"> 
+        <app-contacts [contacts] = "users" ></app-contacts>
     </div>
     
     <div class="right-container">
 
         <div class="chat-global"> 
-            <div class="nav-top"> 
-                <img src="src\favicon.ico">
-                <p> Conversation avec : John Doe</p> 
+
+            <div class="nav-top w3-container"> 
+                <p> Conversation avec : {{users[0].firstname + " " + users[0].lastname }}</p> 
             </div>
     
             <div class = "logos-call">
@@ -21,10 +22,10 @@
             <div class="conversation"> 
                 <div class="talk left">
                     <img src="src\favicon.ico">
-                    <p> Lorem : ipsum dolor sit amet</p>
+                    <p> {{ users[0].firstname }}</p>
                 </div>
                 <div class="talk right">
-                    <p> Lorem : ipsum dolor sit amet</p>
+                    <p> {{ users[1].lastname }}</p>
                     <img src="src\favicon.ico">
                 </div>
                 <div class="talk left">
@@ -62,6 +63,5 @@
         </div>    
     
     </div>
-    
+</main>
 
-</div>
