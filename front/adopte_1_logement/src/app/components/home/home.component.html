@@ -1,36 +1,12 @@
-<div class="housing-list">
-    <div class="housing-card" *ngFor="let housing of housingList" [routerLink]="'/housing/' + housing?.id">
-        <div *ngIf="housing; else housing_skeleton">
-            <ng-container>
-                <img [src]="housing.image" (load)="housing.imageLoaded = true" [hidden]="!housing.imageLoaded" alt="housing image">
-                <p-skeleton *ngIf="!housing.imageLoaded" width="100%" height="300px"></p-skeleton>
-            </ng-container>
-            <div class="housing-card-content">
-                <div class="housing-card-description">
-                    <div class="housing-card-content-title">
-                        {{ housing.title }}
-                    </div>
-                    <div class="housing-card-content-ranking">
-                        <p-rating [(ngModel)]="housing.rating" [readonly]="true" [cancel]="false"></p-rating>
-                        <p>{{ housing.rating | number:'1.0-1' }}</p>
-                    </div>
-                    <div class="housing-card-content-author">
-                        {{ housing.authorName }}
-                    </div>
-                </div>
-                <p-avatar icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
-            </div>
+<div class="container">
+    <div class="filters">
+        <form [formGroup]="sorting">
+            <p-dropdown [options]="sortRating" formControlName="rating" optionLabel="label" placeholder="Tri de note" [showClear]="true"></p-dropdown>
+        </form>
+    </div>
+    <div class="housing-list">
+        <div class="housing-card" *ngFor="let housing of housingList" [routerLink]="'/housing/' + housing?.id">
+            <housing-list-item [housing]="housing"></housing-list-item>
         </div>
-        <ng-template #housing_skeleton>
-            <p-skeleton size="300px"></p-skeleton>
-            <div class="housing-card-content">
-                <div class="housing-card-description">
-                    <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-                    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-                </div>
-                <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
-            </div>
-        </ng-template>
     </div>
 </div>

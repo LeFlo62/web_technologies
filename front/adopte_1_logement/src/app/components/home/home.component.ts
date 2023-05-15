@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { HousingListItem } from '../../data/housing';
 import { HousingService } from '../../services/housing.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -9,25 +10,44 @@ import { HousingService } from '../../services/housing.service';
 })
 export class HomeComponent implements OnInit {
 
-  private static readonly PAGE_SIZE : number = 10;
+  private static readonly PAGE_SIZE : number = 20;
 
   housingList : HousingListItem[] = [];
 
   page : number = 0;
   hasElementsLeft : boolean = true;
 
+  sortRating : any[] = [
+    { label: 'Note croissante', value: 'asc' },
+    { label: 'Note décroissante', value: 'desc' }
+  ];
+
+  sorting : FormGroup = new FormGroup({ rating: new FormControl() });
+
   constructor(private housingService : HousingService) {}
 
   ngOnInit(): void {
     this.loadMoreHousing();
+
+    this.sorting.valueChanges.subscribe(data => {
+      this.page = 0;
+      this.hasElementsLeft = true;
+      this.housingList = [];
+      this.loadMoreHousing();
+    });
   }
 
   loadMoreHousing() {
     if(this.hasElementsLeft){
       this.housingList.push(...Array(HomeComponent.PAGE_SIZE));
-      
 
-      this.housingService.getPagedHousing(this.page, HomeComponent.PAGE_SIZE).subscribe(
+      let sortingStr = "";
+
+      if(this.sorting.value.rating != null) {
+        sortingStr = "rating," + this.sorting.value.rating.value;
+      }
+
+      this.housingService.getPagedHousing(this.page, HomeComponent.PAGE_SIZE, sortingStr).subscribe(
         (data) => {
           for(let i = 0; i < data.length; i++) {
             this.housingList[this.page * HomeComponent.PAGE_SIZE + i] = data[i];

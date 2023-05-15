@@ -26,6 +26,7 @@ public class Housing {
     @ElementCollection
     private List<UUID> images;
 
+    @Lob
     private String description;
 
     private String address;
