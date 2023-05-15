@@ -1,0 +1,111 @@
+<form [formGroup]="form">
+  <div class="user-info-details">
+
+  <div *ngIf="!isEditingUsername" class="user-info-details-2">
+    <div class="user-info-details-left">
+      <p>Nom d'utilisateur :</p>
+      <p>{{profile.username}}</p>
+    </div>
+    <div class="user-info-details-right">
+      <a (click)="isEditingUsername=true"><i class="pi pi-pencil"></i></a>
+    </div>
+  </div>
+  <div *ngIf="isEditingUsername" class="user-info-details-2">
+    <div class="user-info-details-left">
+      <p>Nom d'utilisateur :</p>
+      <input pInputText pKeyFilter="alphanum" formControlName="username" [ngModel]="profile.username"
+             placeholder="{{profile.username}}" [maxlength]="20" pTooltip="Alphanumérique entre 4 et 20 caractères"
+             tooltipPosition="top" [ngClass]="{'ng-invalid': f['username'].invalid}" />
+    </div>
+    <div class="user-info-details-right">
+      <a (click)="onSubmit('username')" [class.disabled]="!isValidUsername()">
+        <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidUsername(), 'valid-icon': isValidUsername()}"></i>
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="!isEditingEmail" class="user-info-details-2">
+    <div class="user-info-details-left">
+      <p>Adresse email :</p>
+      <p>{{profile.email}}</p>
+    </div>
+    <div class="user-info-details-right">
+      <a (click)="isEditingEmail=true"><i class="pi pi-pencil"></i></a>
+    </div>
+  </div>
+  <div *ngIf="isEditingEmail" class="user-info-details-2">
+    <div class="user-info-details-left">
+      <p>Adresse email :</p>
+      <input pInputText pKeyFilter="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+             formControlName="email" [ngModel]="profile.email" placeholder="{{profile.email}}"
+             [maxlength]="20" pTooltip="jean@dupont.fr" tooltipPosition="top"
+             [ngClass]="{'ng-invalid': f['email'].invalid}" />
+    </div>
+    <div class="user-info-details-right">
+      <a (click)="onSubmit('email')" [class.disabled]="!isValidEmail()">
+        <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidEmail(), 'valid-icon': isValidEmail()}"></i>
+      </a>
+    </div>
+  </div>
+
+  </div>
+  <div class="user-info-details" >
+
+    <div class="user-info-details-2" *ngIf="!isEditingPassword">
+      <div class="user-info-details-left">
+        <p>Mot de passe :</p>
+        <p>●●●●●●●●</p>
+      </div>
+      <div class="user-info-details-right">
+        <a (click)="onSubmit('password')" [class.disabled]="!isValidPassword()">
+          <a (click)="isEditingPassword=true"><i class="pi pi-pencil"></i></a>
+        </a>
+      </div>
+    </div>
+
+    <div class="user-info-details-2" *ngIf="isEditingPassword">
+      <div class="user-info-details-left">
+        <p>Mot de passe :</p>
+        <!-- TODO REFUSE SPACES AND SPECIAL CARACTERS-->
+        <p-password  formControlName="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{8,1024}$"
+        [(ngModel)]="profile.password"  [ngClass]="{'ng-invalid': f['password'].invalid}"
+                    weakLabel="Faible" mediumLabel="Moyen" strongLabel="Fort" promptLabel="Saisissez un mot de passe"
+                    [maxLength]=1024 >
+          <ng-template pTemplate="footer">
+            <p-divider></p-divider>
+              <p>Au moins une minuscule<br>
+              Au moins une majuscule<br>
+              Au moins un chiffre<br>
+              Entre 8 et 1024 caractères<br></p>
+          </ng-template>
+        </p-password>
+      </div>
+      <div class="user-info-details-right">
+        <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidPassword(), 'valid-icon': isValidPassword()}"></i>
+      </div>
+    </div>
+
+    <div *ngIf="!isEditingPhone" class="user-info-details-2">
+      <div class="user-info-details-left">
+        <p>Numéro de téléphone :</p>
+        <p>{{profile.phone}}</p>
+      </div>
+      <div class="user-info-details-right">
+        <a (click)="isEditingPhone=true"><i class="pi pi-pencil"></i></a>
+      </div>
+    </div>
+    <div *ngIf="isEditingPhone" class="user-info-details-2">
+      <div class="user-info-details-left">
+        <p>Numéro de téléphone :</p>
+        <input pInputText pKeyFilter="num" formControlName="phone" [ngModel]="profile.phone"
+               placeholder="{{profile.phone}}" [maxlength]="10"
+               [ngClass]="{'ng-invalid': f['phone'].invalid}" />
+      </div>
+      <div class="user-info-details-right">
+        <a (click)="onSubmit('phone')" [class.disabled]="!isValidPhone()">
+          <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidPhone(), 'valid-icon': isValidPhone()}"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</form>
