@@ -40,7 +40,7 @@ public class HousingService {
         return housingRepository.findAll(pageable);
     }
 
-    public void createHousing(Housing toEntity) {
-        housingRepository.save(toEntity);
+    public void createHousing(Housing entity) {
+        housingRepository.save(entity);
     }
 }
