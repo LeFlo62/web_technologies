@@ -1,19 +1,19 @@
-import {Directive} from "@angular/core";
-import {AbstractControl, NG_VALIDATORS, ValidationErrors, Validator} from "@angular/forms";
+import { Directive } from '@angular/core';
+import { NG_VALIDATORS, Validator, AbstractControl, Validators } from '@angular/forms';
 
 @Directive({
-  selector: '[emailValidator][ngModel]',
+  selector: '[passwordValidator]',
+  providers: [{
+    provide: NG_VALIDATORS,
+    useExisting: PasswordValidatorDirective,
+    multi: true
+  }]
 })
 export class PasswordValidatorDirective implements Validator {
-  validate(control: AbstractControl): ValidationErrors | null {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{8,1024}$/;
-    const value = control.value || '';
-    const isValid = regex.test(value);
-
-    if (!isValid) {
-      return {invalidPassword: true};
+  validate(control: AbstractControl): { [key: string]: any } | null {
+    if (control.dirty) {
+      return Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{8,1024}$/)(control);
     }
-
     return null;
   }
 }

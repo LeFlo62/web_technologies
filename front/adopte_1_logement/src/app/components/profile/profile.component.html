@@ -15,6 +15,11 @@
     </div>
     <div class="my-reviews box">
       <p class="titre">Mes avis</p>
+
+      <div *ngFor="let item of reviews">
+        <app-review [review]="item" [minimal]="true"></app-review>
+      </div>
+
     </div>
   </div>
 </div>

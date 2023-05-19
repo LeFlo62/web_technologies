@@ -8,6 +8,57 @@ import { User } from "../../data/user";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
+  reviews = [
+    {
+      author: 'Sarah VALERY',
+      date: '24-04-2023',
+      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
+      usefulCounter: 10,
+      uselessCounter: 10
+    },
+    {
+      author: 'Sarah VALERY',
+      date: '24-04-2023',
+      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
+      usefulCounter: 10,
+      uselessCounter: 10
+    },
+    {
+      author: 'Sarah VALERY',
+      date: '24-04-2023',
+      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
+      usefulCounter: 10,
+      uselessCounter: 10
+    },
+    {
+      author: 'Sarah VALERY',
+      date: '24-04-2023',
+      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
+      usefulCounter: 10,
+      uselessCounter: 10
+    },
+    {
+      author: 'Sarah VALERY',
+      date: '24-04-2023',
+      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
+      usefulCounter: 10,
+      uselessCounter: 10
+    },
+    {
+      author: 'Sarah VALERY',
+      date: '24-04-2023',
+      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
+      usefulCounter: 10,
+      uselessCounter: 10
+    },
+    {
+      author: 'Sarah VALERY',
+      date: '24-04-2023',
+      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
+      usefulCounter: 10,
+      uselessCounter: 10
+    }
+  ];
   profile: User = {
     password: "",
     id: '1',

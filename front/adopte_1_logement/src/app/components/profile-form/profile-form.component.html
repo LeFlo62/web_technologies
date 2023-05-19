@@ -67,7 +67,7 @@
       <div class="user-info-details-left">
         <p>Mot de passe :</p>
         <!-- TODO REFUSE SPACES AND SPECIAL CARACTERS-->
-        <p-password  formControlName="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{8,1024}$"
+        <p-password formControlName="password" (input)="onPasswordInput($event)" (paste)="onPasswordPaste($event)"
         [(ngModel)]="profile.password"  [ngClass]="{'ng-invalid': f['password'].invalid}"
                     weakLabel="Faible" mediumLabel="Moyen" strongLabel="Fort" promptLabel="Saisissez un mot de passe"
                     [maxLength]=1024 >
@@ -80,7 +80,7 @@
           </ng-template>
         </p-password>
       </div>
-      <div class="user-info-details-right">
+      <div class="user-info-details-right" (click)="onSubmit('password')" [class.disabled]="!isValidPassword()" >
         <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidPassword(), 'valid-icon': isValidPassword()}"></i>
       </div>
     </div>

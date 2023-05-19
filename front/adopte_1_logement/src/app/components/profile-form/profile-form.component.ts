@@ -5,6 +5,7 @@ import {User} from "../../data/user";
 import {UsernameValidatorDirective} from "../../directives/username-validator.directive";
 import {EmailValidatorDirective} from "../../directives/email-validator.directive";
 import {PasswordValidatorDirective} from "../../directives/password-validator.directive";
+import {PhoneValidatorDirective} from "../../directives/phone-validator.directive";
 
 @Component({
   selector: 'app-profile-form',
@@ -17,6 +18,7 @@ export class ProfileFormComponent implements OnInit {
   usernameValidator = new UsernameValidatorDirective();
   emailValidator = new EmailValidatorDirective();
   passwordValidator = new PasswordValidatorDirective();
+  phoneValidator = new PhoneValidatorDirective();
 
   isEditingUsername = false;
   isEditingEmail = false;
@@ -46,10 +48,10 @@ export class ProfileFormComponent implements OnInit {
 
     // form with validation rules
     this.form = this.formBuilder.group({
-      phone: new FormControl('', Validators.required),
-      username: new FormControl(this.profile.username, [Validators.required, this.usernameValidator.validate]), // password: new FormControl('', Validators.required)
-      email: new FormControl(this.profile.email, [Validators.required, this.emailValidator.validate]), // password: new FormControl('', Validators.required)
-      password: new FormControl(this.profile.email, [Validators.required, this.passwordValidator.validate]), // password: new FormControl('', Validators.required)
+      phone: new FormControl(this.profile.phone, [Validators.required, this.phoneValidator.validate]),
+      username: new FormControl(this.profile.username, [Validators.required, this.usernameValidator.validate]),
+      email: new FormControl(this.profile.email, [Validators.required, this.emailValidator.validate]),
+      password: new FormControl(this.profile.email, [Validators.required, this.passwordValidator.validate]),
     });
   }
 
@@ -63,8 +65,6 @@ export class ProfileFormComponent implements OnInit {
     if (this.f[value].invalid) {
       return;
     }
-
-    console.log(this.isValidPassword());
 
     this.saveModification(value)
 
@@ -107,4 +107,19 @@ export class ProfileFormComponent implements OnInit {
     const control = this.f['password'];
     return !!(control?.valid) ?? false;
   }
+
+  onPasswordInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const sanitizedValue = inputElement.value.replace(/[^\w]/g, '');
+    this.f['password'].setValue(sanitizedValue);
+  }
+
+  onPasswordPaste(event: ClipboardEvent): void {
+    event.preventDefault();
+    const clipboardData = event.clipboardData || (window as any).clipboardData;
+    const pastedText = clipboardData.getData('text');
+    const sanitizedValue = pastedText.replace(/[^\w]/g, '');
+    this.f['password'].setValue(sanitizedValue);
+  }
+
 }

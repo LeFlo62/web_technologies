@@ -20,7 +20,17 @@ export class AppComponent {
     password: '',
   };
 
+
+
   onSubmitted(user: User) {
     this.user = user;
   }
 }
+
+export interface Review {
+  author: string;
+  date: string;
+  content: string;
+  useful: number;
+  useless: number;
+};
