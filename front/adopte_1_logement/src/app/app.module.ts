@@ -9,6 +9,7 @@ import { HousingComponent } from './components/housing/housing.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewComponent } from './components/review/review.component';
 import { HousingListItemComponent } from './components/housing-list-item/housing-list-item.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { MenubarModule } from 'primeng/menubar';
@@ -20,6 +21,18 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from "primeng/password";
+import { DividerModule } from "primeng/divider";
+import {MessagesModule} from "primeng/messages";
+
+import { UsernameValidatorDirective } from './directives/username-validator.directive';
+import { PasswordValidatorDirective } from './directives/password-validator.directive';
+import { EmailValidatorDirective } from './directives/email-validator.directive';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import {KeyFilterModule} from "primeng/keyfilter";
+import { PhoneValidatorDirective } from './directives/phone-validator.directive';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +41,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HousingComponent,
     ReviewsComponent,
     ReviewComponent,
-    HousingListItemComponent
+    HousingListItemComponent,
+    ReviewComponent,
+    HousingComponent,
+    ProfileComponent,
+    ProfileFormComponent,
+    PhoneValidatorDirective,
+    UsernameValidatorDirective,
+    PasswordValidatorDirective,
+    EmailValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -44,8 +65,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CarouselModule,
     DynamicDialogModule,
     BrowserAnimationsModule,
-    DropdownModule
+    DropdownModule,
+    PasswordModule,
+    DividerModule,
+    InputTextModule,
+    MessagesModule,
+    KeyFilterModule
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

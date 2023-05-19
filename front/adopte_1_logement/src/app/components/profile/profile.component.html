@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="header ">
+    <div class="profile-picture-container">
+      <img class="profile-picture-image" height="100" src="https://picsum.photos/100/100" width="100">
+    </div>
+    <app-profile-form class="user-info"></app-profile-form>
+  </div>
+  <div class="body">
+    <div class="my-location box">
+      <p class="titre" >Mes locations</p>
+      <housing-list-item class="my-rent" [minimal]="true"></housing-list-item>
+    </div>
+    <div class="my-services box">
+      <p class="titre">Mes services</p>
+    </div>
+    <div class="my-reviews box">
+      <p class="titre">Mes avis</p>
+
+      <div *ngFor="let item of reviews">
+        <app-review [review]="item" [minimal]="true"></app-review>
+      </div>
+
+    </div>
+  </div>
+</div>
