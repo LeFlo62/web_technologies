@@ -19,8 +19,7 @@ export class MessagerieComponent {
   }
   public receiveContact($event: User) {
     this.loadedUser = $event;
-  }
-  
+  }  
 
 }
 
