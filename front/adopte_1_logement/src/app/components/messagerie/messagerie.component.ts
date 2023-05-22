@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { User } from "app/data/user";
+import { UserService } from "app/services/User.service";
+import { Hash } from "crypto";
 
 
 @Component({
@@ -8,19 +10,20 @@ import { User } from "app/data/user";
     styleUrls: ['./messagerie.component.scss']
   })
 export class MessagerieComponent {
-  users : User[] = [{"id": "1", "firstname": "Jack", "lastname":"Maxer","image":""},
-                            {"id": "2","firstname": "Julia", "lastname":"Tungsten", "image":""},
-                            {"id": "3","firstname": "Julia", "lastname":"Tungsten", "image":""},
-                            {"id": "4","firstname": "Bill", "lastname":"Tungsten","image":""},
-                            {"id": "5","firstname": "Fred", "lastname":"Tungsten", "image":""},
-                            ];
 
-  public getUsersData(): void {
-    /*recupère la liste des users 
-     this.usersData = axios.get('http://localhost:8080/api/users');
-     */ 
-    return ;
+  public loadedUser : User = {id: "000", firstname: "Adopte", lastname:"UnLogement", image:""};
+
+  private contacts : User[] = UserService.getUsersData();
+  public getContacts() : User[] {
+    return this.contacts;
   }
- 
+  public receiveContact($event: User) {
+    this.loadedUser = $event;
+  }
+  
 
+}
+
+function sha256(email: string): string {
+  throw new Error("Function not implemented.");
 }

@@ -4,15 +4,15 @@
 <main class="container">
 
     <div class="liste-conversation w3-container"> 
-        <app-contacts [contacts] = "users" ></app-contacts>
+        <app-contacts (changeContactEvent) ="receiveContact($event)"  [contacts] = "getContacts()"></app-contacts>
     </div>
     
     <div class="right-container">
-
+ 
         <div class="chat-global"> 
 
             <div class="nav-top w3-container"> 
-                <p> Conversation avec : {{users[0].firstname + " " + users[0].lastname }}</p> 
+                <p> Conversation avec : {{loadedUser.firstname + " " + loadedUser.lastname }}</p> 
             </div>
     
             <div class = "logos-call">
@@ -22,10 +22,10 @@
             <div class="conversation"> 
                 <div class="talk left">
                     <img src="src\favicon.ico">
-                    <p> {{ users[0].firstname }}</p>
+                    <p> {{ loadedUser.firstname }}</p>
                 </div>
                 <div class="talk right">
-                    <p> {{ users[1].lastname }}</p>
+                    <p> {{ loadedUser.lastname }}</p>
                     <img src="src\favicon.ico">
                 </div>
                 <div class="talk left">

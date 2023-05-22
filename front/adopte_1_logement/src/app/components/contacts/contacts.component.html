@@ -1,6 +1,12 @@
-<div *ngFor ="let contact of contacts" class="contact">
-    <img class ="conversation-image" src="users.img">
-    <p>{{contact.firstname + " " + contact.lastname}} </p>
+<p-virtualScroller [value]="contacts" class = "container" [style]="{width : '100%' }"  scrollHeight="800px" [itemSize]="100" [lazy]="true"  >
+    <ng-template pTemplate="contact" let-contact> 
 
-</div>
+        <div  class="contact" (click)="sendContact(contact)">
+            <img class ="conversation-image" src="users.img">
+            <p> {{ contact.firstname + " " + contact.lastname }}</p>
+        </div>
+    </ng-template>
+    </p-virtualScroller>
+    
+    
 

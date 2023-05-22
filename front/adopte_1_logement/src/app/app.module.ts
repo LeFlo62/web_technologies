@@ -22,6 +22,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessagerieComponent } from './components/messagerie/messagerie.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     DynamicDialogModule,
     BrowserAnimationsModule,
     DropdownModule,
+    VirtualScrollerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
