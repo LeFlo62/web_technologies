@@ -25,6 +25,7 @@ public class UserController {
     @PostMapping("/register")
     public HttpStatus register(UserDTO userDTO) {
         //TODO use reCaptcha
+        //TODO verify if email already registered
         userService.createUser(userMapper.toEntity(userDTO));
         return HttpStatus.OK;
     }

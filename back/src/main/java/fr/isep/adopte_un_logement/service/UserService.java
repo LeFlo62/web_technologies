@@ -2,22 +2,22 @@ package fr.isep.adopte_un_logement.service;
 
 import fr.isep.adopte_un_logement.entities.User;
 import fr.isep.adopte_un_logement.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@AllArgsConstructor
 @Service
 public class UserService {
 
     private UserRepository userRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User createUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

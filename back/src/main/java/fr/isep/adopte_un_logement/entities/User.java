@@ -22,6 +22,8 @@ public class User {
 
     private String email;
 
+    private String password;
+
     @OneToMany(mappedBy = "author", orphanRemoval = true)
     private List<Housing> housings;
 

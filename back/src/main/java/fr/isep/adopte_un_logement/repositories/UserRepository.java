@@ -10,4 +10,9 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
+<<<<<<< Updated upstream
+=======
+    User findByEmail(String email);
+
+>>>>>>> Stashed changes
 }
