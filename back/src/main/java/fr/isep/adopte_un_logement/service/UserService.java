@@ -5,6 +5,8 @@ import fr.isep.adopte_un_logement.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class UserService {
 
@@ -23,4 +25,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public boolean userExists(UUID userId) {
+        return userRepository.existsById(userId);
+    }
 }
