@@ -6,6 +6,10 @@ import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {UserService} from "../../services/user.service";
 import {User} from "../../data/user";
+import {UsernameValidatorDirective} from "../../directives/username-validator.directive";
+import {EmailValidatorDirective} from "../../directives/email-validator.directive";
+import {PasswordValidatorDirective} from "../../directives/password-validator.directive";
+import {PhoneValidatorDirective} from "../../directives/phone-validator.directive";
 
 @Component({
   selector: 'app-register', templateUrl: './register.component.html', styleUrls: ['./register.component.scss']
@@ -16,6 +20,11 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   submitting: boolean = false;
 
+  usernameValidator = new UsernameValidatorDirective();
+  emailValidator = new EmailValidatorDirective();
+  passwordValidator = new PasswordValidatorDirective();
+  phoneValidator = new PhoneValidatorDirective();
+
 
   registerForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -24,12 +33,13 @@ export class RegisterComponent implements OnInit {
     username: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(5)]],
     password2: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
   }, {
     validators: [this.validatorService.equalControls('password', 'password2'),],
   });
 
   get loginPath() {
-    return "http://localhost:4200/login";
+    return "/login";
   }
 
 
@@ -42,7 +52,9 @@ export class RegisterComponent implements OnInit {
     return control?.invalid && (control?.dirty || control?.touched);
   }
 
-
+get phone() {
+    return this.registerForm.get('phone');
+}
   get firstName() {
     return this.registerForm.get('firstName');
   }
@@ -68,6 +80,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
+
+    if (!this.registerForm.valid) {
+      return;
+    }
+
     this.submitting = true;
     const { firstName, lastName, email, password } = this.registerForm.value;
     this.authService.register(firstName, lastName, email, password).subscribe({

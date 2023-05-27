@@ -3,6 +3,13 @@ body {
   font-family: var(--font-family);
 }
 
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
 .h-full,
 .align-items-center,
 .justify-content-center,
@@ -12,6 +19,21 @@ body {
   justify-content: center;
   display: flex;
 }
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-item {
+  width: 48%;
+}
+
+div.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 
 * {
   box-sizing: border-box;
@@ -20,9 +42,8 @@ body {
   width: 100%;
 }
 
-.w-480 {
-  margin-top: 30px;
-  width: 480px;
+.w-680 {
+  width: 680px;
 }
 
 p-password {

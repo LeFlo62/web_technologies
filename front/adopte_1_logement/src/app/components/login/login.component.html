@@ -1,65 +1,70 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    <form
-      *ngIf="!isLoggedIn"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
+<div
+  *ngIf="submitting"
+  class="
+    absolute
+    w-full
+    h-full
+    flex
+    align-items-center
+    justify-content-center
+    bg-black-alpha-30
+  "
+>
+</div>
+<div class="parent">
+  <div class="flex justify-content-center align-items-center h-full">
+  <form
+    autocomplete="off"
+    class="w-480"
+    [formGroup]="loginForm"
+    (ngSubmit)="login()"
+  >
+    <p-card header="Connexion">
+      <div class="field">
+        <label for="email">Adresse email</label>
         <input
+          id="email"
           type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+          class="w-full"
+          pInputText
+          formControlName="email"
         />
-        <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
-          Username is required!
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
-          <div *ngIf="password.errors['required']">Password is required</div>
-          <div *ngIf="password.errors['minlength']">
-            Password must be at least 6 characters
+        <small *ngIf="isInvalid('email')" id="email-help" class="p-error">
+          <div *ngIf="email?.errors?.['required']">
+            Adresse email requise
           </div>
-        </div>
+        </small>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">
-          Login
-        </button>
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <p-password
+          inputId="password"
+          [feedback]="false"
+          styleClass="w-full"
+          inputStyleClass="w-full"
+          formControlName="password"
+        ></p-password>
+        <small *ngIf="isInvalid('password')" id="password-help" class="p-error">
+          <div *ngIf="password?.errors?.['required']">
+            Mot de passe requis
+          </div>
+        </small>
       </div>
-      <div class="form-group">
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
-        </div>
-      </div>
-    </form>
-
-    <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ roles }}.
-    </div>
-  </div>
+      <ng-template pTemplate="footer">
+        <button
+          pButton
+          pRipple
+          label="Se connecter"
+          class="w-full"
+          type="submit"
+          [disabled]="submitting"
+        ></button>
+        <p>
+          Pas encore inscrit ?
+          <a [routerLink]="registerPath">Inscription</a>
+        </p>
+      </ng-template>
+    </p-card>
+  </form>
+</div>
 </div>

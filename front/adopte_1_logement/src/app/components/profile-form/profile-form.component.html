@@ -3,25 +3,11 @@
 
   <div *ngIf="!isEditingUsername" class="user-info-details-2">
     <div class="user-info-details-left">
-      <p>Nom d'utilisateur :</p>
-      <p>{{profile.username}}</p>
-    </div>
-    <div class="user-info-details-right">
-      <a (click)="isEditingUsername=true"><i class="pi pi-pencil"></i></a>
-    </div>
+      <p>{{profile.firstname}}</p>
+      <div class="user-info-details-right">
+        <p>{{profile.lastname}}</p>
+      </div>
   </div>
-  <div *ngIf="isEditingUsername" class="user-info-details-2">
-    <div class="user-info-details-left">
-      <p>Nom d'utilisateur :</p>
-      <input pInputText pKeyFilter="alphanum" formControlName="username" [ngModel]="profile.username"
-             placeholder="{{profile.username}}" [maxlength]="20" pTooltip="Alphanumérique entre 4 et 20 caractères"
-             tooltipPosition="top" [ngClass]="{'ng-invalid': f['username'].invalid}" />
-    </div>
-    <div class="user-info-details-right">
-      <a (click)="onSubmit('username')" [class.disabled]="!isValidUsername()">
-        <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidUsername(), 'valid-icon': isValidUsername()}"></i>
-      </a>
-    </div>
   </div>
 
   <div *ngIf="!isEditingEmail" class="user-info-details-2">

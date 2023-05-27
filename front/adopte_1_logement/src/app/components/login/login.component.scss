@@ -1,32 +1,103 @@
-label {
-  display: block;
-  margin-top: 10px;
+body {
+  color: var(--text-color);
+  font-family: var(--font-family);
 }
 
-.card-container.card {
-  max-width: 400px !important;
-  padding: 40px 40px;
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
-.card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+.h-full,
+.align-items-center,
+.justify-content-center,
+.flex {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
-.profile-img-card {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+* {
+  box-sizing: border-box;
+}
+.w-full {
+  width: 100%;
+}
+
+.w-480 {
+  margin-top: 30px;
+  width: 480px;
+}
+
+p-password {
+  width: 100%;
+}
+
+.p-component,
+.p-component *,
+.p-card {
+  box-sizing: border-box;
+  color: #495057;
+}
+
+
+.p-card {
+  background: #ffffff;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+  0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+}
+
+.p-component {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+  BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+  "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.p-card .p-card-body,
+.p-card .p-card-content {
+  padding: 1.25rem;
+}
+
+.p-card .p-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.field > label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  margin-bottom: 5px;
+}
+
+.field input[type="text"] {
+  width: 100%;
+}
+
+.p-card-body.custom-margin-top {
+  margin-top: 200px;
+}
+
+
+.p {
+  width: 100%;
 }
