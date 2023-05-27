@@ -32,6 +32,11 @@ import { EmailValidatorDirective } from './directives/email-validator.directive'
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import {KeyFilterModule} from "primeng/keyfilter";
 import { PhoneValidatorDirective } from './directives/phone-validator.directive';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import {CardModule} from "primeng/card";
+import {RippleModule} from "primeng/ripple";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 
 @NgModule({
@@ -49,7 +54,9 @@ import { PhoneValidatorDirective } from './directives/phone-validator.directive'
     PhoneValidatorDirective,
     UsernameValidatorDirective,
     PasswordValidatorDirective,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +77,10 @@ import { PhoneValidatorDirective } from './directives/phone-validator.directive'
     DividerModule,
     InputTextModule,
     MessagesModule,
-    KeyFilterModule
+    KeyFilterModule,
+    CardModule,
+    RippleModule,
+    ProgressSpinnerModule
   ],
 
   providers: [],
