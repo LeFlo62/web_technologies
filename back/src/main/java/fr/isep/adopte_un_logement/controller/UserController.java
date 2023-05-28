@@ -1,6 +1,6 @@
 package fr.isep.adopte_un_logement.controller;
 
-import fr.isep.adopte_un_logement.dto.UserDTO;
+import fr.isep.adopte_un_logement.dto.UserCreationDTO;
 import fr.isep.adopte_un_logement.mapper.UserMapper;
 import fr.isep.adopte_un_logement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public HttpStatus register(UserDTO userDTO) {
+    public HttpStatus register(UserCreationDTO userDTO) {
         //TODO use reCaptcha
+        //TODO verify if email already registered
         userService.createUser(userMapper.toEntity(userDTO));
         return HttpStatus.OK;
     }
