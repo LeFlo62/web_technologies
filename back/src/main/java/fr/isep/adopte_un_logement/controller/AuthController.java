@@ -38,7 +38,7 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
         System.out.println(loginRequest.getEmail() + " " + loginRequest.getPassword());
 
@@ -63,7 +63,7 @@ public class AuthController {
                         roles));
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UserCreationDTO userCreationDTO) {
         if (userService.existsByEmail(userCreationDTO.getEmail())) {
             return ResponseEntity.badRequest().body("Error: Email is already taken!");
