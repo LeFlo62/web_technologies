@@ -3,7 +3,7 @@
       <img src="favicon.ico" height="40" class="mr-2" />
   </ng-template>
   <ng-template pTemplate="end">
-    <p-avatar *ngIf="id else connectButton" class="user-avatar" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle" [routerLink]="'/profile/{id}'"></p-avatar>
+    <p-avatar *ngIf="id else connectButton" class="user-avatar" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle" [routerLink]="'/profile/' + id"></p-avatar>
     <ng-template #connectButton>
       <button pButton pRipple label="Se connecter" class="w-full" [routerLink]="'/login'"></button>
     </ng-template>
