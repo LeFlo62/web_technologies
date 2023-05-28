@@ -10,7 +10,7 @@ security:
     secret: M01jOVR1WlRFek1OUDhNc0oyWnM4bW41ZFhzYWNwdzltY1Q3Q1ppNndMUXI1UGlkaVhlblYyZUJBcFhMSDY4RQ==
   public-endpoints: >
     /housing/list,
-    /image/**
+    /image/**,
 
 spring:
   datasource:

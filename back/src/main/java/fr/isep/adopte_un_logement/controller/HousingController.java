@@ -1,17 +1,18 @@
 package fr.isep.adopte_un_logement.controller;
 
 import fr.isep.adopte_un_logement.dto.HousingCreationDTO;
-import fr.isep.adopte_un_logement.dto.HousingDTO;
 import fr.isep.adopte_un_logement.dto.HousingListItemDTO;
 import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.mapper.HousingMapper;
 import fr.isep.adopte_un_logement.service.HousingService;
 import fr.isep.adopte_un_logement.service.ImageService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,11 +27,6 @@ public class HousingController {
     private ImageService imageService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<HousingListItemDTO>> getHousingList() {
-        return ResponseEntity.ok(housingMapper.toDTO(housingService.getHousingList()));
-    }
-
-    @GetMapping("/list/paginated")
     public ResponseEntity<List<HousingListItemDTO>> getHousingListPaginated(Pageable pageable) {
         return ResponseEntity.ok(housingMapper.toDTO(housingService.getHousingListPaginated(pageable).getContent()));
     }

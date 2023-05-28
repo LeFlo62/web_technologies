@@ -1,0 +1,70 @@
+<div
+  *ngIf="submitting"
+  class="
+    absolute
+    w-full
+    h-full
+    flex
+    align-items-center
+    justify-content-center
+    bg-black-alpha-30
+  "
+>
+</div>
+<div class="parent">
+  <div class="flex justify-content-center align-items-center h-full">
+  <form
+    autocomplete="off"
+    class="w-480"
+    [formGroup]="loginForm"
+    (ngSubmit)="login()"
+  >
+    <p-card header="Connexion">
+      <div class="field">
+        <label for="email">Adresse email</label>
+        <input
+          id="email"
+          type="text"
+          class="w-full"
+          pInputText
+          formControlName="email"
+        />
+        <small *ngIf="isInvalid('email')" id="email-help" class="p-error">
+          <div *ngIf="email?.errors?.['required']">
+            Adresse email requise
+          </div>
+        </small>
+      </div>
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <p-password
+          inputId="password"
+          [feedback]="false"
+          styleClass="w-full"
+          inputStyleClass="w-full"
+          formControlName="password"
+        ></p-password>
+        <small *ngIf="isInvalid('password')" id="password-help" class="p-error">zyyyyy
+          <div *ngIf="password?.errors?.['required']">
+            Mot de passe requis
+          </div>
+        </small>
+      </div>
+      <ng-template pTemplate="footer">
+        <button
+          pButton
+          pRipple
+          label="Se connecter"
+          class="w-full"
+          type="submit"
+          [disabled]="submitting"
+        ></button>
+        <p>
+          Pas encore inscrit ?
+          <a [routerLink]="registerPath">Inscription</a>
+        </p>
+      </ng-template>
+    </p-card>
+  </form>
+</div>
+</div>

@@ -37,6 +37,7 @@ import {CardModule} from "primeng/card";
 import {RippleModule} from "primeng/ripple";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { authInterceptorProviders } from './auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -54,7 +55,9 @@ import { authInterceptorProviders } from './auth.interceptor';
     PhoneValidatorDirective,
     UsernameValidatorDirective,
     PasswordValidatorDirective,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,10 @@ import { authInterceptorProviders } from './auth.interceptor';
     DividerModule,
     InputTextModule,
     MessagesModule,
-    KeyFilterModule
+    KeyFilterModule,
+    CardModule,
+    RippleModule,
+    ProgressSpinnerModule
   ],
 
   providers: [
