@@ -2,24 +2,19 @@ package fr.isep.adopte_un_logement.controller;
 
 import fr.isep.adopte_un_logement.config.security.JwtUtils;
 import fr.isep.adopte_un_logement.dto.LoginRequestDTO;
+import fr.isep.adopte_un_logement.dto.LoginResponseDTO;
 import fr.isep.adopte_un_logement.dto.UserCreationDTO;
-import fr.isep.adopte_un_logement.dto.UserDTO;
 import fr.isep.adopte_un_logement.mapper.UserMapper;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
 import fr.isep.adopte_un_logement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +39,9 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("/signin")
-    public ResponseEntity<UserDTO> authenticateUser(LoginRequestDTO loginRequest) {
+    public ResponseEntity<LoginResponseDTO> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
+        System.out.println(loginRequest.getEmail() + " " + loginRequest.getPassword());
+
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
@@ -52,21 +49,20 @@ public class AuthController {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+        String jwt = jwtUtils.generateJwtToken(authentication);
 
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new UserDTO(userDetails.getFirstName(),
+        return ResponseEntity.ok(new LoginResponseDTO(jwt, userDetails.getFirstName(),
                         userDetails.getLastName(),
                         userDetails.getEmail(),
                         roles));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(UserCreationDTO userCreationDTO) {
+    public ResponseEntity<String> registerUser(@RequestBody UserCreationDTO userCreationDTO) {
         if (userService.existsByEmail(userCreationDTO.getEmail())) {
             return ResponseEntity.badRequest().body("Error: Email is already taken!");
         }
@@ -74,11 +70,5 @@ public class AuthController {
         userService.createUser(userMapper.toEntity(userCreationDTO));
 
         return ResponseEntity.ok("User registered successfully!");
-    }
-
-    @PostMapping("/signout")
-    public ResponseEntity logoutUser() {
-        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).build();
     }
 }

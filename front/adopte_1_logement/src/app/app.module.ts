@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +32,11 @@ import { EmailValidatorDirective } from './directives/email-validator.directive'
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import {KeyFilterModule} from "primeng/keyfilter";
 import { PhoneValidatorDirective } from './directives/phone-validator.directive';
+import { LoginComponent } from './components/login/login.component';
+import {CardModule} from "primeng/card";
+import {RippleModule} from "primeng/ripple";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import { authInterceptorProviders } from './auth.interceptor';
 
 
 @NgModule({
@@ -73,7 +78,9 @@ import { PhoneValidatorDirective } from './directives/phone-validator.directive'
     KeyFilterModule
   ],
 
-  providers: [],
+  providers: [
+    authInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
