@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
-public class HousingMapper implements EntityToDTOMapper<Housing, HousingListItemDTO>, DTOtoEntityMapper<Housing, HousingCreationDTO>{
+public class HousingMapper {
 
     private final ApplicationConfig applicationConfig;
 
@@ -21,7 +23,7 @@ public class HousingMapper implements EntityToDTOMapper<Housing, HousingListItem
         this.applicationConfig = applicationConfig;
     }
 
-    @Override @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public HousingListItemDTO toDTO(Housing housing) {
         return HousingListItemDTO.builder()
                 .id(housing.getId().toString())
@@ -32,7 +34,10 @@ public class HousingMapper implements EntityToDTOMapper<Housing, HousingListItem
                 .build();
     }
 
-    @Override
+    public List<HousingListItemDTO> toDTO(List<Housing> entities){
+        return entities.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
     public Housing toEntity(HousingCreationDTO housingCreationDTO) {
         return Housing.builder()
                 .title(housingCreationDTO.getTitle())
@@ -41,4 +46,5 @@ public class HousingMapper implements EntityToDTOMapper<Housing, HousingListItem
                 .author(User.builder().id(UUID.fromString(housingCreationDTO.getAuthorId())).build())
                 .build();
     }
+
 }

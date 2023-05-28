@@ -3,6 +3,7 @@ package fr.isep.adopte_un_logement.service;
 import fr.isep.adopte_un_logement.entities.Message;
 import fr.isep.adopte_un_logement.entities.User;
 import fr.isep.adopte_un_logement.repositories.MessageRepository;
+import fr.isep.adopte_un_logement.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,8 @@ public class MessageService {
 
     private MessageRepository messageRepository;
 
+    private UserRepository userRepository;
+
     public Message addMessage(Message message){
         return messageRepository.save(message);
     }
@@ -26,6 +29,6 @@ public class MessageService {
     }
 
     public List<User> getLastUsers(String userId) {
-        return messageRepository.getLastMessagedUsers(UUID.fromString(userId));
+        return userRepository.findAllById(messageRepository.getLastMessagedUsers(UUID.fromString(userId)));
     }
 }

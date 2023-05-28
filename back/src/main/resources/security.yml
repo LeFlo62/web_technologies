@@ -1,8 +1,0 @@
-secret_key: "e7hH6GN2PMMM33UEwkjpAW6Pkom4SfE8CsMLt5tQwKnHpuZrrSrNGYkVwxsb5E7o"
-expiration_time: 900000
-token_prefix: "Bearer "
-header_string: "Authorization"
-sign_up_url: "/user"
-public_links:
-  - "/housing/list/paginated"
-  - "/housing/list"

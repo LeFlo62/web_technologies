@@ -5,13 +5,14 @@ import fr.isep.adopte_un_logement.entities.Message;
 import fr.isep.adopte_un_logement.entities.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
-public class MessageMapper implements DTOMapper<Message, MessageDTO> {
+public class MessageMapper {
 
 
-    @Override
     public Message toEntity(MessageDTO messageDTO) {
         return Message.builder()
                 .id(messageDTO.getId())
@@ -22,7 +23,6 @@ public class MessageMapper implements DTOMapper<Message, MessageDTO> {
                 .build();
     }
 
-    @Override
     public MessageDTO toDTO(Message message) {
         return MessageDTO.builder()
                 .id(message.getId())
@@ -33,5 +33,9 @@ public class MessageMapper implements DTOMapper<Message, MessageDTO> {
                 .content(message.getContent())
                 .sendTime(message.getSendTime())
                 .build();
+    }
+
+    public List<MessageDTO> toDTO(List<Message> entities){
+        return entities.stream().map(this::toDTO).collect(Collectors.toList());
     }
 }
