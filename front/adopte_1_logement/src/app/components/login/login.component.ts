@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { TokenStorageService } from 'app/services/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,10 @@ export class LoginComponent implements OnInit {
     email: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
-  isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage : TokenStorageService,   private fb: FormBuilder,) { }
+  constructor(private authService: AuthService, private tokenStorage : TokenStorageService, private router : Router,  private fb: FormBuilder,) { }
 
   get registerPath() {
     return "/register";
@@ -41,9 +40,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.tokenStorage.isLoggedIn()) {
-      console.log("User is logged in");
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
+      console.log(this.tokenStorage.getUser());
+      this.router.navigate(['/home']);
     }
   }
 
@@ -53,14 +51,15 @@ export class LoginComponent implements OnInit {
     }
     this.submitting = true;
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: (data : {jwt: string, firstName : string, lastName : string, email : string, roles : string[]}) => {
+      next: (data : {jwt: string, id : string, firstName : string, lastName : string, email : string, roles : string[]}) => {
         console.log(data);
         this.tokenStorage.saveToken(data.jwt);
-        this.tokenStorage.saveUser({firstName : data.firstName, lastName : data.lastName, email : data.email, roles : data.roles});
+        this.tokenStorage.saveUser({id : data.id, firstName : data.firstName, lastName : data.lastName, email : data.email, roles : data.roles});
 
         this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
+        this.router.navigate(['/home']).then(() => {
+          window.location.reload();
+        });
       },
       error: err => {
         this.errorMessage = err;

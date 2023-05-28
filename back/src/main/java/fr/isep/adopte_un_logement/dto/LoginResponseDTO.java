@@ -12,6 +12,7 @@ import java.util.List;
 public class LoginResponseDTO {
 
     private String jwt;
+    private String id;
     private String firstName;
 
     private String lastName;

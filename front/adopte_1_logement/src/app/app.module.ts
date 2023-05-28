@@ -38,6 +38,7 @@ import {RippleModule} from "primeng/ripple";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { authInterceptorProviders } from './auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { RegisterComponent } from './components/register/register.component';
     PasswordValidatorDirective,
     EmailValidatorDirective,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

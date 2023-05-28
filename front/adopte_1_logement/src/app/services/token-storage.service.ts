@@ -10,6 +10,7 @@ export class TokenStorageService {
 
   signOut(): void {
     window.sessionStorage.clear();
+    window.sessionStorage.removeItem(USER_KEY);
   }
 
   public saveToken(token: string): void {
@@ -32,7 +33,7 @@ export class TokenStorageService {
       return JSON.parse(user);
     }
 
-    return {};
+    return null;
   }
 
   public isLoggedIn(): boolean {
