@@ -12,7 +12,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(
-      this.AUTH_API + 'signin',
+      this.AUTH_API + 'login',
       {
         email: email,
         password: password
@@ -22,7 +22,7 @@ export class AuthService {
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
     return this.http.post(
-      this.AUTH_API + 'signup',
+      this.AUTH_API + 'register',
       {
         firstName,
         lastName,
