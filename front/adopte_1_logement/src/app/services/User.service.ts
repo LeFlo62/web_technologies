@@ -31,6 +31,10 @@ export class UserService {
             {"id": "23","firstname": "Marc", "lastname":"Panier", "image":""},
             ];
     }
+    static getConversationByUser(user1Id : string, user2Id:User){
+
+        
+    }
 
 
 }

@@ -1,4 +1,4 @@
-<p-virtualScroller [value]="contacts" class = "container" [style]="{width : '100%' }"  scrollHeight="800px" [itemSize]="100" [lazy]="true"  >
+<p-virtualScroller [value]="contacts" class = "container"  scrollHeight="800px" [itemSize]="100" [lazy]="true"  >
     <ng-template pTemplate="contact" let-contact> 
 
         <div  class="contact" (click)="sendContact(contact)">
