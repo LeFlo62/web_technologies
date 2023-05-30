@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { ReviewComponent } from './components/review/review.component';
 import { HousingListItemComponent } from './components/housing-list-item/housing-list-item.component';
 import { AdsComponent } from './components/ads/ads.component';
 import { CreateHousingComponent } from './components/create-housing/create-housing.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { MenubarModule } from 'primeng/menubar';
@@ -26,6 +27,23 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MessagesModule } from 'primeng/messages';
+import { PasswordModule } from "primeng/password";
+import { DividerModule } from "primeng/divider";
+
+import { UsernameValidatorDirective } from './directives/username-validator.directive';
+import { PasswordValidatorDirective } from './directives/password-validator.directive';
+import { EmailValidatorDirective } from './directives/email-validator.directive';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import {KeyFilterModule} from "primeng/keyfilter";
+import { PhoneValidatorDirective } from './directives/phone-validator.directive';
+import { LoginComponent } from './components/login/login.component';
+import {CardModule} from "primeng/card";
+import {RippleModule} from "primeng/ripple";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import { authInterceptorProviders } from './auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
+import { LogoutComponent } from './components/logout/logout.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +54,18 @@ import { MessagesModule } from 'primeng/messages';
     ReviewComponent,
     HousingListItemComponent,
     AdsComponent,
-    CreateHousingComponent
+    CreateHousingComponent,
+    ReviewComponent,
+    HousingComponent,
+    ProfileComponent,
+    ProfileFormComponent,
+    PhoneValidatorDirective,
+    UsernameValidatorDirective,
+    PasswordValidatorDirective,
+    EmailValidatorDirective,
+    RegisterComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +85,18 @@ import { MessagesModule } from 'primeng/messages';
     InputTextModule,
     InputTextareaModule,
     FileUploadModule,
-    MessagesModule
+    MessagesModule,
+    PasswordModule,
+    DividerModule,
+    KeyFilterModule,
+    CardModule,
+    RippleModule,
+    ProgressSpinnerModule
   ],
-  providers: [],
+
+  providers: [
+    authInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

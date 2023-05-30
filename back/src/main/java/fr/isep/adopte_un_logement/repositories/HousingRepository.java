@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface HousingRepository extends JpaRepository<Housing, UUID>, PagingAndSortingRepository<Housing, UUID> {
+public interface HousingRepository extends JpaRepository<Housing, UUID> {
 }

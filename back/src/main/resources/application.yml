@@ -3,6 +3,15 @@ minio:
   user: ${MINIO_USER}
   password: ${MINIO_PASSWORD}
 
+security:
+  jwt:
+    cookie_name: adopteunlogement
+    expiration: 86400000
+    secret: M01jOVR1WlRFek1OUDhNc0oyWnM4bW41ZFhzYWNwdzltY1Q3Q1ppNndMUXI1UGlkaVhlblYyZUJBcFhMSDY4RQ==
+  public-endpoints: >
+    /housing/list,
+    /image/**,
+
 spring:
   datasource:
     url: jdbc:postgresql://${DB_URL}:5432/adopteunlogement

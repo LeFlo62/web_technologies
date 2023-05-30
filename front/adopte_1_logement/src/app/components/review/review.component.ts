@@ -8,6 +8,7 @@ import { Review } from 'app/data/housing';
 })
 export class ReviewComponent {
   @Input() review : Review | any;
+  @Input() minimal : boolean = false;
 
   constructor(){}
 

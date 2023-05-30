@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -15,4 +16,12 @@ export class AppComponent {
     {label: 'Mes locations', icon: 'pi pi-fw pi-calendar', routerLink: ['/user']},
     {label: 'Messagerie', icon: 'pi pi-fw pi-comment', routerLink: ['/admin']},
   ];
+
+  id? : string;
+
+  constructor(private tokenStorage : TokenStorageService) {
+    if(this.tokenStorage.isLoggedIn()) {
+      this.id = this.tokenStorage.getUser().id;
+    }
+  }
 }

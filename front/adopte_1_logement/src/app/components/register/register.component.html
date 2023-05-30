@@ -1,0 +1,160 @@
+<div
+  *ngIf="submitting"
+  class="
+    absolute
+    w-full
+    h-full
+    flex
+    align-items-center
+    justify-content-center
+    bg-black-alpha-30
+  "
+>
+
+</div>
+<div class="parent">
+<div class="flex justify-content-center align-items-center h-full">
+  <form
+    autocomplete="off"
+    class="w-680"
+    [formGroup]="registerForm"
+    (ngSubmit)="register()"
+  >
+    <p-card header="S'inscrire">
+      <div class="field">
+        <div class="flex-container">
+          <div class="flex-item">
+            <label for="firstName">Prénom</label>
+            <input
+              id="firstName"
+              type="text"
+              class="w-full"
+              pInputText
+              formControlName="firstName"
+            />
+            <small *ngIf="isInvalid('firstName')" id="firstName-help" class="p-error">
+              <div *ngIf="firstName?.errors?.['required']">Prénom requis</div>
+            </small>
+          </div>
+
+          <div class="flex-item">
+            <label for="lastName">NOM</label>
+            <input
+              id="lastName"
+              type="text"
+              class="w-full"
+              pInputText
+              formControlName="lastName"
+            />
+            <small *ngIf="isInvalid('lastName')" id="lastName-help" class="p-error">
+              <div *ngIf="lastName?.errors?.['required']">Nom requis</div>
+            </small>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="field">
+        <label for="email">Adresse email</label>
+        <input
+          id="email"
+          type="email"
+          class="w-full"
+          pInputText
+          formControlName="email"
+        />
+        <small *ngIf="isInvalid('email')" id="email-help" class="p-error">
+          <div *ngIf="email?.errors?.['required']">L'adresse email est requise</div>
+          <div *ngIf="email?.errors?.['email']">L'adresse email doit être valide</div>
+        </small>
+      </div>
+
+      <div class="field">
+        <div class="flex-container">
+          <div class="flex-item">
+            <label class="block" for="password">Mot de passe</label>
+            <p-password
+              inputId="password"
+              class="custom-p-password"
+              formControlName="password"
+            >
+              <!-- TODO WIDTH 100%-->
+              <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p>Au moins une minuscule<br>
+                  Au moins une majuscule<br>
+                  Au moins un chiffre<br>
+                  Entre 8 et 1024 caractères<br></p>
+              </ng-template>
+            </p-password>
+            <small *ngIf="isInvalid('password')" id="password-help" class="p-error">
+              <div *ngIf="password?.errors?.['required']">
+                Mot de passe requis
+              </div>
+              <div *ngIf="password?.errors?.['minlength']">
+                Le mot de passe doit faire plus de 8 caractères
+              </div>
+              <div *ngIf="password?.errors?.['doNotMatch']">
+                Les mots de passe de correspondent pas
+              </div>
+            </small>
+          </div>
+
+          <div class="flex-item">
+            <label class="block" for="password2">Confirmez votre mot de passe</label>
+            <p-password
+              inputId="password2"
+              [feedback]="false"
+              class="w-full"
+              formControlName="password2"
+            ></p-password>
+            <small
+              *ngIf="isInvalid('password2')"
+              id="password2-help"
+              class="p-error"
+            >
+              <div *ngIf="password2?.errors?.['required']">
+                Mot de passe requis
+              </div>
+              <div *ngIf="password2?.errors?.['doNotMatch']">
+                Les mots de passe ne correspondent pas
+              </div>
+            </small>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="field">
+        <label for="phone">Numéro de téléphone</label>
+        <input
+          id="phone"
+          type="phone"
+          class="w-full"
+          pInputText
+          formControlName="phone"
+        />
+        <small *ngIf="isInvalid('phone')" id="phone-help" class="p-error">
+          <div *ngIf="phone?.errors?.['required']">Le numéro de téléphone est requis</div>
+          <div *ngIf="phone?.errors?.['phone']">Le numéro de téléphone doit être valide</div>
+        </small>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <button
+          pButton
+          pRipple
+          label="Inscription"
+          class="w-full"
+          type="submit"
+          [disabled]="submitting"
+        ></button>
+        <p>
+          Déjà inscrit ?
+          <a [routerLink]="loginPath">Connexion</a>
+        </p>
+      </ng-template>
+    </p-card>
+  </form>
+</div>
+</div>

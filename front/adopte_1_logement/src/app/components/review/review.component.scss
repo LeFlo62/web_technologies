@@ -3,13 +3,13 @@
     .header {
         display: flex;
         align-items: center;
-    
+
         .author-date {
             display: flex;
             flex-direction: column;
             margin-left: 1rem;
         }
-    
+
         .rating {
             display: flex;
             margin-left: auto;
@@ -18,18 +18,29 @@
                 cursor: pointer;
                 text-decoration: underline;
             }
-            .space {
-                margin: 0 0.5rem;
-            }
         }
     }
     .content {
         margin-top: 1rem;
     }
     p {
-        margin: 0;
+        margin: 5px ;
     }
     .grey-font {
         color: var(--greyFont);
     }
+}
+
+.min-box {
+  width: auto;
+}
+
+.disabled{
+  display: none;
+}
+
+.min-rating {
+  .p {
+    margin-left: 5px;
+  }
 }

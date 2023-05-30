@@ -13,16 +13,12 @@ export class HousingService {
   
   constructor(private http : HttpClient) { }
   
-  public getAllHousing() : Observable<HousingListItem[]> {
-    return this.http.get<HousingListItem[]>(this.url + "/list");
-  }
-  
   public getPagedHousing(page : number, pageSize : number, sorting : string = "") : Observable<HousingListItem[]> {
     let sortString = "";
     if (sorting != "") {
       sortString = "&sort=" + sorting;
     }
-    return this.http.get<HousingListItem[]>(this.url + "/list/paginated?page=" + page + "&size=" + pageSize + sortString);
+    return this.http.get<HousingListItem[]>(this.url + "/list?page=" + page + "&size=" + pageSize + sortString);
   }
 
   public getHousingById(id: String) : Observable<HousingItem>{

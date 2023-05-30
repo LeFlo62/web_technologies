@@ -20,6 +20,6 @@ public class AsyncConfig  implements WebMvcConfigurer {
 
     @Bean
     protected ConcurrentTaskExecutor getTaskExecutor() {
-        return new ConcurrentTaskExecutor(Executors.newFixedThreadPool(5));
+        return new ConcurrentTaskExecutor(Executors.newFixedThreadPool(8));
     }
 }
