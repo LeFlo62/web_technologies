@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiUrl } from '../../environments/environment';
-import { HousingListItem } from '../data/housing';
+import { HousingListItem, HousingItem } from '../data/housing';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,5 +25,7 @@ export class HousingService {
     return this.http.get<HousingListItem[]>(this.url + "/list/paginated?page=" + page + "&size=" + pageSize + sortString);
   }
 
-  public getHousingDataFromId(id: String){}
+  public getHousingById(id: String) : Observable<HousingItem>{
+    return this.http.get<HousingItem>(this.url + "/" + id);
+  }
 }

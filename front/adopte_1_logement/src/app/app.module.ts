@@ -9,6 +9,8 @@ import { HousingComponent } from './components/housing/housing.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewComponent } from './components/review/review.component';
 import { HousingListItemComponent } from './components/housing-list-item/housing-list-item.component';
+import { AdsComponent } from './components/ads/ads.component';
+import { CreateHousingComponent } from './components/create-housing/create-housing.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { MenubarModule } from 'primeng/menubar';
@@ -20,6 +22,10 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HousingComponent,
     ReviewsComponent,
     ReviewComponent,
-    HousingListItemComponent
+    HousingListItemComponent,
+    AdsComponent,
+    CreateHousingComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +52,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CarouselModule,
     DynamicDialogModule,
     BrowserAnimationsModule,
-    DropdownModule
+    DropdownModule,
+    InputTextModule,
+    InputTextareaModule,
+    FileUploadModule,
+    MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

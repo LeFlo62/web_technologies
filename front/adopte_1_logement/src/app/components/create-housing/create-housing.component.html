@@ -1,0 +1,65 @@
+<!-- <p>To do list:
+    - Titre x
+    - Images
+    - Rating -> Pas d'avis
+    - Services
+    - Contraintes
+    - Description housing x
+    - Description landlord -> Nom, prénom + "Pas de description"
+    - Reviews -> 0
+</p> -->
+<div class="container">
+    <form [formGroup]="createHousingForm" class="box">
+        <div class="additional-padding">
+            <h2>Nouvelle annonce :</h2>
+            <!-- Title input -->
+            <span class="p-float-label">
+                <input id="title" pInputText class="p-inputtext-sm" formControlName="title"/>
+                <label htmlFor="title">Titre <i>(obligatoire)</i></label>
+            </span>
+            <!-- Housing description input -->
+            <span class="p-float-label">
+                <textarea id="float-input" rows="5" cols="30" pInputTextarea formControlName="housingDescription"></textarea>
+                <label for="float-input">Description</label>
+            </span>
+            <div class="flexbox">
+                <!-- Services input -->
+                <div class="services">
+                    <p>Services :</p>
+                    <div formArrayName="services">
+                        <div *ngFor="let service of servicesArray.controls; let i = index">
+                        <input [formControlName]="i" pInputText class="p-inputtext-sm service-inputs">
+                        <button type="button" pButton class="p-button-text p-button-secondary delete-button" icon="pi pi-times" (click)="removeService(i)"></button>
+                        </div>
+                    </div>
+                    <button type="button" pButton class="p-button-outlined add-button" (click)="addService()">Ajouter un service</button>
+                </div>
+                <!-- Constraints input -->
+                <div class="constraints">
+                    <p>Constraintes :</p>
+                    <div formArrayName="constraints" class="constraints">
+                        <div *ngFor="let constraint of constraintsArray.controls; let i = index">
+                        <input [formControlName]="i" pInputText class="p-inputtext-sm constraint-inputs">
+                        <button type="button" pButton class="p-button-text p-button-secondary delete-button" icon="pi pi-times" (click)="removeConstraint(i)"></button>
+                        </div>
+                    </div>
+                    <button type="button" pButton class="p-button-outlined add-button" (click)="addConstraint()">Ajouter une contrainte</button>
+                </div>
+            </div>
+            <!-- Images input -->
+            <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)" [multiple]="true" accept="image/*">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+            <!-- Info message -->
+            <p class="info">
+                <i>Veillez à uploader vos photos avant de publier votre annonce</i>
+            </p>
+            <!-- Submit button -->
+            <button id="submitButton" pButton class="p-button-success" [disabled]="!createHousingForm.valid" (click)="onSubmit()">Publier l'annonce</button>
+        </div>
+    </form>
+</div>
