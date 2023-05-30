@@ -24,9 +24,7 @@ public class HousingService {
         return housingRepository.findAll();
     }
 
-    public Housing getHousingById(UUID id) {
-        return housingRepository.findById(id).orElse(null);
-    }
+    public Housing getHousingById(UUID id) { return housingRepository.findById(id).orElse(null); }
 
     public void deleteHousing(UUID id) {
         housingRepository.deleteById(id);
