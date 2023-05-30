@@ -39,6 +39,7 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { authInterceptorProviders } from './auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { MessengerComponent } from './components/messenger/messenger.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     EmailValidatorDirective,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    MessengerComponent
   ],
   imports: [
     BrowserModule,

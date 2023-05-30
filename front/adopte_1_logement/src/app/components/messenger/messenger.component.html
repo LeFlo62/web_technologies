@@ -1,0 +1,7 @@
+<div class="content">
+    <div class="contacts">
+        <div class="contact" *ngFor="let user of lastUsers">
+            <p-avatar icon="pi pi-user" styleClass="mr-2" size="large" shape="circle" [routerLink]="'/message/' + user.id"></p-avatar>
+        </div>
+    </div>
+</div>
