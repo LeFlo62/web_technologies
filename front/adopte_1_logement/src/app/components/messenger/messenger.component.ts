@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from 'app/data/user';
 import { TokenStorageService } from 'app/services/token-storage.service';
@@ -8,7 +8,7 @@ import { TokenStorageService } from 'app/services/token-storage.service';
   templateUrl: './messenger.component.html',
   styleUrls: ['./messenger.component.scss']
 })
-export class MessengerComponent {
+export class MessengerComponent implements OnInit {
 
   lastUsers : User[] = [];
 
@@ -23,6 +23,9 @@ export class MessengerComponent {
     this.route.params.subscribe((params : Params) => {
       this.userId = params["id"];
     });
+  }
+  ngOnInit(): void {
+    
   }
 
 }

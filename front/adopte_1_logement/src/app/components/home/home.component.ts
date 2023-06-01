@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
   //Event for end of page
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (window.innerHeight + window.scrollY >= document.getElementById('content-pane')!.offsetHeight) {
       this.loadMoreHousing();
     }
   }
