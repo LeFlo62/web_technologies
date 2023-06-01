@@ -15,7 +15,7 @@ export interface Review {
     useless: number;
 };
 
-export interface Housing {
+export interface HousingItem {
     title: string, 
     images: any[],
     rating: number,

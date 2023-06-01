@@ -9,6 +9,8 @@ import { HousingComponent } from './components/housing/housing.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewComponent } from './components/review/review.component';
 import { HousingListItemComponent } from './components/housing-list-item/housing-list-item.component';
+import { AdsComponent } from './components/ads/ads.component';
+import { CreateHousingComponent } from './components/create-housing/create-housing.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { DropdownModule } from 'primeng/dropdown';
@@ -22,9 +24,11 @@ import { CarouselModule } from 'primeng/carousel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
+import { MessagesModule } from 'primeng/messages';
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
-import {MessagesModule} from "primeng/messages";
 
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
@@ -50,6 +54,8 @@ import { MessengerComponent } from './components/messenger/messenger.component';
     ReviewsComponent,
     ReviewComponent,
     HousingListItemComponent,
+    AdsComponent,
+    CreateHousingComponent,
     ReviewComponent,
     HousingComponent,
     ProfileComponent,
@@ -78,10 +84,12 @@ import { MessengerComponent } from './components/messenger/messenger.component';
     DynamicDialogModule,
     BrowserAnimationsModule,
     DropdownModule,
+    InputTextModule,
+    InputTextareaModule,
+    FileUploadModule,
+    MessagesModule,
     PasswordModule,
     DividerModule,
-    InputTextModule,
-    MessagesModule,
     KeyFilterModule,
     CardModule,
     RippleModule,

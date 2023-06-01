@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="housingData; else housingSkeleton">
     <div class="header">
         <div class="back-to-results" [routerLink]="'/home'">
             <i class="pi pi-arrow-left"></i>
@@ -11,17 +11,17 @@
         <div class="left-side">
             <p-carousel [value]="housingData.images" [numVisible]="1" [circular]="true">
                 <ng-template let-images pTemplate="item">
-                    <img [src]="images.src"
+                    <img [src]="images"
                     style="overflow: hidden; background-repeat: no-repeat;"
                     width="100%" 
                     height="100%"
-                    [alt]="images.alt"
-                    [title]="images.title">
+                    alt="housing-images">
                 </ng-template>
             </p-carousel>
             <div class="tenants-review box">
                 <p>Notes des locataires : </p>
                 <p-rating [(ngModel)]="housingData.rating" [readonly]="true" [cancel]="false"></p-rating>
+                <p>{{housingData.rating}}</p>
                 <button pButton pRipple type="button" label="Voir les avis" class="p-button-sm p-button-text p-button-plain" (click)="onShowComments()"></button>
             </div>
             <div class="landlord-requests">
@@ -52,5 +52,54 @@
                 <h3>Description :</h3>
                 <span>{{housingData.housingDescription}}</span>
             </div>
+        </div>
     </div>
 </div>
+<ng-template #housingSkeleton>
+    <div class="container">
+        <div class="header">
+            <div class="back-to-results" [routerLink]="'/home'">
+                <i class="pi pi-arrow-left"></i>
+                <p>Retour aux résultats</p>
+            </div>
+            <p class="research">Rechercher</p>
+        </div>
+        <p-skeleton styleClass="mb-2" height="2rem"></p-skeleton>
+        <div class="content">
+            <div class="left-side">
+                <p-skeleton styleClass="mb-2" height="20rem"></p-skeleton>
+                <div class="tenants-review box">
+                    <p>Notes des locataires :</p>
+                    <p-skeleton styleClass="mb-2"></p-skeleton>
+                </div>
+                <div class="landlord-requests">
+                    <div class="services box">
+                        <h3>Services :</h3>
+                        <p-skeleton styleClass="mb-2" class="skeleton-padding"></p-skeleton>
+                        <p-skeleton styleClass="mb-2" class="skeleton-padding"></p-skeleton>
+                        <p-skeleton styleClass="mb-2" class="skeleton-padding"></p-skeleton>
+                    </div>
+                    <div class="constraints box">
+                        <h3>Contraintes :</h3>
+                        <p-skeleton styleClass="mb-2" class="skeleton-padding"></p-skeleton>
+                        <p-skeleton styleClass="mb-2" class="skeleton-padding"></p-skeleton>
+                        <p-skeleton styleClass="mb-2" class="skeleton-padding"></p-skeleton>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="landlord-info">
+                    <p-skeleton width="30rem" height="5rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="7rem" height="7rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                </div>
+                <div class="buttons">
+                    <p-skeleton styleClass="mb-2" height="5rem"></p-skeleton>
+                </div>
+                <div class="housing-description box">
+                    <h3>Description :</h3>
+                    <p-skeleton styleClass="mb-2" height="20rem"></p-skeleton>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
