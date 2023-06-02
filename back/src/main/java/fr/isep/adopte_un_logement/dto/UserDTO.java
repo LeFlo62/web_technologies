@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDTO {
 
+    private String id;
     private String firstName;
 
     private String lastName;

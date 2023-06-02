@@ -14,8 +14,8 @@ export class MessageService {
 
   constructor(private http : HttpClient) { }
 
-  getMessages(id : string) : Observable<Message[]> {
-    return this.http.get<Message[]>(this.url + "/" + id);
+  getMessages(id : string, page : number, pageSize : number) : Observable<Message[]> {
+    return this.http.get<Message[]>(this.url + "/" + id + "?page=" + page + "&size=" + pageSize);
   }
 
   sendMessage(id : string, content : string) : Observable<any>{

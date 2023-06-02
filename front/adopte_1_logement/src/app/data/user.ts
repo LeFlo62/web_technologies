@@ -1,7 +1,7 @@
 export interface User {
   id: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   username: string;
@@ -12,8 +12,8 @@ export interface User {
 export class AppComponent {
   user: User = {
     id: '',
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     username: '',

@@ -28,8 +28,8 @@ export class ProfileFormComponent implements OnInit {
   profile: User = {
     id: "",
     password: "",
-    firstname: 'John',
-    lastname: 'Doe',
+    firstName: 'John',
+    lastName: 'Doe',
     email: 'test@est.fr',
     phone: '0606060606',
     username: 'usernameeee'

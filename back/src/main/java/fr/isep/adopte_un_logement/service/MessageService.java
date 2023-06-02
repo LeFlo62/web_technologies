@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +31,11 @@ public class MessageService {
     }
 
     public List<User> getLastUsers(String userId) {
-        return userRepository.findAllById(messageRepository.getLastMessagedUsers(UUID.fromString(userId)));
+        List<UUID> uuids = messageRepository.getLastMessagedUsers(UUID.fromString(userId));
+        List<User> users = userRepository.findAllById(uuids);
+
+        Collections.sort(users, Comparator.comparingInt(u -> uuids.indexOf(u.getId())));
+
+        return users;
     }
 }

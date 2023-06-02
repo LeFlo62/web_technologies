@@ -62,8 +62,8 @@ export class ProfileComponent {
   profile: User = {
     password: "",
     id: '1',
-    firstname: 'John',
-    lastname: 'Doe',
+    firstName: 'John',
+    lastName: 'Doe',
     email: 'test@est.fr',
     phone: '0606060606',
     username: 'usernameeee'

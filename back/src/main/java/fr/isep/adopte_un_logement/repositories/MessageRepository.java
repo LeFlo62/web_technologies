@@ -14,13 +14,13 @@ public interface MessageRepository extends JpaRepository<Message, UUID> {
     @Query("SELECT m\n" +
             "FROM Message m\n" +
             "WHERE (m.sender.id = :user1 AND m.receiver.id = :user2) OR (m.sender.id = :user2 AND m.receiver.id = :user1)\n" +
-            "ORDER BY m.sendTime ASC")
+            "ORDER BY m.sendTime DESC")
     Page<Message> getMessages(UUID user1, UUID user2, Pageable pageable);
 
-    @Query(value = "SELECT DISTINCT CASE WHEN m.sender_id = :userId THEN m.receiver_id ELSE m.sender_id END\n" +
-            "FROM (SELECT receiver_id,sender_id FROM message AS m\n" +
+    @Query(value = "SELECT user_id FROM (SELECT DISTINCT m.send_time, CASE WHEN m.sender_id = :userId THEN m.receiver_id ELSE m.sender_id END AS user_id\n" +
+            "FROM (SELECT receiver_id,sender_id,send_time FROM message AS m\n" +
             "      WHERE m.receiver_id = :userId OR m.sender_id = :userId\n" +
-            "      ORDER BY m.send_time DESC) AS m", nativeQuery = true)
+            "      ) AS m) AS f ORDER BY f.send_time DESC", nativeQuery = true)
     List<UUID> getLastMessagedUsers(UUID userId);
 
 }
