@@ -17,11 +17,20 @@ export class AppComponent {
     {label: 'Messagerie', icon: 'pi pi-fw pi-comment', routerLink: ['/message']},
   ];
 
+  userMenu : MenuItem[] = [
+    {label: 'Mon profil', icon: 'pi pi-fw pi-user', routerLink: ['/profile/' + this.id]},
+    {
+      separator: true
+    },
+    {label: 'Déconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/logout']},
+  ];
+
   id? : string;
 
   constructor(private tokenStorage : TokenStorageService) {
     if(this.tokenStorage.isLoggedIn()) {
       this.id = this.tokenStorage.getUser().id;
+      this.userMenu[0].routerLink = ['/profile/' + this.id];
     }
   }
 }
