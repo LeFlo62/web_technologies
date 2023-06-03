@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from "../../data/user";
+import { UserService } from 'app/services/user.service';
+import { ActivatedRoute, Route } from '@angular/router';
 
 
 @Component({
@@ -59,13 +61,16 @@ export class ProfileComponent {
       uselessCounter: 10
     }
   ];
-  profile: User = {
-    password: "",
-    id: '1',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'test@est.fr',
-    phone: '0606060606',
-    username: 'usernameeee'
-  };
+  profile!: User;
+
+  constructor(private route : ActivatedRoute, private userService : UserService) { }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      console.log("dsqdqsd")
+      this.userService.getUser(params['id']).subscribe(user => {
+        this.profile = user;
+      });
+    });
+  }
 }

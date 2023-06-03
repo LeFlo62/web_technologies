@@ -3,15 +3,13 @@ package fr.isep.adopte_un_logement.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Entity
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -33,6 +31,6 @@ public class User {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private List<Role> roles = new ArrayList<>();
 
 }

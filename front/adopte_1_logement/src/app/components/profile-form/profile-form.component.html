@@ -1,97 +1,46 @@
-<form [formGroup]="form">
-  <div class="user-info-details">
-
-  <div *ngIf="!isEditingUsername" class="user-info-details-2">
-    <div class="user-info-details-left">
-      <p>{{profile.firstName}}</p>
-      <div class="user-info-details-right">
-        <p>{{profile.lastName}}</p>
+<form [formGroup]="form" class="user-form">
+    <div class="user-section" *ngIf="!editing else edit">
+      <div class="user-details">
+        <p *ngIf="profile else firstNameSkeleton">Prénom : {{profile.firstName}}</p>
+        <ng-template #firstNameSkeleton><p class="skeleton">Prénom : <p-skeleton width="10rem" styleClass="mb-2 inline"></p-skeleton></p></ng-template>
+        <p *ngIf="profile else lastNameSkeleton">Nom : {{profile.lastName}}</p>
+        <ng-template #lastNameSkeleton><p class="skeleton">Nom : <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton></p></ng-template>
+        <p *ngIf="profile else emailSkeleton">Email : {{profile.email}}</p>
+        <ng-template #emailSkeleton><p class="skeleton">Email : <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton></p></ng-template>
+        <p *ngIf="isSelf()">Mot de passe : ●●●●●●●●</p>
       </div>
-  </div>
-  </div>
-
-  <div *ngIf="!isEditingEmail" class="user-info-details-2">
-    <div class="user-info-details-left">
-      <p>Adresse email :</p>
-      <p>{{profile.email}}</p>
-    </div>
-    <div class="user-info-details-right">
-      <a (click)="isEditingEmail=true"><i class="pi pi-pencil"></i></a>
-    </div>
-  </div>
-  <div *ngIf="isEditingEmail" class="user-info-details-2">
-    <div class="user-info-details-left">
-      <p>Adresse email :</p>
-      <input pInputText pKeyFilter="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-             formControlName="email" [ngModel]="profile.email" placeholder="{{profile.email}}"
-             [maxlength]="20" pTooltip="jean@dupont.fr" tooltipPosition="top"
-             [ngClass]="{'ng-invalid': f['email'].invalid}" />
-    </div>
-    <div class="user-info-details-right">
-      <a (click)="onSubmit('email')" [class.disabled]="!isValidEmail()">
-        <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidEmail(), 'valid-icon': isValidEmail()}"></i>
-      </a>
-    </div>
-  </div>
-
-  </div>
-  <div class="user-info-details" >
-
-    <div class="user-info-details-2" *ngIf="!isEditingPassword">
-      <div class="user-info-details-left">
-        <p>Mot de passe :</p>
-        <p>●●●●●●●●</p>
-      </div>
-      <div class="user-info-details-right">
-        <a (click)="onSubmit('password')" [class.disabled]="!isValidPassword()">
-          <a (click)="isEditingPassword=true"><i class="pi pi-pencil"></i></a>
-        </a>
+      <div class="buttons" *ngIf="isSelf()">
+        <button pButton (click)="editForm()">Modifer</button>
       </div>
     </div>
-
-    <div class="user-info-details-2" *ngIf="isEditingPassword">
-      <div class="user-info-details-left">
-        <p>Mot de passe :</p>
-        <!-- TODO REFUSE SPACES AND SPECIAL CARACTERS-->
-        <p-password formControlName="password" (input)="onPasswordInput($event)" (paste)="onPasswordPaste($event)"
-        [(ngModel)]="profile.password"  [ngClass]="{'ng-invalid': f['password'].invalid}"
-                    weakLabel="Faible" mediumLabel="Moyen" strongLabel="Fort" promptLabel="Saisissez un mot de passe"
-                    [maxLength]=1024 >
-          <ng-template pTemplate="footer">
-            <p-divider></p-divider>
-              <p>Au moins une minuscule<br>
-              Au moins une majuscule<br>
-              Au moins un chiffre<br>
-              Entre 8 et 1024 caractères<br></p>
-          </ng-template>
-        </p-password>
+    <ng-template #edit>
+      <div class="user-section">
+        <div class="user-details" editing>
+          <div class="field">
+            <label for="firstName">Prénom</label>
+            <input pInputText type="text" id="firstName" formControlName="firstName">
+          </div>
+          <div class="field">
+            <label for="lastName">Nom</label>
+            <input pInputText type="text" id="lastName" formControlName="lastName">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input pInputText type="email" id="email" formControlName="email">
+          </div>
+          <div class="field">
+            <label for="password">Mot de passe</label>
+            <div>
+              <input pInputText type="password" id="password" formControlName="password" placeholder="Mot de passe">
+            <input pInputText type="password" id="passwordConfirm" formControlName="passwordConfirm" placeholder="Confirmer le mot de passe">
+            <small *ngIf="form.value.passwordConfirm && form.value.passwordConfirm != form.value.password">Les mot de passes doivent être les mêmes</small>
+            </div>
+          </div>
+        </div>
+        <div class="buttons" *ngIf="isSelf()">
+          <button pButton class="p-button-raised p-button-success" (click)="submit()">Sauvegarder</button>
+          <button (click)="editing = false" pButton class="p-button-outlined p-button-danger">Annuler</button>
+        </div>
       </div>
-      <div class="user-info-details-right" (click)="onSubmit('password')" [class.disabled]="!isValidPassword()" >
-        <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidPassword(), 'valid-icon': isValidPassword()}"></i>
-      </div>
-    </div>
-
-    <div *ngIf="!isEditingPhone" class="user-info-details-2">
-      <div class="user-info-details-left">
-        <p>Numéro de téléphone :</p>
-        <p>{{profile.phone}}</p>
-      </div>
-      <div class="user-info-details-right">
-        <a (click)="isEditingPhone=true"><i class="pi pi-pencil"></i></a>
-      </div>
-    </div>
-    <div *ngIf="isEditingPhone" class="user-info-details-2">
-      <div class="user-info-details-left">
-        <p>Numéro de téléphone :</p>
-        <input pInputText pKeyFilter="num" formControlName="phone" [ngModel]="profile.phone"
-               placeholder="{{profile.phone}}" [maxlength]="10"
-               [ngClass]="{'ng-invalid': f['phone'].invalid}" />
-      </div>
-      <div class="user-info-details-right">
-        <a (click)="onSubmit('phone')" [class.disabled]="!isValidPhone()">
-          <i class="pi pi-check" [ngClass]="{'invalid-icon': !isValidPhone(), 'valid-icon': isValidPhone()}"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+    </ng-template>
 </form>

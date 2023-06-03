@@ -3,10 +3,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
-  username: string;
   password: string;
-  [key: string]: string;
 }
 
 export class AppComponent {
@@ -15,8 +12,6 @@ export class AppComponent {
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
-    username: '',
     password: '',
   };
 

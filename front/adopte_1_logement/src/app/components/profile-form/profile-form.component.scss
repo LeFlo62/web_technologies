@@ -1,55 +1,49 @@
-.invalid-icon {
-  color: #FF3333;
+.user-form{
+  height: 100%;
 }
 
-.valid-icon {
-  color: #a6d93b;
-}
-
-.user-info {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-right: 50px;
-  width: calc(100% - 150px);
+.user-section{
   display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-}
-
-.user-info-details {
-  display: flex;
-  flex-direction: row;
-
-  div:first-child {
-    margin-right: 60px;
-  }
-}
-
-.user-info-details-2 {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 100%;
-  flex-direction: row;
-  p:first-child {
-    margin-right: 10px;
+  align-items: center;
+  height: 100%;
+
+  .user-details{
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  
+    &[editing]{
+      flex-direction: column;
+      width: auto;
+    }
+
+    > * {
+      flex: 0 0 40%;
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .field{
+        display: flex;
+        flex-direction: row;
+        
+        input{
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  .buttons{
+    height: 100%;
+
+    > * {
+      margin: 10px;
+    }
   }
 }
 
-.user-info-details-left {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-
-}
-
-.user-info-details-right {
-  display: flex;
-  align-items: center;
-}
-
-.user-info-details-right p {
-
-}
