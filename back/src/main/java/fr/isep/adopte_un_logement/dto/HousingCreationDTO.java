@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Getter @Setter @Builder
 public class HousingCreationDTO {
 
@@ -16,5 +18,6 @@ public class HousingCreationDTO {
 
     private String description;
 
-    private String address;
+    private List<String> services;
+    private List<String> constraints;
 }

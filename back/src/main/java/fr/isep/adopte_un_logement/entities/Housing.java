@@ -28,6 +28,8 @@ public class Housing {
 
     @Lob
     private String description;
-
-    private String address;
+    @ElementCollection
+    private List<String> services;
+    @ElementCollection
+    private List<String> constraints;
 }

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -44,8 +43,9 @@ public class HousingMapper {
         return Housing.builder()
                 .title(housingCreationDTO.getTitle())
                 .description(housingCreationDTO.getDescription())
-                .address(housingCreationDTO.getAddress())
                 .author(User.builder().id(UUID.fromString(housingCreationDTO.getAuthorId())).build())
+                .services(housingCreationDTO.getServices())
+                .constraints(housingCreationDTO.getConstraints())
                 .build();
     }
 
@@ -53,8 +53,12 @@ public class HousingMapper {
         return HousingDTO.builder()
                 .id(housing.getId().toString())
                 .title(housing.getTitle())
+                .authorId(housing.getAuthor().getId().toString())
+                .authorName(housing.getAuthor().getFirstName() + " " + housing.getAuthor().getLastName())
+                .description(housing.getDescription())
+                .services(housing.getServices())
+                .constraints(housing.getConstraints())
                 .images(housing.getImages().stream().map(id -> applicationConfig.getApiUrl() + "image/" + id).collect(Collectors.toList()))
-                .rating(housing.getRating())
                 .build();
     }
 }
