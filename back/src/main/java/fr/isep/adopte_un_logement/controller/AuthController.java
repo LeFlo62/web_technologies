@@ -8,6 +8,7 @@ import fr.isep.adopte_un_logement.mapper.UserMapper;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
 import fr.isep.adopte_un_logement.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -58,13 +59,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserCreationDTO userCreationDTO) {
+    public HttpStatus registerUser(@RequestBody UserCreationDTO userCreationDTO) {
         if (userService.existsByEmail(userCreationDTO.getEmail())) {
-            return ResponseEntity.badRequest().body("Error: Email is already taken!");
+            return HttpStatus.BAD_REQUEST;
         }
         userCreationDTO.setPassword(encoder.encode(userCreationDTO.getPassword()));
         userService.createUser(userMapper.toEntity(userCreationDTO));
 
-        return ResponseEntity.ok("User registered successfully!");
+        return HttpStatus.OK;
     }
 }

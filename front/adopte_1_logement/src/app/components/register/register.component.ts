@@ -30,10 +30,8 @@ export class RegisterComponent implements OnInit {
     firstName: ['', [Validators.required]],
     lastName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    username: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', [Validators.required, Validators.minLength(5)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     password2: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
   }, {
     validators: [this.validatorService.equalControls('password', 'password2'),],
   });
@@ -81,6 +79,7 @@ get phone() {
 
   register(): void {
 
+    console.log(this.registerForm.value);
     if (!this.registerForm.valid) {
       return;
     }
@@ -88,11 +87,8 @@ get phone() {
     this.submitting = true;
     const { firstName, lastName, email, password } = this.registerForm.value;
     this.authService.register(firstName, lastName, email, password).subscribe({
-      next: data => {
-        console.log(data);
-        this.submitting = false;
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
+      next: () => {
+        this.router.navigate(['/login']);
       }, error: err => {
         console.log(err);
         this.submitting = false;
