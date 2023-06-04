@@ -47,7 +47,7 @@
                 </div>
             </div>
             <!-- Images input -->
-            <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)" [multiple]="true" accept="image/*">
+            <p-fileUpload #fileUpload name="files[]" [showUploadButton]="false" [multiple]="true" accept="image/*">
                 <ng-template pTemplate="content">
                     <ul *ngIf="uploadedFiles.length">
                         <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -59,7 +59,7 @@
                 <i>Veillez à uploader vos photos avant de publier votre annonce</i>
             </p>
             <!-- Submit button -->
-            <button id="submitButton" pButton class="p-button-success" [disabled]="!createHousingForm.valid" (click)="onSubmit()">Publier l'annonce</button>
+            <button id="submitButton" pButton class="p-button-success" [disabled]="!createHousingForm.valid" (click)="onSubmit(fileUpload)">Publier l'annonce</button>
         </div>
     </form>
 </div>

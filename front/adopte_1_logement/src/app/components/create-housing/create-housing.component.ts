@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Form, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { HousingService } from '../../services/housing.service';
+import { FileUpload } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-create-housing',
@@ -13,9 +15,7 @@ export class CreateHousingComponent {
   uploadedFiles: File[] = [];
   images: string[] = [];
 
-  createHousingFormData = new FormData();
-
-  constructor() {}
+  constructor(private housingService : HousingService) {}
 
   createHousingForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -55,17 +55,34 @@ export class CreateHousingComponent {
   removeConstraint(index: number) {
     this.constraintsArray.removeAt(index);
   }
-  // Images
-  onUpload(event: any) {
-    const filesNumber = event.files.length
-    for(let i=0; i<filesNumber; i++) {
-      this.images.push(event.files[i]);
-      this.createHousingFormData.append(`image_${i}`, event.files[i]);
-    }
-  }
   
-  onSubmit(){
-    
-    console.warn(this.createHousingFormData);
+  onSubmit(fileUpload : FileUpload){
+
+    if(this.createHousingForm.invalid){
+      return;
+    }
+
+    if(fileUpload.files.length == 0){
+      return;
+    }
+
+      let formData : FormData = new FormData();
+
+      formData.append('title', this.createHousingForm.get('title')?.value!);
+      formData.append('housingDescription', this.createHousingForm.get('housingDescription')?.value!);
+      
+      for(let service of this.createHousingForm.get('services')?.value!){
+        formData.append('services', service!);
+      }
+
+      for(let constraint of this.createHousingForm.get('constraints')?.value!){
+        formData.append('constraints', constraint!);
+      }
+
+      for(let file of fileUpload.files){
+        formData.append('images', file);
+      }
+
+      this.housingService.createHousing(formData).subscribe();
   }
 }
