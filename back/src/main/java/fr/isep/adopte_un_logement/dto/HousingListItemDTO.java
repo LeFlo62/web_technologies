@@ -10,7 +10,6 @@ public class HousingListItemDTO {
     private String id;
     private String title;
     private String authorName;
-    private float rating;
     private String image;
 
 }

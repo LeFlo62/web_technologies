@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { HousingListItem } from '../../data/housing';
 import { HousingService } from '../../services/housing.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ReviewService } from 'app/services/review.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   sorting : FormGroup = new FormGroup({ rating: new FormControl() });
 
-  constructor(private housingService : HousingService) {}
+  constructor(private housingService : HousingService, private reviewService : ReviewService) {}
 
   ngOnInit(): void {
     this.loadMoreHousing();
@@ -52,6 +53,15 @@ export class HomeComponent implements OnInit {
           for(let i = 0; i < data.length; i++) {
             this.housingList[this.page * HomeComponent.PAGE_SIZE + i] = data[i];
           }
+
+          this.reviewService.getAverageRatingMultiple(data.map(h => h.id)).subscribe(
+            (ratings : {housingId : string, rating : number}[]) => {
+              console.log(ratings);
+              for(let i = 0; i < ratings.length; i++) {
+                this.housingList.find(h => h.id == ratings[i].housingId)!.rating = ratings[i].rating +2;
+                console.log(this.housingList.find(h => h.id == ratings[i].housingId));
+              }
+            });
 
           if(data.length < HomeComponent.PAGE_SIZE) {
             let diff = HomeComponent.PAGE_SIZE - data.length;

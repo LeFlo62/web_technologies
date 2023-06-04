@@ -30,7 +30,6 @@ public class HousingMapper {
                 .id(housing.getId().toString())
                 .title(housing.getTitle())
                 .authorName(housing.getAuthor().getFirstName() + " " + housing.getAuthor().getLastName())
-                .rating(housing.getRating())
                 .image(applicationConfig.getApiUrl() + "image/" + housing.getImages().get(0))
                 .build();
     }

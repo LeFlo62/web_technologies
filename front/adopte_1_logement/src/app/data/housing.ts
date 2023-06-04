@@ -8,11 +8,13 @@ export interface HousingListItem {
 };
 
 export interface Review {
-    author: string;
-    date: string;
+    id: string;
+    authorId: string;
+    authorName: string;
+    time: number;
+    housingId: string;
     content: string;
-    useful: number;
-    useless: number;
+    rating: number;
 };
 
 export interface Housing {

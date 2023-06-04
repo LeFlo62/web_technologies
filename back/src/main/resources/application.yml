@@ -12,6 +12,9 @@ security:
     /housing/list,
     /housing/{id},
     /image/**,
+    /review/list/**,
+    /review/average/**,
+    /review/averageMultiple,
 
 spring:
   datasource:

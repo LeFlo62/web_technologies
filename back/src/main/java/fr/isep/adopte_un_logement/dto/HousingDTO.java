@@ -17,6 +17,5 @@ public class HousingDTO {
     private List<String> constraints;
     private String description;
     private String landlordDescription;
-    private String reviews;
 
 }
