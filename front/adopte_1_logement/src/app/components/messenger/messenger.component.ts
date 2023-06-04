@@ -55,6 +55,11 @@ export class MessengerComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     this.route.params.subscribe((params : Params) => {
       this.userId = params["id"];
+
+      if(this.userId == this.tokenStorage.getUser().id){
+        this.router.navigate(['/message']);
+      }
+
       this.hasElementsLeft = true;
       this.page = 0;
       this.messages = [];
@@ -73,7 +78,7 @@ export class MessengerComponent implements OnInit, AfterViewChecked {
         });
       }
 
-      if(!this.userId){
+      if(!this.userId && users.length > 0){
         this.userId = users[0].id;
         this.loadMoreMessages();
         this.startMessagePolling();
@@ -88,7 +93,7 @@ export class MessengerComponent implements OnInit, AfterViewChecked {
   }
 
   sendMessage(){
-    if(this.form.get('message')?.value && this.form.get('message')?.value.trim() != ''){
+    if(this.form.get('message')?.value && this.form.get('message')?.value.trim() != '' && this.userId && this.userId != this.tokenStorage.getUser().id){
       this.messageService.sendMessage(this.userId!, this.form.get('message')?.value.trim()).subscribe(() => {
         this.messages.push({
           id : '',
@@ -107,7 +112,7 @@ export class MessengerComponent implements OnInit, AfterViewChecked {
   }
 
   loadMoreMessages() {
-    if(this.hasElementsLeft && !this.loading){
+    if(this.hasElementsLeft && !this.loading && this.userId && this.userId != this.tokenStorage.getUser().id){
       this.loading = true;
       this.messages.unshift(...Array(MessengerComponent.PAGE_SIZE));
 
@@ -133,12 +138,14 @@ export class MessengerComponent implements OnInit, AfterViewChecked {
   }
 
   loadNewMessages(){
-    this.messageService.getMessages(this.userId!, 0, MessengerComponent.PAGE_SIZE).subscribe((messages : Message[]) => {
-      let ids = this.messages.map(m => m.id);
-      let newMessages : Message[] = messages.filter(m => !ids.includes(m.id));
-      this.messages.push(...newMessages);
-      this.scrolling = false;
-    });
+    if(this.userId && this.userId != this.tokenStorage.getUser().id){
+      this.messageService.getMessages(this.userId!, 0, MessengerComponent.PAGE_SIZE).subscribe((messages : Message[]) => {
+        let ids = this.messages.map(m => m.id);
+        let newMessages : Message[] = messages.filter(m => !ids.includes(m.id));
+        this.messages.push(...newMessages);
+        this.scrolling = false;
+      });
+    }
   }
 
   onScroll(event : any) {

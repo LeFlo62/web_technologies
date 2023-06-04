@@ -3,6 +3,7 @@ import { Form, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HousingService } from '../../services/housing.service';
 import { FileUpload } from 'primeng/fileupload';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-housing',
@@ -15,7 +16,7 @@ export class CreateHousingComponent {
   uploadedFiles: File[] = [];
   images: string[] = [];
 
-  constructor(private housingService : HousingService) {}
+  constructor(private router : Router, private housingService : HousingService) {}
 
   createHousingForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -69,7 +70,7 @@ export class CreateHousingComponent {
       let formData : FormData = new FormData();
 
       formData.append('title', this.createHousingForm.get('title')?.value!);
-      formData.append('housingDescription', this.createHousingForm.get('housingDescription')?.value!);
+      formData.append('description', this.createHousingForm.get('housingDescription')?.value!);
       
       for(let service of this.createHousingForm.get('services')?.value!){
         formData.append('services', service!);
@@ -83,6 +84,8 @@ export class CreateHousingComponent {
         formData.append('images', file);
       }
 
-      this.housingService.createHousing(formData).subscribe();
+      this.housingService.createHousing(formData).subscribe((id : string) => {
+        this.router.navigate(['/housing/' + id]);
+      });
   }
 }

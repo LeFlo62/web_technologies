@@ -38,7 +38,7 @@ public class HousingService {
         return housingRepository.findAll(pageable);
     }
 
-    public void createHousing(Housing entity) {
-        housingRepository.save(entity);
+    public Housing createHousing(Housing entity) {
+        return housingRepository.save(entity);
     }
 }

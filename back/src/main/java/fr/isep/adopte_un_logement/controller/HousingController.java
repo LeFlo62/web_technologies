@@ -32,7 +32,7 @@ public class HousingController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createHousing(HousingCreationDTO housingCreationDTO) {
+    public ResponseEntity<String> createHousing(HousingCreationDTO housingCreationDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userId = userDetails.getId().toString();
 
@@ -43,8 +43,8 @@ public class HousingController {
         List<UUID> images = imageService.uploadImages(housingCreationDTO.getImages());
 
         housing.setImages(images);
-        housingService.createHousing(housing);
-        return ResponseEntity.ok().build();
+        String id = housingService.createHousing(housing).getId().toString();
+        return ResponseEntity.ok(id);
     }
 
     @GetMapping("/{id}")

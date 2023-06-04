@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiUrl } from '../../environments/environment';
-import { HousingListItem, HousingItem } from '../data/housing';
+import { HousingListItem, Housing } from '../data/housing';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,11 +21,11 @@ export class HousingService {
     return this.http.get<HousingListItem[]>(this.url + "/list?page=" + page + "&size=" + pageSize + sortString);
   }
 
-  public getHousingById(id: String) : Observable<HousingItem>{
-    return this.http.get<HousingItem>(this.url + "/" + id);
+  public getHousingById(id: String) : Observable<Housing>{
+    return this.http.get<Housing>(this.url + "/" + id);
   }
 
-  createHousing(formData: FormData) {
-    return this.http.post(this.url + '/create', formData);
+  createHousing(formData: FormData) : Observable<string> {
+    return this.http.post<string>(this.url + '/create', formData);
   }
 }
