@@ -24,4 +24,8 @@ export class HousingService {
   public getHousingById(id: String) : Observable<HousingItem>{
     return this.http.get<HousingItem>(this.url + "/" + id);
   }
+
+  public createHousing(formData: FormData) {
+    return this.http.post(this.url + '/create', formData);
+  }
 }
