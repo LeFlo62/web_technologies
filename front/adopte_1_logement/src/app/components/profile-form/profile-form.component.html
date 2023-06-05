@@ -22,7 +22,7 @@
   <div *ngIf="isEditingEmail" class="user-info-details-2">
     <div class="user-info-details-left">
       <p>Adresse email :</p>
-      <input pInputText pKeyFilter="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+      <input pInputText pKeyFilter="email"
              formControlName="email" [ngModel]="profile.email" placeholder="{{profile.email}}"
              [maxlength]="20" pTooltip="jean@dupont.fr" tooltipPosition="top"
              [ngClass]="{'ng-invalid': f['email'].invalid}" />

@@ -24,13 +24,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
-import {MessagesModule} from "primeng/messages";
+import { MessageService } from 'primeng/api';
 
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
-import {KeyFilterModule} from "primeng/keyfilter";
+import { KeyFilterModule } from "primeng/keyfilter";
 import { PhoneValidatorDirective } from './directives/phone-validator.directive';
 import { LoginComponent } from './components/login/login.component';
 import {CardModule} from "primeng/card";
@@ -39,6 +39,10 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { authInterceptorProviders } from './auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { UsersTableComponent } from "./components/admin-panel/users-table/users-table.component";
+import { TableModule} from "primeng/table";
+import { UsersDialogComponent } from "./components/admin-panel/users-dialog/users-dialog.component";
+import { DialogModule } from "primeng/dialog";
 
 
 @NgModule({
@@ -59,7 +63,9 @@ import { LogoutComponent } from './components/logout/logout.component';
     EmailValidatorDirective,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    UsersTableComponent,
+    UsersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -79,15 +85,17 @@ import { LogoutComponent } from './components/logout/logout.component';
     PasswordModule,
     DividerModule,
     InputTextModule,
-    MessagesModule,
     KeyFilterModule,
     CardModule,
     RippleModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    TableModule,
+    DialogModule
   ],
 
   providers: [
-    authInterceptorProviders
+    authInterceptorProviders,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

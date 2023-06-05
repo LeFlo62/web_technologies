@@ -27,6 +27,7 @@
           type="text"
           class="w-full"
           pInputText
+          pKeyFilter="email"
           formControlName="email"
         />
         <small *ngIf="isInvalid('email')" id="email-help" class="p-error">
@@ -42,6 +43,7 @@
           [feedback]="false"
           styleClass="w-full"
           inputStyleClass="w-full"
+
           formControlName="password"
         ></p-password>
         <small *ngIf="isInvalid('password')" id="password-help" class="p-error">

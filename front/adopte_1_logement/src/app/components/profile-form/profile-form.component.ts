@@ -32,7 +32,8 @@ export class ProfileFormComponent implements OnInit {
     lastname: 'Doe',
     email: 'test@est.fr',
     phone: '0606060606',
-    username: 'usernameeee'
+    username: 'usernameeee',
+    role: 'user',
   };
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,) {

@@ -29,11 +29,11 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
     lastName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    username: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', [Validators.required, Validators.minLength(5)]],
-    password2: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email, this.emailValidator.validate]],
+    username: ['', [Validators.required, this.usernameValidator.validate]],
+    password: ['', [Validators.required, this.passwordValidator.validate]],
+    password2: ['', [Validators.required, this.passwordValidator.validate]],
+    phone: ['', [Validators.required, this.phoneValidator.validate]],
   }, {
     validators: [this.validatorService.equalControls('password', 'password2'),],
   });
@@ -84,10 +84,10 @@ get phone() {
     if (!this.registerForm.valid) {
       return;
     }
-
+    //TODO
     this.submitting = true;
-    const { firstName, lastName, email, password } = this.registerForm.value;
-    this.authService.register(firstName, lastName, email, password).subscribe({
+    const { firstName, lastName, email, password, username } = this.registerForm.value;
+    this.usersService.createUser(firstName, lastName, email, password, username).subscribe({
       next: data => {
         console.log(data);
         this.submitting = false;

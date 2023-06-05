@@ -6,6 +6,7 @@ import {ProfileComponent} from "./components/profile/profile.component";
 import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
 import { LogoutComponent } from './components/logout/logout.component';
+import {UsersTableComponent} from "./components/admin-panel/users-table/users-table.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'admin', component: UsersTableComponent },
 ];
 
 @NgModule({

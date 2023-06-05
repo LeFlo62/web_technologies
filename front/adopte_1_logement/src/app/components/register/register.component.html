@@ -59,6 +59,7 @@
         <input
           id="email"
           type="email"
+          pKeyFilter="email"
           class="w-full"
           pInputText
           formControlName="email"
@@ -132,6 +133,8 @@
           type="phone"
           class="w-full"
           pInputText
+          pKeyFilter="num"
+          maxlength="10"
           formControlName="phone"
         />
         <small *ngIf="isInvalid('phone')" id="phone-help" class="p-error">

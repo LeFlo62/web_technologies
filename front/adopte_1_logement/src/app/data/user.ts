@@ -6,6 +6,7 @@ export interface User {
   phone: string;
   username: string;
   password: string;
+  role: string;
   [key: string]: string;
 }
 
@@ -18,6 +19,7 @@ export class AppComponent {
     phone: '',
     username: '',
     password: '',
+    role: '',
   };
 
 
