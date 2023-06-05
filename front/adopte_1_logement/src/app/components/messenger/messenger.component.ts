@@ -140,6 +140,7 @@ export class MessengerComponent implements OnInit, AfterViewChecked {
   loadNewMessages(){
     if(this.userId && this.userId != this.tokenStorage.getUser().id){
       this.messageService.getMessages(this.userId!, 0, MessengerComponent.PAGE_SIZE).subscribe((messages : Message[]) => {
+        this.messages = this.messages.filter(m => m.id != '');
         let ids = this.messages.map(m => m.id);
         let newMessages : Message[] = messages.filter(m => !ids.includes(m.id));
         this.messages.push(...newMessages);
