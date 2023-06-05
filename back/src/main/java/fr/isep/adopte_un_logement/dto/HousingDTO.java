@@ -9,13 +9,13 @@ import java.util.List;
 @Getter @Setter @Builder
 public class HousingDTO {
     private String id;
+    private String authorId;
+    private String authorName;
     private String title;
     private List<String> images;
-    private float rating;
-    private String services;
-    private String constraints;
-    private String housingDescription;
+    private List<String> services;
+    private List<String> constraints;
+    private String description;
     private String landlordDescription;
-    private String reviews;
 
 }

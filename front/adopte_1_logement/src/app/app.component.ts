@@ -14,7 +14,15 @@ export class AppComponent {
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: ['/home']},
     {label: 'Mes annonces', icon: 'pi pi-fw pi-tag', routerLink: ['/my-ads']},
     {label: 'Mes locations', icon: 'pi pi-fw pi-calendar', routerLink: ['/user']},
-    {label: 'Messagerie', icon: 'pi pi-fw pi-comment', routerLink: ['/admin']},
+    {label: 'Messagerie', icon: 'pi pi-fw pi-comment', routerLink: ['/message']},
+  ];
+
+  userMenu : MenuItem[] = [
+    {label: 'Mon profil', icon: 'pi pi-fw pi-user', routerLink: ['/profile/' + this.id]},
+    {
+      separator: true
+    },
+    {label: 'Déconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/logout']},
   ];
 
   id? : string;
@@ -22,6 +30,7 @@ export class AppComponent {
   constructor(private tokenStorage : TokenStorageService) {
     if(this.tokenStorage.isLoggedIn()) {
       this.id = this.tokenStorage.getUser().id;
+      this.userMenu[0].routerLink = ['/profile/' + this.id];
     }
   }
 }

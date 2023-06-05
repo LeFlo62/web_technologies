@@ -2,6 +2,10 @@ package fr.isep.adopte_un_logement.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,10 +28,23 @@ public class Housing {
     private float rating = 0;
 
     @ElementCollection
+    @JoinColumn(name = "housing_id")
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @Cascade(value={CascadeType.ALL})
     private List<UUID> images;
 
     @Lob
     private String description;
 
-    private String address;
+    @ElementCollection
+    @JoinColumn(name = "housing_id")
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @Cascade(value={CascadeType.ALL})
+    private List<String> services;
+
+    @ElementCollection
+    @JoinColumn(name = "housing_id")
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @Cascade(value={CascadeType.ALL})
+    private List<String> constraints;
 }

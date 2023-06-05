@@ -31,19 +31,25 @@ public class HousingController {
         return ResponseEntity.ok(housingMapper.toDTO(housingService.getHousingListPaginated(pageable).getContent()));
     }
 
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<HousingListItemDTO>> getHousingListByAuthorId(@PathVariable("id") String id) {
+        return ResponseEntity.ok(housingMapper.toDTO(housingService.getHousingListByAuthorId(UUID.fromString(id))));
+    }
+
     @PostMapping("/create")
-    public ResponseEntity<Void> createHousing(HousingCreationDTO housingCreationDTO) {
+    public ResponseEntity<String> createHousing(HousingCreationDTO housingCreationDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userId = userDetails.getId().toString();
+
         housingCreationDTO.setAuthorId(userId);
-        
+
         Housing housing = housingMapper.toEntity(housingCreationDTO);
 
         List<UUID> images = imageService.uploadImages(housingCreationDTO.getImages());
 
         housing.setImages(images);
-        housingService.createHousing(housing);
-        return ResponseEntity.ok().build();
+        String id = housingService.createHousing(housing).getId().toString();
+        return ResponseEntity.ok(id);
     }
 
     @GetMapping("/{id}")

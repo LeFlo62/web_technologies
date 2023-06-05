@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { HousingService } from '../../services/housing.service';
+import { FileUpload } from 'primeng/fileupload';
 import { Router } from '@angular/router';
-import { HousingService } from 'app/services/housing.service';
 
 @Component({
   selector: 'app-create-housing',
@@ -71,29 +72,36 @@ export class CreateHousingComponent implements OnInit {
   removeConstraint(index: number) {
     this.constraintsArray.removeAt(index);
   }
-
-  // Upload images
-  onUpload(event: any) {
-    const filesNumber = event.files.length
-    // Add images to formData
-    for(let i=0; i<filesNumber; i++) {
-      this.images.push(event.files[i]);
-      this.createHousingFormData.append(`image_${i}`, event.files[i]);
-    }
-  }
   
-  onSubmit(){
-    // Add other values to formData
-    Object.keys(this.createHousingForm.controls).forEach(controlName => {
-      const control = this.createHousingForm.get(controlName);
-      if (control) {
-        this.createHousingFormData.append(controlName, control.value);
+  onSubmit(fileUpload : FileUpload){
+
+    if(this.createHousingForm.invalid){
+      return;
+    }
+
+    if(fileUpload.files.length == 0){
+      return;
+    }
+
+      let formData : FormData = new FormData();
+
+      formData.append('title', this.createHousingForm.get('title')?.value!);
+      formData.append('description', this.createHousingForm.get('housingDescription')?.value!);
+      
+      for(let service of this.createHousingForm.get('services')?.value!){
+        formData.append('services', service!);
       }
-    });
-    // Send request to the back-end
-    this.housingService.createHousing(this.createHousingFormData).subscribe({
-      next: (res: any) => console.warn(res),
-      error: () => 'Impossible to create a new housing'
-    })
+
+      for(let constraint of this.createHousingForm.get('constraints')?.value!){
+        formData.append('constraints', constraint!);
+      }
+
+      for(let file of fileUpload.files){
+        formData.append('images', file);
+      }
+
+      this.housingService.createHousing(formData).subscribe((id : string) => {
+        this.router.navigate(['/housing/' + id]);
+      });
   }
 }

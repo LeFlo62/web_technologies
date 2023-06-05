@@ -1,6 +1,5 @@
 .my-rent {
-  justify-content: center;
-  display: flex;
+  width: 100%;
 }
 
 .titre {
@@ -14,14 +13,14 @@
 }
 
 .container {
+  position: absolute;
   width: 100%;
-  height: calc(100% - 66px);
+  height: 100%;
   padding-left: 4%;
   padding-right: 4%;
   padding-top: 2%;
   padding-bottom: 2%;
   display: flex;
-  position: absolute;
   flex-direction: column;
   align-items: stretch;
 
@@ -34,13 +33,7 @@
     border-radius: 10px;
 
     .user-info {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      margin-right: 50px;
-      width: calc(100% - 150px);
-      display: flex;
-      flex-direction: column;
-      border-radius: 10px;
+      width: 100%;
     }
 
     .profile-picture-container {
@@ -71,26 +64,20 @@
     justify-content: space-between;
     margin-top: 15px;
     padding-bottom: 15px;
+    overflow: hidden;
 
     .my-location {
       display: flex;
       align-items: stretch;
       flex-direction: column;
-      width: 30%;
+      width: 45%;
       background-color: var(--boxBgColor);
     }
 
     .my-reviews {
       display: flex;
       flex-direction: column;
-      width: 30%;
-      background-color: var(--boxBgColor);
-    }
-
-    .my-services {
-      display: flex;
-      flex-direction: column;
-      width: 30%;
+      width: 45%;
       background-color: var(--boxBgColor);
     }
   }

@@ -8,20 +8,24 @@ export interface HousingListItem {
 };
 
 export interface Review {
-    author: string;
-    date: string;
+    id: string;
+    authorId: string;
+    authorName: string;
+    time: number;
+    housingId: string;
     content: string;
-    useful: number;
-    useless: number;
+    rating: number;
 };
 
-export interface HousingItem {
+export interface Housing {
     title: string, 
     images: any[],
     rating: number,
     services: string[],
     constraints: string[],
-    housingDescription: string,
+    authorId: string,
+    authorName: string,
+    description: string,
     landlordDescription: string,
     reviews: Review[]
 }

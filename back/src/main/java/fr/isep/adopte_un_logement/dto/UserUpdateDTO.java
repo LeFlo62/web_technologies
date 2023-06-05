@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter @Setter @Builder
 @AllArgsConstructor
-public class UserDTO {
+public class UserUpdateDTO {
 
     private String id;
     private String firstName;
@@ -17,6 +15,6 @@ public class UserDTO {
     private String lastName;
 
     private String email;
-    private List<String> roles;
+    private String password;
 
 }

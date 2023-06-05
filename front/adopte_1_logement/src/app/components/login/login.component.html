@@ -39,9 +39,9 @@
         <label for="password">Mot de passe</label>
         <p-password
           inputId="password"
+          [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%'}"
           [feedback]="false"
-          styleClass="w-full"
-          inputStyleClass="w-full"
           formControlName="password"
         ></p-password>
         <small *ngIf="isInvalid('password')" id="password-help" class="p-error">

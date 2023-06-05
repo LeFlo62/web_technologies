@@ -7,7 +7,8 @@ import fr.isep.adopte_un_logement.dto.UserCreationDTO;
 import fr.isep.adopte_un_logement.mapper.UserMapper;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
 import fr.isep.adopte_un_logement.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,27 +22,21 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@AllArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    PasswordEncoder encoder;
+    private PasswordEncoder encoder;
 
-    @Autowired
-    JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
-        System.out.println(loginRequest.getEmail() + " " + loginRequest.getPassword());
-
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
@@ -64,13 +59,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserCreationDTO userCreationDTO) {
+    public HttpStatus registerUser(@RequestBody UserCreationDTO userCreationDTO) {
         if (userService.existsByEmail(userCreationDTO.getEmail())) {
-            return ResponseEntity.badRequest().body("Error: Email is already taken!");
+            return HttpStatus.BAD_REQUEST;
         }
         userCreationDTO.setPassword(encoder.encode(userCreationDTO.getPassword()));
         userService.createUser(userMapper.toEntity(userCreationDTO));
 
-        return ResponseEntity.ok("User registered successfully!");
+        return HttpStatus.OK;
     }
 }

@@ -1,22 +1,17 @@
 export interface User {
   id: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone: string;
-  username: string;
   password: string;
-  [key: string]: string;
 }
 
 export class AppComponent {
   user: User = {
     id: '',
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    phone: '',
-    username: '',
     password: '',
   };
 

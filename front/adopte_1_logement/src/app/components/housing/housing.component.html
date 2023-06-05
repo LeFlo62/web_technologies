@@ -45,12 +45,12 @@
                 <p-avatar icon="pi pi-user" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="buttons">
-                <button pButton label="Contacter le bailleur" class="p-button-success" style="width: 70%;"></button>
+                <button pButton label="Contacter le bailleur" class="p-button-success" style="width: 70%;" [routerLink]="'/message/' + housingData.authorId"></button>
                 <button pButton pRipple label="Favoris" class="favorites" styleClass="p-button-sm p-button-primary" icon="pi pi-plus" style="width: 25%;"></button>
             </div>
             <div class="housing-description box">
                 <h3>Description :</h3>
-                <span>{{housingData.housingDescription}}</span>
+                <span>{{housingData.description}}</span>
             </div>
         </div>
     </div>

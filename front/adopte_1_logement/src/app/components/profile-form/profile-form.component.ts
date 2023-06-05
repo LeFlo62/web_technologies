@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "../../data/user";
@@ -6,6 +6,8 @@ import {UsernameValidatorDirective} from "../../directives/username-validator.di
 import {EmailValidatorDirective} from "../../directives/email-validator.directive";
 import {PasswordValidatorDirective} from "../../directives/password-validator.directive";
 import {PhoneValidatorDirective} from "../../directives/phone-validator.directive";
+import { UserService } from 'app/services/user.service';
+import { TokenStorageService } from 'app/services/token-storage.service';
 
 @Component({
   selector: 'app-profile-form',
@@ -14,112 +16,58 @@ import {PhoneValidatorDirective} from "../../directives/phone-validator.directiv
 })
 
 export class ProfileFormComponent implements OnInit {
-  form!: FormGroup;
-  usernameValidator = new UsernameValidatorDirective();
+  
+  @Input() profile!: User;
+  
   emailValidator = new EmailValidatorDirective();
   passwordValidator = new PasswordValidatorDirective();
   phoneValidator = new PhoneValidatorDirective();
+  
+  form : FormGroup = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, this.emailValidator.validate.bind(this.emailValidator)]),
+    password: new FormControl('', [this.passwordValidator.validate.bind(this.passwordValidator)]),
+    passwordConfirm: new FormControl('', [this.passwordValidator.validate.bind(this.passwordValidator)]),
+  });
 
-  isEditingUsername = false;
-  isEditingEmail = false;
-  isEditingPassword = false;
-  isEditingPhone = false;
+  editing : boolean = false;
 
-  profile: User = {
-    id: "",
-    password: "",
-    firstname: 'John',
-    lastname: 'Doe',
-    email: 'test@est.fr',
-    phone: '0606060606',
-    username: 'usernameeee'
-  };
-
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,) {
-  }
+  constructor(private userService : UserService, private tokenStorage : TokenStorageService) {}
 
   ngOnInit() {
-    this.profile.id = this.route.snapshot.params['id'];
+  }
 
-    this.isEditingUsername = false;
-    this.isEditingEmail = false;
-    this.isEditingPassword = false;
-    this.isEditingPhone = false;
-
-    // form with validation rules
-    this.form = this.formBuilder.group({
-      phone: new FormControl(this.profile.phone, [Validators.required, this.phoneValidator.validate]),
-      username: new FormControl(this.profile.username, [Validators.required, this.usernameValidator.validate]),
-      email: new FormControl(this.profile.email, [Validators.required, this.emailValidator.validate]),
-      password: new FormControl(this.profile.email, [Validators.required, this.passwordValidator.validate]),
+  editForm(){
+    this.editing = true;
+    this.form.setValue({
+      firstName: this.profile.firstName,
+      lastName: this.profile.lastName,
+      email: this.profile.email,
+      password: '',
+      passwordConfirm: ''
     });
   }
 
-  get f() {
-    return this.form.controls;
+  submit() {
+    if(!this.form.valid) return;
+
+    let user : User = {
+      id: this.profile.id,
+      firstName: this.form.value.firstName,
+      lastName: this.form.value.lastName,
+      email: this.form.value.email,
+      password: this.form.value.password,
+    };
+
+    this.userService.updateUser(user).subscribe((data : User) =>  {
+      this.profile = data;
+      this.editing = false;
+    });
   }
 
-
-  onSubmit(value: string) {
-    // stop here if form is invalid
-    if (this.f[value].invalid) {
-      return;
-    }
-
-    this.saveModification(value)
-
-    switch (value) {
-      case 'username':
-        this.isEditingUsername = false;
-        break;
-      case 'email':
-        this.isEditingEmail = false;
-        break;
-      case 'password':
-        this.isEditingPassword = false;
-        break;
-      case 'phone':
-        this.isEditingPhone = false;
-        break;
-    }
-  }
-
-  private saveModification(value: string) {
-    this.profile[value] = this.f[value].value;
-  }
-
-  isValidPhone(): boolean {
-    const control = this.f['phone'];
-    return !!(control?.valid) ?? false;
-  }
-
-  isValidUsername(): boolean {
-    const control = this.f['username'];
-    return !!(control?.valid) ?? false;
-  }
-
-  isValidEmail(): boolean {
-    const control = this.f['email'];
-    return !!(control?.valid) ?? false;
-  }
-
-  isValidPassword() {
-    const control = this.f['password'];
-    return !!(control?.valid) ?? false;
-  }
-
-  onPasswordInput(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const sanitizedValue = inputElement.value.replace(/[^\w]/g, '');
-    this.f['password'].setValue(sanitizedValue);
-  }
-
-  onPasswordPaste(event: ClipboardEvent): void {
-    event.preventDefault();
-    const clipboardData = event.clipboardData || (window as any).clipboardData;
-    const pastedText = clipboardData.getData('text');
-    const sanitizedValue = pastedText.replace(/[^\w]/g, '');
-    this.f['password'].setValue(sanitizedValue);
+  isSelf() : boolean{
+    return this.tokenStorage.isLoggedIn() && this.profile && this.tokenStorage.getUser().id == this.profile.id;
   }
 
 }

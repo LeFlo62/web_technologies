@@ -10,8 +10,12 @@ security:
     secret: M01jOVR1WlRFek1OUDhNc0oyWnM4bW41ZFhzYWNwdzltY1Q3Q1ppNndMUXI1UGlkaVhlblYyZUJBcFhMSDY4RQ==
   public-endpoints: >
     /housing/list,
+    /housing/list/{id},
     /housing/{id},
     /image/**,
+    /review/list/**,
+    /review/average/**,
+    /review/averageMultiple,
 
 spring:
   datasource:
@@ -22,6 +26,10 @@ spring:
     hikari:
       auto-commit: false
   jpa:
-      hibernate:
-          ddl-auto: update
-      show-sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB

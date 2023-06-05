@@ -49,6 +49,8 @@
 .minimal-housing-card{
     display: flex;
     flex-direction: row;
+    width: auto;
+    min-width: 300px;
 
     img{
         height: 64px;

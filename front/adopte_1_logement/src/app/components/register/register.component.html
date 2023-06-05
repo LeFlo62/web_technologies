@@ -18,7 +18,6 @@
     autocomplete="off"
     class="w-680"
     [formGroup]="registerForm"
-    (ngSubmit)="register()"
   >
     <p-card header="S'inscrire">
       <div class="field">
@@ -75,7 +74,7 @@
             <label class="block" for="password">Mot de passe</label>
             <p-password
               inputId="password"
-              class="custom-p-password"
+              class="custom-p-password w-full"
               formControlName="password"
             >
               <!-- TODO WIDTH 100%-->
@@ -124,29 +123,13 @@
         </div>
       </div>
 
-
-      <div class="field">
-        <label for="phone">Numéro de téléphone</label>
-        <input
-          id="phone"
-          type="phone"
-          class="w-full"
-          pInputText
-          formControlName="phone"
-        />
-        <small *ngIf="isInvalid('phone')" id="phone-help" class="p-error">
-          <div *ngIf="phone?.errors?.['required']">Le numéro de téléphone est requis</div>
-          <div *ngIf="phone?.errors?.['phone']">Le numéro de téléphone doit être valide</div>
-        </small>
-      </div>
-
       <ng-template pTemplate="footer">
         <button
           pButton
           pRipple
           label="Inscription"
           class="w-full"
-          type="submit"
+          (click)="register()"
           [disabled]="submitting"
         ></button>
         <p>

@@ -2,40 +2,33 @@ package fr.isep.adopte_un_logement.mapper;
 
 import fr.isep.adopte_un_logement.dto.UserCreationDTO;
 import fr.isep.adopte_un_logement.dto.UserDTO;
+import fr.isep.adopte_un_logement.dto.UserUpdateDTO;
+import fr.isep.adopte_un_logement.entities.Role;
 import fr.isep.adopte_un_logement.entities.User;
-import org.springframework.stereotype.Component;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
-public class UserMapper {
-    public User toEntity(UserDTO userDTO) {
-        return User.builder()
-                .firstName(userDTO.getFirstName())
-                .lastName(userDTO.getLastName())
-                .email(userDTO.getEmail())
-                .build();
-    }
+@Mapper(componentModel = "spring")
+public interface UserMapper {
 
-    public User toEntity(UserCreationDTO userDTO) {
-        return User.builder()
-                .firstName(userDTO.getFirstName())
-                .lastName(userDTO.getLastName())
-                .email(userDTO.getEmail())
-                .password(userDTO.getPassword())
-                .build();
-    }
+    Role toEntity(String value);
 
-    public UserDTO toDTO(User user) {
-        return UserDTO.builder()
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .build();
-    }
+    List<Role> toEntity(List<String> value);
 
-    public List<UserDTO> toDTO(List<User> entities){
-        return entities.stream().map(this::toDTO).collect(Collectors.toList());
-    }
+    String toDTORole(Role value);
+    List<String> toDTORoles(List<Role> value);
+
+    User toEntity(UserDTO userDTO);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntity(UserUpdateDTO dto, @MappingTarget User user);
+
+    User toEntity(UserCreationDTO userDTO);
+    UserDTO toDTO(User user);
+    List<UserDTO> toDTO(List<User> entities);
+
 }
