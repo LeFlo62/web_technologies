@@ -41,4 +41,8 @@ public class HousingService {
     public Housing createHousing(Housing entity) {
         return housingRepository.save(entity);
     }
+
+    public List<Housing> getHousingListByAuthorId(UUID uuid) {
+        return housingRepository.findAllByAuthorId(uuid);
+    }
 }

@@ -31,6 +31,11 @@ public class HousingController {
         return ResponseEntity.ok(housingMapper.toDTO(housingService.getHousingListPaginated(pageable).getContent()));
     }
 
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<HousingListItemDTO>> getHousingListByAuthorId(@PathVariable("id") String id) {
+        return ResponseEntity.ok(housingMapper.toDTO(housingService.getHousingListByAuthorId(UUID.fromString(id))));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> createHousing(HousingCreationDTO housingCreationDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

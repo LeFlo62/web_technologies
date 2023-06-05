@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HousingService {
-
-  private url : string = apiUrl + 'housing';
+    private url : string = apiUrl + 'housing';
   
   constructor(private http : HttpClient) { }
   
@@ -27,5 +26,9 @@ export class HousingService {
 
   createHousing(formData: FormData) : Observable<string> {
     return this.http.post<string>(this.url + '/create', formData);
+  }
+
+  getHousingsByUser(userId : string) : Observable<HousingListItem[]> {
+    return this.http.get<HousingListItem[]>(this.url + "/list/" + userId);
   }
 }

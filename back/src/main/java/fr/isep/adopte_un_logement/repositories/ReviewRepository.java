@@ -23,4 +23,5 @@ public interface ReviewRepository extends JpaRepository<Review, UUID> {
     @Query("SELECT r.housing.id, AVG(r.rating) FROM Review r WHERE r.housing.id IN ?1 GROUP BY r.housing.id")
     List<ReviewAverage> getAverageRatingByHousingIds(List<UUID> housingIds);
 
+    List<Review> findAllByAuthorId(UUID uuid);
 }

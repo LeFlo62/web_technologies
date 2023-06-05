@@ -32,4 +32,7 @@ public class ReviewService {
         return reviewRepository.getAverageRatingByHousingIds(housingIds.stream().map(UUID::fromString).toList());
     }
 
+    public List<Review> getReviewListByUserId(String housingId) {
+        return reviewRepository.findAllByAuthorId(UUID.fromString(housingId));
+    }
 }

@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { User } from "../../data/user";
 import { UserService } from 'app/services/user.service';
 import { ActivatedRoute, Route } from '@angular/router';
+import { TokenStorageService } from 'app/services/token-storage.service';
+import { HousingService } from 'app/services/housing.service';
+import { ReviewService } from 'app/services/review.service';
+import { HousingListItem, Review } from 'app/data/housing';
 
 
 @Component({
@@ -10,66 +14,24 @@ import { ActivatedRoute, Route } from '@angular/router';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-  reviews = [
-    {
-      author: 'Sarah VALERY',
-      date: '24-04-2023',
-      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
-      usefulCounter: 10,
-      uselessCounter: 10
-    },
-    {
-      author: 'Sarah VALERY',
-      date: '24-04-2023',
-      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
-      usefulCounter: 10,
-      uselessCounter: 10
-    },
-    {
-      author: 'Sarah VALERY',
-      date: '24-04-2023',
-      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
-      usefulCounter: 10,
-      uselessCounter: 10
-    },
-    {
-      author: 'Sarah VALERY',
-      date: '24-04-2023',
-      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
-      usefulCounter: 10,
-      uselessCounter: 10
-    },
-    {
-      author: 'Sarah VALERY',
-      date: '24-04-2023',
-      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
-      usefulCounter: 10,
-      uselessCounter: 10
-    },
-    {
-      author: 'Sarah VALERY',
-      date: '24-04-2023',
-      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
-      usefulCounter: 10,
-      uselessCounter: 10
-    },
-    {
-      author: 'Sarah VALERY',
-      date: '24-04-2023',
-      content: 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
-      usefulCounter: 10,
-      uselessCounter: 10
-    }
-  ];
+  reviews : Review[] = [];
+  locations : HousingListItem[] = [];
   profile!: User;
 
-  constructor(private route : ActivatedRoute, private userService : UserService) { }
+  constructor(private route : ActivatedRoute, private userService : UserService, private tokenService : TokenStorageService, private reviewService : ReviewService, private housingService : HousingService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      console.log("dsqdqsd")
       this.userService.getUser(params['id']).subscribe(user => {
         this.profile = user;
+      });
+
+      this.housingService.getHousingsByUser(params['id']).subscribe((housings : HousingListItem[]) => {
+        this.locations = housings;
+      });
+
+      this.reviewService.getReviewsByUser(params['id']).subscribe((reviews : Review[]) => {
+        this.reviews = reviews;
       });
     });
   }

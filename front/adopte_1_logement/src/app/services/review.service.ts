@@ -8,13 +8,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReviewService {
-
-  private url : string = apiUrl + 'review/';
+    private url : string = apiUrl + 'review/';
   
   constructor(private http : HttpClient) { }
 
   getReviewsByHousing(id : number) : Observable<Review[]> {
     return this.http.get<Review[]>(this.url + 'list/' + id);
+  }
+
+  getReviewsByUser(userId : string) : Observable<Review[]> {
+    return this.http.get<Review[]>(this.url + 'list/' + userId);
   }
 
   addReview(houseId : string, content : string, rating : number) : Observable<any> {

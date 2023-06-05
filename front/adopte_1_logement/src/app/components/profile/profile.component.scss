@@ -1,6 +1,5 @@
 .my-rent {
-  justify-content: center;
-  display: flex;
+  width: 100%;
 }
 
 .titre {
@@ -71,21 +70,14 @@
       display: flex;
       align-items: stretch;
       flex-direction: column;
-      width: 30%;
+      width: 45%;
       background-color: var(--boxBgColor);
     }
 
     .my-reviews {
       display: flex;
       flex-direction: column;
-      width: 30%;
-      background-color: var(--boxBgColor);
-    }
-
-    .my-services {
-      display: flex;
-      flex-direction: column;
-      width: 30%;
+      width: 45%;
       background-color: var(--boxBgColor);
     }
   }

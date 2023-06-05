@@ -29,6 +29,11 @@ public class ReviewController {
         return ResponseEntity.ok(reviewMapper.toDTOList(reviewService.getReviewListByHousingId(housingId, pageable)));
     }
 
+    @GetMapping("/listByUser/{housingId}")
+    public ResponseEntity<List<ReviewDTO>> getReviewListByUserId(@PathVariable("housingId") String housingId) {
+        return ResponseEntity.ok(reviewMapper.toDTOList(reviewService.getReviewListByUserId(housingId)));
+    }
+
     @PostMapping("/create")
     public HttpStatus createReview(ReviewCreationDTO reviewDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
