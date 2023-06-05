@@ -17,4 +17,8 @@ public class HousingCreationDTO {
     private String description;
 
     private String address;
+
+    private String[] services;
+
+    private String[] constraints;
 }

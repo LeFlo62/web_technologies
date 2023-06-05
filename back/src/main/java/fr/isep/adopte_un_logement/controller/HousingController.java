@@ -5,11 +5,13 @@ import fr.isep.adopte_un_logement.dto.HousingDTO;
 import fr.isep.adopte_un_logement.dto.HousingListItemDTO;
 import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.mapper.HousingMapper;
+import fr.isep.adopte_un_logement.model.UserDetailsImpl;
 import fr.isep.adopte_un_logement.service.HousingService;
 import fr.isep.adopte_un_logement.service.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +33,10 @@ public class HousingController {
 
     @PostMapping("/create")
     public ResponseEntity<Void> createHousing(HousingCreationDTO housingCreationDTO) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userId = userDetails.getId().toString();
+        housingCreationDTO.setAuthorId(userId);
+        
         Housing housing = housingMapper.toEntity(housingCreationDTO);
 
         List<UUID> images = imageService.uploadImages(housingCreationDTO.getImages());
