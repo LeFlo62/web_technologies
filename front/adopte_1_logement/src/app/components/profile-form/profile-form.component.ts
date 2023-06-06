@@ -52,7 +52,7 @@ export class ProfileFormComponent implements OnInit {
   submit() {
     if(!this.form.valid) return;
 
-    let user : User = {
+    let user : any = {
       id: this.profile.id,
       firstName: this.form.value.firstName,
       lastName: this.form.value.lastName,

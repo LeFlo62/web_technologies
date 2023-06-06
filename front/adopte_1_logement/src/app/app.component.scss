@@ -11,3 +11,12 @@
     cursor: pointer;
   }
 }
+
+.endbar{
+  display: flex;
+  align-items: center;
+
+  p, .user-avatar {
+    margin: 0 10px;
+  }
+}

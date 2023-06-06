@@ -5,10 +5,7 @@ import fr.isep.adopte_un_logement.dto.UserDTO;
 import fr.isep.adopte_un_logement.dto.UserUpdateDTO;
 import fr.isep.adopte_un_logement.entities.Role;
 import fr.isep.adopte_un_logement.entities.User;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -19,10 +16,11 @@ public interface UserMapper {
 
     List<Role> toEntity(List<String> value);
 
-    String toDTORole(Role value);
-    List<String> toDTORoles(List<Role> value);
+    default String toDTORole(Role value) {
+        return value.getName().toString();
+    };
 
-    User toEntity(UserDTO userDTO);
+    List<String> toDTORoles(List<Role> value);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntity(UserUpdateDTO dto, @MappingTarget User user);
@@ -30,5 +28,7 @@ public interface UserMapper {
     User toEntity(UserCreationDTO userDTO);
     UserDTO toDTO(User user);
     List<UserDTO> toDTO(List<User> entities);
+
+    User toEntity(UserUpdateDTO userDTO);
 
 }

@@ -24,4 +24,6 @@ public interface ReviewRepository extends JpaRepository<Review, UUID> {
     List<ReviewAverage> getAverageRatingByHousingIds(List<UUID> housingIds);
 
     List<Review> findAllByAuthorId(UUID uuid);
+
+    void deleteAllByAuthorId(UUID id);
 }

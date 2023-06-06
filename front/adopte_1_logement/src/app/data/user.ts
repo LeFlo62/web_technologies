@@ -3,23 +3,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-}
-
-export class AppComponent {
-  user: User = {
-    id: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  };
-
-
-
-  onSubmitted(user: User) {
-    this.user = user;
-  }
+  roles: string[];
 }
 
 export interface Review {

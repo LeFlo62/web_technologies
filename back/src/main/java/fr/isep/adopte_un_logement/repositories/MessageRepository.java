@@ -4,6 +4,7 @@ import fr.isep.adopte_un_logement.entities.Message;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -23,4 +24,9 @@ public interface MessageRepository extends JpaRepository<Message, UUID> {
             "      ) AS m) AS f ORDER BY f.send_time DESC", nativeQuery = true)
     List<UUID> getLastMessagedUsers(UUID userId);
 
+    @Modifying
+    @Query("DELETE\n" +
+            "FROM Message m\n" +
+            "WHERE m.sender.id = :id OR m.receiver.id = :id")
+    void deleteAllByUserId(UUID id);
 }

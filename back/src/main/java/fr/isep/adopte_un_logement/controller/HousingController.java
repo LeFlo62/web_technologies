@@ -3,6 +3,7 @@ package fr.isep.adopte_un_logement.controller;
 import fr.isep.adopte_un_logement.dto.HousingCreationDTO;
 import fr.isep.adopte_un_logement.dto.HousingDTO;
 import fr.isep.adopte_un_logement.dto.HousingListItemDTO;
+import fr.isep.adopte_un_logement.dto.StringDTO;
 import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.mapper.HousingMapper;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
@@ -37,7 +38,7 @@ public class HousingController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createHousing(HousingCreationDTO housingCreationDTO) {
+    public ResponseEntity<StringDTO> createHousing(HousingCreationDTO housingCreationDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userId = userDetails.getId().toString();
 
@@ -49,7 +50,7 @@ public class HousingController {
 
         housing.setImages(images);
         String id = housingService.createHousing(housing).getId().toString();
-        return ResponseEntity.ok(id);
+        return ResponseEntity.ok(StringDTO.from(id));
     }
 
     @GetMapping("/{id}")

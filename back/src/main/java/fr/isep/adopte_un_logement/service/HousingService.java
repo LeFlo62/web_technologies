@@ -45,4 +45,8 @@ public class HousingService {
     public List<Housing> getHousingListByAuthorId(UUID uuid) {
         return housingRepository.findAllByAuthorId(uuid);
     }
+
+    public void deleteHousings(List<Housing> housings) {
+        housingRepository.deleteAll(housings);
+    }
 }

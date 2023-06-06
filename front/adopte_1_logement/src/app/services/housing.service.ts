@@ -24,8 +24,8 @@ export class HousingService {
     return this.http.get<Housing>(this.url + "/" + id);
   }
 
-  createHousing(formData: FormData) : Observable<string> {
-    return this.http.post<string>(this.url + '/create', formData);
+  createHousing(formData: FormData) : Observable<any> {
+    return this.http.post<any>(this.url + '/create', formData, {observe: 'body'});
   }
 
   getHousingsByUser(userId : string) : Observable<HousingListItem[]> {

@@ -3,7 +3,8 @@
       <img src="favicon.ico" height="40" class="mr-2" />
   </ng-template>
   <ng-template pTemplate="end">
-    <div *ngIf="id else connectButton">
+    <div class="endbar" *ngIf="user else connectButton">
+      <p>{{ user.firstName }} {{ user.lastName }}</p>
       <p-avatar class="user-avatar" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle" (click)="menu.toggle($event)"></p-avatar>
       <p-tieredMenu #menu [model]="userMenu" [popup]="true"></p-tieredMenu>
     </div>

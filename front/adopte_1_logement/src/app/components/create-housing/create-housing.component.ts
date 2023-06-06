@@ -84,8 +84,8 @@ export class CreateHousingComponent {
         formData.append('images', file);
       }
 
-      this.housingService.createHousing(formData).subscribe((id : string) => {
-        this.router.navigate(['/housing/' + id]);
+      this.housingService.createHousing(formData).subscribe((id : {value : string}) => {
+        this.router.navigate(['/housing/' + id.value]);
       });
   }
 }

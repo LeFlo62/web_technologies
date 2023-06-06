@@ -9,6 +9,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { LogoutComponent } from './components/logout/logout.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'message', component: MessengerComponent },
-  { path: 'message/:id', component: MessengerComponent}
+  { path: 'message/:id', component: MessengerComponent},
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({

@@ -4,8 +4,11 @@ import fr.isep.adopte_un_logement.config.security.JwtUtils;
 import fr.isep.adopte_un_logement.dto.LoginRequestDTO;
 import fr.isep.adopte_un_logement.dto.LoginResponseDTO;
 import fr.isep.adopte_un_logement.dto.UserCreationDTO;
+import fr.isep.adopte_un_logement.entities.User;
 import fr.isep.adopte_un_logement.mapper.UserMapper;
+import fr.isep.adopte_un_logement.model.ERole;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
+import fr.isep.adopte_un_logement.service.RoleService;
 import fr.isep.adopte_un_logement.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +31,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     private UserService userService;
+    private RoleService roleService;
 
     private UserMapper userMapper;
 
@@ -64,7 +68,10 @@ public class AuthController {
             return HttpStatus.BAD_REQUEST;
         }
         userCreationDTO.setPassword(encoder.encode(userCreationDTO.getPassword()));
-        userService.createUser(userMapper.toEntity(userCreationDTO));
+
+        User user = userMapper.toEntity(userCreationDTO);
+        user.setRoles(List.of(roleService.findByName(ERole.USER)));
+        userService.createUser(user);
 
         return HttpStatus.OK;
     }

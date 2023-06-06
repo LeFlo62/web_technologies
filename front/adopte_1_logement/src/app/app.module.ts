@@ -29,6 +29,12 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MessagesModule } from 'primeng/messages';
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DialogModule } from 'primeng/dialog';
+
+
 
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
@@ -45,6 +51,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { AdminComponent } from './components/admin/admin.component';
+import { UsersComponent } from './components/admin/users/users.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +75,9 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    MessengerComponent
+    MessengerComponent,
+    AdminComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +104,11 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
     CardModule,
     RippleModule,
     ProgressSpinnerModule,
-    TieredMenuModule
+    TieredMenuModule,
+    TabMenuModule,
+    TableModule,
+    MultiSelectModule,
+    DialogModule
   ],
 
   providers: [

@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.tokenStorage.isLoggedIn()) {
-      console.log(this.tokenStorage.getUser());
       this.router.navigate(['/home']);
     }
   }
@@ -52,7 +51,6 @@ export class LoginComponent implements OnInit {
     this.submitting = true;
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: (data : {jwt: string, id : string, firstName : string, lastName : string, email : string, roles : string[]}) => {
-        console.log(data);
         this.tokenStorage.saveToken(data.jwt);
         this.tokenStorage.saveUser({id : data.id, firstName : data.firstName, lastName : data.lastName, email : data.email, roles : data.roles});
 

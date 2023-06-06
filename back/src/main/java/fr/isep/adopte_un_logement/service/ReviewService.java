@@ -35,4 +35,8 @@ public class ReviewService {
     public List<Review> getReviewListByUserId(String housingId) {
         return reviewRepository.findAllByAuthorId(UUID.fromString(housingId));
     }
+
+    public void deleteReviewsFromUser(UUID id) {
+        reviewRepository.deleteAllByAuthorId(id);
+    }
 }

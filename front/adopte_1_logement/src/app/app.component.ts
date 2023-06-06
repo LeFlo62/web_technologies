@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TokenStorageService } from './services/token-storage.service';
+import { User } from './data/user';
 
 @Component({
   selector: 'app-root',
@@ -18,19 +19,24 @@ export class AppComponent {
   ];
 
   userMenu : MenuItem[] = [
-    {label: 'Mon profil', icon: 'pi pi-fw pi-user', routerLink: ['/profile/' + this.id]},
+    {label: 'Mon profil', icon: 'pi pi-fw pi-user', routerLink: ['/profile/' + this.user?.id]},
     {
       separator: true
     },
     {label: 'Déconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/logout']},
   ];
 
-  id? : string;
+  user? : User;
 
   constructor(private tokenStorage : TokenStorageService) {
     if(this.tokenStorage.isLoggedIn()) {
-      this.id = this.tokenStorage.getUser().id;
-      this.userMenu[0].routerLink = ['/profile/' + this.id];
+      this.user = this.tokenStorage.getUser();
+      if(this.user){
+        this.userMenu[0].routerLink = ['/profile/' + this.user.id];
+        if(this.user.roles.includes('ADMIN')) {
+          this.userMenu.unshift({label: 'Administration', icon: 'pi pi-fw pi-cog', routerLink: ['/admin']});
+        }
+      }
     }
   }
 }
