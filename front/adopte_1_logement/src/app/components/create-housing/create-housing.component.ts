@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Form, FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { HousingService } from '../../services/housing.service';
 import { FileUpload } from 'primeng/fileupload';
@@ -11,12 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-housing.component.scss'],
   providers: []
 })
-export class CreateHousingComponent {
-
+export class CreateHousingComponent implements OnInit {
+  userData: any;
+  userId: string = '';
   uploadedFiles: File[] = [];
   images: string[] = [];
 
-  constructor(private router : Router, private housingService : HousingService) {}
+  createHousingFormData = new FormData();
 
   createHousingForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -28,6 +29,21 @@ export class CreateHousingComponent {
       new FormControl('')
     ])
   })
+
+  constructor(
+    private housingService: HousingService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    const authUser: any = sessionStorage.getItem('auth-user')
+    this.userData = JSON.parse(authUser);
+    if(this.userData) {
+      this.userId = this.userData.id;
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
 
   // Service inputs
   get servicesArray(): FormArray {
