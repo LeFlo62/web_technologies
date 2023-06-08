@@ -1,11 +1,15 @@
 package fr.isep.adopte_un_logement.controller;
 
+import fr.isep.adopte_un_logement.dto.HousingDTO;
 import fr.isep.adopte_un_logement.dto.UserDTO;
 import fr.isep.adopte_un_logement.dto.UserUpdateDTO;
+import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.entities.Role;
 import fr.isep.adopte_un_logement.entities.User;
+import fr.isep.adopte_un_logement.mapper.HousingMapper;
 import fr.isep.adopte_un_logement.mapper.UserMapper;
 import fr.isep.adopte_un_logement.model.ERole;
+import fr.isep.adopte_un_logement.service.HousingService;
 import fr.isep.adopte_un_logement.service.RoleService;
 import fr.isep.adopte_un_logement.service.UserService;
 import lombok.AllArgsConstructor;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -31,6 +36,9 @@ public class AdminController {
     private UserService userService;
 
     private RoleService roleService;
+
+    private HousingService housingService;
+    private HousingMapper housingMapper;
 
     private PasswordEncoder encoder;
 
@@ -70,6 +78,39 @@ public class AdminController {
         Optional<User> userOpt = this.userService.getUser(userId);
         if(userOpt.isPresent()){
             this.userService.deleteUser(userOpt.get());
+            return HttpStatus.OK;
+        }
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @GetMapping("/housing/count")
+    public ResponseEntity<Long> getHousingCount(){
+        return ResponseEntity.ok(this.housingService.getHousingsCount());
+    }
+
+    @GetMapping("/housing/list")
+    public ResponseEntity<List<HousingDTO>> getHousings(Pageable pageable){
+        return ResponseEntity.ok(this.housingMapper.toHousingDTO(this.housingService.getHousingListPaginated(pageable).getContent()));
+    }
+
+    @PostMapping("/housing/update")
+    public HttpStatus updateHousing(@RequestBody HousingDTO update){
+        Optional<Housing> housingOpt = this.housingService.getHousingById(UUID.fromString(update.getId()));
+        if(housingOpt.isPresent()){
+            Housing housing = housingOpt.get();
+            this.housingMapper.updateEntity(update, housing);
+
+            this.housingService.updateHousing(housing);
+            return HttpStatus.OK;
+        }
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @PostMapping("/housing/delete")
+    public HttpStatus deleteHousing(@RequestBody String housingId){
+        Optional<Housing> housingOpt = this.housingService.getHousingById(UUID.fromString(housingId));
+        if(housingOpt.isPresent()){
+            this.housingService.deleteHousing(UUID.fromString(housingId));
             return HttpStatus.OK;
         }
         return HttpStatus.NOT_FOUND;

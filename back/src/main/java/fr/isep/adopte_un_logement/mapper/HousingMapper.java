@@ -48,6 +48,17 @@ public class HousingMapper {
                 .build();
     }
 
+    public Housing toEntity(HousingDTO housingDTO){
+        return Housing.builder()
+                .id(UUID.fromString(housingDTO.getId()))
+                .title(housingDTO.getTitle())
+                .description(housingDTO.getDescription())
+                .author(User.builder().id(UUID.fromString(housingDTO.getAuthorId())).build())
+                .services(housingDTO.getServices())
+                .constraints(housingDTO.getConstraints())
+                .build();
+    }
+
     public HousingDTO toHousingDTO(Housing housing) {
         return HousingDTO.builder()
                 .id(housing.getId().toString())
@@ -59,5 +70,16 @@ public class HousingMapper {
                 .constraints(housing.getConstraints())
                 .images(housing.getImages().stream().map(id -> applicationConfig.getApiUrl() + "image/" + id).collect(Collectors.toList()))
                 .build();
+    }
+
+    public List<HousingDTO> toHousingDTO(List<Housing> entities){
+        return entities.stream().map(this::toHousingDTO).collect(Collectors.toList());
+    }
+
+    public void updateEntity(HousingDTO update, Housing housing) {
+        if(update.getTitle() != null) housing.setTitle(update.getTitle());
+        if(update.getDescription() != null) housing.setDescription(update.getDescription());
+        if(update.getServices() != null) housing.setServices(update.getServices());
+        if(update.getConstraints() != null) housing.setConstraints(update.getConstraints());
     }
 }

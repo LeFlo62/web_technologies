@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class CreateHousingComponent implements OnInit {
   userData: any;
   userId: string = '';
-  uploadedFiles: File[] = [];
   images: string[] = [];
 
   createHousingFormData = new FormData();

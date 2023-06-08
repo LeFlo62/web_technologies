@@ -18,6 +18,7 @@ export interface Review {
 };
 
 export interface Housing {
+    id: string,
     title: string, 
     images: any[],
     rating: number,

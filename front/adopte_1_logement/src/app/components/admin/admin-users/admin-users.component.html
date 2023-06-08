@@ -12,7 +12,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-user>
         <tr>
-            <td>{{ user.id }}</td>
+            <td><a [routerLink]="'/profile/' + user.id" target="_blank">{{ user.id }}</a></td>
             <td>{{ user.lastName }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.email }}</td>

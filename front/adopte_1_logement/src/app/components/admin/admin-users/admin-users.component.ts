@@ -6,10 +6,10 @@ import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-admin-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  templateUrl: './admin-users.component.html',
+  styleUrls: ['./admin-users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class AdminUsersComponent implements OnInit {
 
   private static readonly PAGE_SIZE : number = 20;
 
@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
   constructor(private adminService : AdminService) { }
 
   ngOnInit(): void {
-    this.adminService.getCount().subscribe(count => {
+    this.adminService.getUserCount().subscribe(count => {
       this.userCount = count;
     });
 
@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
   }
 
   loadUsers() {
-    this.adminService.getUsers(this.page, UsersComponent.PAGE_SIZE).subscribe(users => {
+    this.adminService.getUsers(this.page, AdminUsersComponent.PAGE_SIZE).subscribe(users => {
       this.users = users;
       for(let user of this.users) {
         this.userMenu[user.id] = [
@@ -88,7 +88,7 @@ export class UsersComponent implements OnInit {
   }
 
   get pageSize() : number {
-    return UsersComponent.PAGE_SIZE;
+    return AdminUsersComponent.PAGE_SIZE;
   }
 
 }

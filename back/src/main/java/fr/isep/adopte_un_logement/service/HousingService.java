@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,7 +25,7 @@ public class HousingService {
         return housingRepository.findAll();
     }
 
-    public Housing getHousingById(UUID id) { return housingRepository.findById(id).orElse(null); }
+    public Optional<Housing> getHousingById(UUID id) { return housingRepository.findById(id); }
 
     public void deleteHousing(UUID id) {
         housingRepository.deleteById(id);
@@ -48,5 +49,9 @@ public class HousingService {
 
     public void deleteHousings(List<Housing> housings) {
         housingRepository.deleteAll(housings);
+    }
+
+    public long getHousingsCount() {
+        return housingRepository.count();
     }
 }

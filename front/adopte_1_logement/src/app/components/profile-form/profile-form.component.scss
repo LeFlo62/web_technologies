@@ -12,9 +12,9 @@
   .user-details{
     display: flex;
     width: 80%;
+    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
   
     &[editing]{
       flex-direction: column;

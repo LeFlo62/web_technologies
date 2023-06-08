@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequestMapping("/housing")
@@ -55,6 +56,10 @@ public class HousingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<HousingDTO> getHousingById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(housingMapper.toHousingDTO(housingService.getHousingById(UUID.fromString(id))));
+        Optional<Housing> housingOpt = housingService.getHousingById(UUID.fromString(id));
+        if(housingOpt.isPresent()){
+            return ResponseEntity.ok(housingMapper.toHousingDTO(housingOpt.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 }

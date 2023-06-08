@@ -52,7 +52,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { AdminComponent } from './components/admin/admin.component';
-import { UsersComponent } from './components/admin/users/users.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { AdminAdsComponent } from './components/admin/admin-ads/admin-ads.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { UsersComponent } from './components/admin/users/users.component';
     LogoutComponent,
     MessengerComponent,
     AdminComponent,
-    UsersComponent
+    AdminUsersComponent,
+    AdminAdsComponent,
   ],
   imports: [
     BrowserModule,

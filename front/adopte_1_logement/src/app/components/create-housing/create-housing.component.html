@@ -47,13 +47,7 @@
                 </div>
             </div>
             <!-- Images input -->
-            <p-fileUpload #fileUpload name="files[]" [showUploadButton]="false" [multiple]="true" accept="image/*">
-                <ng-template pTemplate="content">
-                    <ul *ngIf="uploadedFiles.length">
-                        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-                    </ul>
-                </ng-template>
-            </p-fileUpload>
+            <p-fileUpload #fileUpload name="files[]" [showUploadButton]="false" [multiple]="true" accept="image/*"></p-fileUpload>
             <!-- Info message -->
             <p class="info">
                 <i>Veillez à uploader vos photos avant de publier votre annonce</i>
