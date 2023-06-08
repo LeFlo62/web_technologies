@@ -3,10 +3,9 @@ package fr.isep.adopte_un_logement.controller;
 import fr.isep.adopte_un_logement.dto.ReviewAverageDTO;
 import fr.isep.adopte_un_logement.dto.ReviewCreationDTO;
 import fr.isep.adopte_un_logement.dto.ReviewDTO;
-import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.entities.Review;
-import fr.isep.adopte_un_logement.entities.User;
 import fr.isep.adopte_un_logement.mapper.ReviewMapper;
+import fr.isep.adopte_un_logement.model.ReviewAverage;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
 import fr.isep.adopte_un_logement.service.ReviewService;
 import lombok.AllArgsConstructor;
@@ -16,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RequestMapping("/review")
@@ -43,11 +43,9 @@ public class ReviewController {
         String userId = userDetails.getId().toString();
 
         reviewDTO.setAuthorId(userId);
-        reviewDTO.setTime(System.currentTimeMillis());
 
         Review review = reviewMapper.toEntity(reviewDTO);
-        review.setHousing(reviewMapper.toEntityHousing(reviewDTO.getHousingId()));
-        review.setAuthor(reviewMapper.toEntityUser(reviewDTO.getAuthorId()));
+        review.setTime(System.currentTimeMillis());
 
         reviewService.createReview(review);
 
@@ -61,7 +59,9 @@ public class ReviewController {
 
     @PostMapping("/averageMultiple")
     public ResponseEntity<List<ReviewAverageDTO>> getAverageRatingByHousingId(@RequestBody List<String> housingIds) {
-        return ResponseEntity.ok(reviewMapper.toDTOAverageList(reviewService.getAverageRatingByHousingIds(housingIds)));
+        List<ReviewAverage> l = reviewService.getAverageRatingByHousingIds(housingIds);
+        System.out.println(Arrays.toString(l.toArray()));
+        return ResponseEntity.ok(reviewMapper.toDTOAverageList(l));
     }
 
 }

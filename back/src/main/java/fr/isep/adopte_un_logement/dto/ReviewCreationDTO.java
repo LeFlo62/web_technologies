@@ -17,6 +17,4 @@ public class ReviewCreationDTO {
 
     private float rating = 0;
 
-    private long time;
-
 }
