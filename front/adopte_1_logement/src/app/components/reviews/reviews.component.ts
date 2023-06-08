@@ -10,6 +10,7 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
   styleUrls: ['./reviews.component.scss']
 })
 export class ReviewsComponent implements OnInit {
+    
   housingId: string = '';
   reviews: Review[] | undefined;
   newReviewContent: string = '';

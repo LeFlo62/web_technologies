@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RequestMapping("/review")
@@ -53,15 +52,13 @@ public class ReviewController {
     }
 
     @GetMapping("/average/{housingId}")
-    public ResponseEntity<Float> getAverageRatingByHousingId(@PathVariable("housingId") String housingId) {
-        return ResponseEntity.ok(reviewService.getAverageRatingByHousingId(housingId));
+    public ResponseEntity<ReviewAverageDTO> getAverageRatingByHousingId(@PathVariable("housingId") String housingId) {
+        return ResponseEntity.ok(reviewMapper.toDTO(new ReviewAverage(housingId, reviewService.getAverageRatingByHousingId(housingId))));
     }
 
     @PostMapping("/averageMultiple")
     public ResponseEntity<List<ReviewAverageDTO>> getAverageRatingByHousingId(@RequestBody List<String> housingIds) {
-        List<ReviewAverage> l = reviewService.getAverageRatingByHousingIds(housingIds);
-        System.out.println(Arrays.toString(l.toArray()));
-        return ResponseEntity.ok(reviewMapper.toDTOAverageList(l));
+        return ResponseEntity.ok(reviewMapper.toDTOAverageList(reviewService.getAverageRatingByHousingIds(housingIds)));
     }
 
 }

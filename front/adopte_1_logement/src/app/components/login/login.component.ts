@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.tokenStorage.isLoggedIn()) {
-      console.log(this.tokenStorage.getUser());
       this.router.navigate(['/home']);
     }
   }

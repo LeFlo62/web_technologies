@@ -24,7 +24,7 @@ export class ReviewService {
     return this.http.post<any>(this.url + 'create', {housingId: housingId, content : content, rating : rating});
   }
 
-  getAverageRating(housingId : string) : Observable<number> {
+  getAverageRating(housingId : string) : Observable<any> {
     return this.http.get<number>(this.url + 'average/' + housingId);
   }
 

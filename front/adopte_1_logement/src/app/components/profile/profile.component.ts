@@ -28,6 +28,12 @@ export class ProfileComponent {
 
       this.housingService.getHousingsByUser(params['id']).subscribe((housings : HousingListItem[]) => {
         this.locations = housings;
+        this.reviewService.getAverageRatingMultiple(housings.map(h => h.id)).subscribe(
+          (ratings : {housingId : string, rating : number}[]) => {
+            for(let i = 0; i < ratings.length; i++) {
+              this.locations.find(h => h.id == ratings[i].housingId)!.rating = ratings[i].rating;
+            }
+          });
       });
 
       this.reviewService.getReviewsByUser(params['id']).subscribe((reviews : Review[]) => {
