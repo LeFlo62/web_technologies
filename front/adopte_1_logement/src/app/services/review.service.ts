@@ -20,8 +20,8 @@ export class ReviewService {
     return this.http.get<Review[]>(this.url + 'list/' + userId);
   }
 
-  addReview(houseId : string, content : string, rating : number) : Observable<any> {
-    return this.http.post<any>(this.url + 'create', {houseId: houseId, content : content, rating : rating});
+  addReview(housingId : string, content : string, rating : number) : Observable<any> {
+    return this.http.post<any>(this.url + 'create', {housingId: housingId, content : content, rating : rating});
   }
 
   getAverageRating(housingId : string) : Observable<number> {

@@ -3,6 +3,9 @@ package fr.isep.adopte_un_logement.controller;
 import fr.isep.adopte_un_logement.dto.ReviewAverageDTO;
 import fr.isep.adopte_un_logement.dto.ReviewCreationDTO;
 import fr.isep.adopte_un_logement.dto.ReviewDTO;
+import fr.isep.adopte_un_logement.entities.Housing;
+import fr.isep.adopte_un_logement.entities.Review;
+import fr.isep.adopte_un_logement.entities.User;
 import fr.isep.adopte_un_logement.mapper.ReviewMapper;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
 import fr.isep.adopte_un_logement.service.ReviewService;
@@ -35,13 +38,18 @@ public class ReviewController {
     }
 
     @PostMapping("/create")
-    public HttpStatus createReview(ReviewCreationDTO reviewDTO) {
+    public HttpStatus createReview(@RequestBody ReviewCreationDTO reviewDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userId = userDetails.getId().toString();
 
         reviewDTO.setAuthorId(userId);
+        reviewDTO.setTime(System.currentTimeMillis());
 
-        reviewService.createReview(reviewMapper.toEntity(reviewDTO));
+        Review review = reviewMapper.toEntity(reviewDTO);
+        review.setHousing(reviewMapper.toEntityHousing(reviewDTO.getHousingId()));
+        review.setAuthor(reviewMapper.toEntityUser(reviewDTO.getAuthorId()));
+
+        reviewService.createReview(review);
 
         return HttpStatus.OK;
     }

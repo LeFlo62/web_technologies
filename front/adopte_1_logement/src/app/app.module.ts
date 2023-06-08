@@ -45,6 +45,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MessengerComponent } from './components/messenger/messenger.component';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
     CardModule,
     RippleModule,
     ProgressSpinnerModule,
-    TieredMenuModule
+    TieredMenuModule,
+    InputNumberModule
   ],
 
   providers: [

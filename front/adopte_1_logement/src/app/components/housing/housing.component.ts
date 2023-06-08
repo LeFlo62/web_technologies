@@ -35,7 +35,10 @@ export class HousingComponent implements OnInit {
 
   onShowComments(){
     this.dialogService.open(ReviewsComponent, { 
-      data: this.housingData.reviews, 
+      data: {
+        housingId: this.housingId,
+        reviews: this.housingData.reviews
+      },
       header: 'Avis des locataires' 
     });
   }
