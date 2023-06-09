@@ -33,6 +33,7 @@ export class AdminComponent implements OnInit {
       this.items = [
           { label: 'Utilisateurs', icon: 'pi pi-fw pi-user' },
           { label: 'Annonces', icon: 'pi pi-fw pi-home' },
+          { label: 'Avis', icon: 'pi pi-fw pi-star' },
       ];
 
       this.activeItem = this.items[0];

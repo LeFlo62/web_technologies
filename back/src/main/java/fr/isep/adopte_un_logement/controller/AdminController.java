@@ -1,9 +1,6 @@
 package fr.isep.adopte_un_logement.controller;
 
-import fr.isep.adopte_un_logement.dto.HousingDTO;
-import fr.isep.adopte_un_logement.dto.ReviewDTO;
-import fr.isep.adopte_un_logement.dto.UserDTO;
-import fr.isep.adopte_un_logement.dto.UserUpdateDTO;
+import fr.isep.adopte_un_logement.dto.*;
 import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.entities.Review;
 import fr.isep.adopte_un_logement.entities.Role;
@@ -147,10 +144,10 @@ public class AdminController {
     }
 
     @PostMapping("/review/delete")
-    public HttpStatus deleteReview(@RequestBody String housingId){
-        Optional<Housing> housingOpt = this.housingService.getHousingById(UUID.fromString(housingId));
-        if(housingOpt.isPresent()){
-            this.housingService.deleteHousing(UUID.fromString(housingId));
+    public HttpStatus deleteReview(@RequestBody String reviewId){
+        Optional<Review> reviewOpt = this.reviewService.getReviewById(UUID.fromString(reviewId));
+        if(reviewOpt.isPresent()){
+            this.reviewService.deleteReview(UUID.fromString(reviewId));
             return HttpStatus.OK;
         }
         return HttpStatus.NOT_FOUND;

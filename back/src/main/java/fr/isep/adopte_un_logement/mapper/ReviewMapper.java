@@ -3,6 +3,7 @@ package fr.isep.adopte_un_logement.mapper;
 import fr.isep.adopte_un_logement.dto.ReviewAverageDTO;
 import fr.isep.adopte_un_logement.dto.ReviewCreationDTO;
 import fr.isep.adopte_un_logement.dto.ReviewDTO;
+import fr.isep.adopte_un_logement.dto.ReviewUpdateDTO;
 import fr.isep.adopte_un_logement.entities.Housing;
 import fr.isep.adopte_un_logement.entities.Review;
 import fr.isep.adopte_un_logement.entities.User;
@@ -19,15 +20,16 @@ public class ReviewMapper {
     public ReviewDTO toDTO(Review review){
         return ReviewDTO.builder()
                 .id(review.getId().toString())
-                .authorId(review.getAuthor().toString())
-                .housingId(review.getHousing().toString())
+                .authorId(review.getAuthor().getId().toString())
+                .authorName(review.getAuthor().getFirstName() + " " + review.getAuthor().getLastName())
+                .housingId(review.getHousing().getId().toString())
                 .rating(review.getRating())
                 .content(review.getContent())
                 .time(review.getTime())
                 .build();
     }
 
-    public List<ReviewDTO> toDTOList(List<Review> reviewListByHousingId) {
+    public List<ReviewDTO> toDTO(List<Review> reviewListByHousingId) {
         return reviewListByHousingId.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
@@ -49,5 +51,11 @@ public class ReviewMapper {
 
     public List<ReviewAverageDTO> toDTOAverageList(List<ReviewAverage> list) {
         return list.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    public void updateEntity(ReviewUpdateDTO update, Review review) {
+        if(update.getId() != null) review.setId(UUID.fromString(update.getId()));
+        if(update.getContent() != null) review.setContent(update.getContent());
+        if(update.getRating() != -1) review.setRating(update.getRating());
     }
 }

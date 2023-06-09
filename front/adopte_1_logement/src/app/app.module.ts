@@ -55,6 +55,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 import { AdminAdsComponent } from './components/admin/admin-ads/admin-ads.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AdminReviewsComponent } from './components/admin/admin-reviews/admin-reviews.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     AdminComponent,
     AdminUsersComponent,
     AdminAdsComponent,
+    AdminReviewsComponent,
   ],
   imports: [
     BrowserModule,

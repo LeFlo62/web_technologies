@@ -28,12 +28,12 @@ public class ReviewController {
 
     @GetMapping("/list/{housingId}")
     public ResponseEntity<List<ReviewDTO>> getReviewListByHousingId(@PathVariable("housingId") String housingId, Pageable pageable) {
-        return ResponseEntity.ok(reviewMapper.toDTOList(reviewService.getReviewListByHousingId(housingId, pageable)));
+        return ResponseEntity.ok(reviewMapper.toDTO(reviewService.getReviewListByHousingId(housingId, pageable)));
     }
 
     @GetMapping("/listByUser/{housingId}")
     public ResponseEntity<List<ReviewDTO>> getReviewListByUserId(@PathVariable("housingId") String housingId) {
-        return ResponseEntity.ok(reviewMapper.toDTOList(reviewService.getReviewListByUserId(housingId)));
+        return ResponseEntity.ok(reviewMapper.toDTO(reviewService.getReviewListByUserId(housingId)));
     }
 
     @PostMapping("/create")

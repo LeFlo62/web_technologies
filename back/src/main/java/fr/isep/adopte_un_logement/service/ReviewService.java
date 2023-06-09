@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -48,5 +49,17 @@ public class ReviewService {
 
     public List<Review> getReviews(Pageable pageable) {
         return this.reviewRepository.findAll(pageable).getContent();
+    }
+
+    public Optional<Review> getReviewById(UUID uuid) {
+        return this.reviewRepository.findById(uuid);
+    }
+
+    public void updateReview(Review review) {
+        this.reviewRepository.save(review);
+    }
+
+    public void deleteReview(UUID uuid) {
+        this.reviewRepository.deleteById(uuid);
     }
 }
