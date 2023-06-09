@@ -39,4 +39,12 @@ public class ReviewService {
     public void deleteReviewsFromUser(UUID id) {
         reviewRepository.deleteAllByAuthorId(id);
     }
+
+    public long getReviewsCount() {
+        return reviewRepository.count();
+    }
+
+    public List<Review> getReviews(Pageable pageable) {
+        return this.reviewRepository.findAll(pageable).getContent();
+    }
 }

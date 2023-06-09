@@ -13,6 +13,8 @@ export class AdminUsersComponent implements OnInit {
 
   private static readonly PAGE_SIZE : number = 20;
 
+  loading : boolean = true;
+
   users : User[] = [];
   userCount : number = 0;
 
@@ -41,6 +43,7 @@ export class AdminUsersComponent implements OnInit {
 
   loadUsers() {
     this.adminService.getUsers(this.page, AdminUsersComponent.PAGE_SIZE).subscribe(users => {
+      this.loading = false;
       this.users = users;
       for(let user of this.users) {
         this.userMenu[user.id] = [

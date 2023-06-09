@@ -14,6 +14,8 @@ export class AdminAdsComponent {
 
   private static readonly PAGE_SIZE : number = 20;
 
+  loading : boolean = true;
+
   housings : Housing[] = [];
   housingCount : number = 0;
 
@@ -47,6 +49,7 @@ export class AdminAdsComponent {
 
   loadHousings() {
     this.adminService.getHousings(this.page, AdminAdsComponent.PAGE_SIZE).subscribe(housings => {
+      this.loading = false;
       this.housings = housings;
       for(let housing of this.housings) {
         this.housingMenu[housing.id] = [

@@ -1,5 +1,5 @@
 <p-table [value]="users" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="pageSize" [totalRecords]="userCount"
-(onPage)="changePage($event)">
+(onPage)="changePage($event)" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Id</th>
@@ -9,6 +9,20 @@
             <th>Role</th>
             <th>Actions</th>
         </tr>
+        <tr>
+            <th></th>
+            <th>
+                <p-columnFilter type="text" field="lastName"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="firstName"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="email"></p-columnFilter>
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user>
         <tr>
@@ -16,7 +30,7 @@
             <td>{{ user.lastName }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.email }}</td>
-            <td><p-multiSelect [options]="roles" [(ngModel)]="user.roles" optionLabel="label" optionValue="value" [showHeader]="false" (onChange)="updateUser(user)"></p-multiSelect></td>
+            <td><p-multiSelect [options]="roles" [(ngModel)]="user.roles" optionLabel="label" optionValue="value" [showHeader]="false" (onChange)="updateUser(user)" appendTo="body"></p-multiSelect></td>
             <td>
                 <p-button icon="pi pi-cog" styleClass="p-button-rounded p-button-info p-button-outlined" (click)="menu.toggle($event)"></p-button>
                 <p-tieredMenu #menu [model]="userMenu[user.id]" [popup]="true" appendTo="body"></p-tieredMenu>

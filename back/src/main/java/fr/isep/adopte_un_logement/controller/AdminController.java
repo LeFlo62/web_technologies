@@ -1,15 +1,19 @@
 package fr.isep.adopte_un_logement.controller;
 
 import fr.isep.adopte_un_logement.dto.HousingDTO;
+import fr.isep.adopte_un_logement.dto.ReviewDTO;
 import fr.isep.adopte_un_logement.dto.UserDTO;
 import fr.isep.adopte_un_logement.dto.UserUpdateDTO;
 import fr.isep.adopte_un_logement.entities.Housing;
+import fr.isep.adopte_un_logement.entities.Review;
 import fr.isep.adopte_un_logement.entities.Role;
 import fr.isep.adopte_un_logement.entities.User;
 import fr.isep.adopte_un_logement.mapper.HousingMapper;
+import fr.isep.adopte_un_logement.mapper.ReviewMapper;
 import fr.isep.adopte_un_logement.mapper.UserMapper;
 import fr.isep.adopte_un_logement.model.ERole;
 import fr.isep.adopte_un_logement.service.HousingService;
+import fr.isep.adopte_un_logement.service.ReviewService;
 import fr.isep.adopte_un_logement.service.RoleService;
 import fr.isep.adopte_un_logement.service.UserService;
 import lombok.AllArgsConstructor;
@@ -39,6 +43,9 @@ public class AdminController {
 
     private HousingService housingService;
     private HousingMapper housingMapper;
+
+    private ReviewService reviewService;
+    private ReviewMapper reviewMapper;
 
     private PasswordEncoder encoder;
 
@@ -108,6 +115,39 @@ public class AdminController {
 
     @PostMapping("/housing/delete")
     public HttpStatus deleteHousing(@RequestBody String housingId){
+        Optional<Housing> housingOpt = this.housingService.getHousingById(UUID.fromString(housingId));
+        if(housingOpt.isPresent()){
+            this.housingService.deleteHousing(UUID.fromString(housingId));
+            return HttpStatus.OK;
+        }
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @GetMapping("/review/count")
+    public ResponseEntity<Long> getReviewCount(){
+        return ResponseEntity.ok(this.reviewService.getReviewsCount());
+    }
+
+    @GetMapping("/review/list")
+    public ResponseEntity<List<ReviewDTO>> getReviews(Pageable pageable){
+        return ResponseEntity.ok(this.reviewMapper.toDTO(this.reviewService.getReviews(pageable)));
+    }
+
+    @PostMapping("/review/update")
+    public HttpStatus updateReview(@RequestBody ReviewUpdateDTO update){
+        Optional<Review> reviewOpt = this.reviewService.getReviewById(UUID.fromString(update.getId()));
+        if(reviewOpt.isPresent()){
+            Review review = reviewOpt.get();
+            this.reviewMapper.updateEntity(update, review);
+
+            this.reviewService.updateReview(review);
+            return HttpStatus.OK;
+        }
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @PostMapping("/review/delete")
+    public HttpStatus deleteReview(@RequestBody String housingId){
         Optional<Housing> housingOpt = this.housingService.getHousingById(UUID.fromString(housingId));
         if(housingOpt.isPresent()){
             this.housingService.deleteHousing(UUID.fromString(housingId));
