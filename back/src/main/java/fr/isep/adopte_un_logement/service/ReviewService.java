@@ -27,6 +27,7 @@ public class ReviewService {
     }
 
     public float getAverageRatingByHousingId(String housingId) {
+        if(!reviewRepository.existsByHousingId(UUID.fromString(housingId))) return 0;
         return reviewRepository.getAverageRatingByHousingId(UUID.fromString(housingId));
     }
 

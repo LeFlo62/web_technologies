@@ -14,6 +14,7 @@ import java.util.UUID;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
 
+    boolean existsByHousingId(UUID housingId);
 
     @Query("SELECT AVG(r.rating) FROM Review r WHERE r.housing.id = ?1")
     float getAverageRatingByHousingId(UUID housingId);
