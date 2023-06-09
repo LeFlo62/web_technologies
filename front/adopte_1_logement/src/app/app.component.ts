@@ -32,7 +32,6 @@ export class AppComponent {
 
         this.menuBar.push(
           {label: 'Mes annonces', icon: 'pi pi-fw pi-tag', routerLink: ['/my-ads']},
-          {label: 'Mes locations', icon: 'pi pi-fw pi-calendar', routerLink: ['/user']},
           {label: 'Messagerie', icon: 'pi pi-fw pi-comment', routerLink: ['/message']},
         );
 
