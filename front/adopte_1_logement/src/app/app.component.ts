@@ -13,9 +13,6 @@ export class AppComponent {
 
   menuBar : MenuItem[] = [
     {label: 'Accueil', icon: 'pi pi-fw pi-home', routerLink: ['/home']},
-    {label: 'Mes annonces', icon: 'pi pi-fw pi-tag', routerLink: ['/my-ads']},
-    {label: 'Mes locations', icon: 'pi pi-fw pi-calendar', routerLink: ['/user']},
-    {label: 'Messagerie', icon: 'pi pi-fw pi-comment', routerLink: ['/message']},
   ];
 
   userMenu : MenuItem[] = [
@@ -32,7 +29,15 @@ export class AppComponent {
     if(this.tokenStorage.isLoggedIn()) {
       this.user = this.tokenStorage.getUser();
       if(this.user){
+
+        this.menuBar.push(
+          {label: 'Mes annonces', icon: 'pi pi-fw pi-tag', routerLink: ['/my-ads']},
+          {label: 'Mes locations', icon: 'pi pi-fw pi-calendar', routerLink: ['/user']},
+          {label: 'Messagerie', icon: 'pi pi-fw pi-comment', routerLink: ['/message']},
+        );
+
         this.userMenu[0].routerLink = ['/profile/' + this.user.id];
+        
         if(this.user.roles.includes('ADMIN')) {
           this.userMenu.unshift({label: 'Administration', icon: 'pi pi-fw pi-cog', routerLink: ['/admin']});
         }

@@ -7,4 +7,11 @@
         margin-top: 1rem;
         margin-left: auto;
     }
+
+    .housing-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 70%;
+    }
 }
