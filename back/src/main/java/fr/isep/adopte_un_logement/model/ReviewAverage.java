@@ -1,13 +1,13 @@
 package fr.isep.adopte_un_logement.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter @Setter @Builder
+@AllArgsConstructor
+@ToString
 public class ReviewAverage {
 
     private String housingId;
-    private float averageRating;
+    private float rating;
 
 }

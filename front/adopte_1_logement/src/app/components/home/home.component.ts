@@ -56,10 +56,8 @@ export class HomeComponent implements OnInit {
 
           this.reviewService.getAverageRatingMultiple(data.map(h => h.id)).subscribe(
             (ratings : {housingId : string, rating : number}[]) => {
-              console.log(ratings);
               for(let i = 0; i < ratings.length; i++) {
-                this.housingList.find(h => h.id == ratings[i].housingId)!.rating = ratings[i].rating +2;
-                console.log(this.housingList.find(h => h.id == ratings[i].housingId));
+                this.housingList.find(h => h.id == ratings[i].housingId)!.rating = ratings[i].rating;
               }
             });
 

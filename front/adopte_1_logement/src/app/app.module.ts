@@ -54,6 +54,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 import { AdminAdsComponent } from './components/admin/admin-ads/admin-ads.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { AdminAdsComponent } from './components/admin/admin-ads/admin-ads.compon
     TabMenuModule,
     TableModule,
     MultiSelectModule,
-    DialogModule
+    DialogModule,
+    InputNumberModule
   ],
 
   providers: [

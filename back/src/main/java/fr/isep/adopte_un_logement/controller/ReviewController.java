@@ -3,7 +3,9 @@ package fr.isep.adopte_un_logement.controller;
 import fr.isep.adopte_un_logement.dto.ReviewAverageDTO;
 import fr.isep.adopte_un_logement.dto.ReviewCreationDTO;
 import fr.isep.adopte_un_logement.dto.ReviewDTO;
+import fr.isep.adopte_un_logement.entities.Review;
 import fr.isep.adopte_un_logement.mapper.ReviewMapper;
+import fr.isep.adopte_un_logement.model.ReviewAverage;
 import fr.isep.adopte_un_logement.model.UserDetailsImpl;
 import fr.isep.adopte_un_logement.service.ReviewService;
 import lombok.AllArgsConstructor;
@@ -35,20 +37,23 @@ public class ReviewController {
     }
 
     @PostMapping("/create")
-    public HttpStatus createReview(ReviewCreationDTO reviewDTO) {
+    public HttpStatus createReview(@RequestBody ReviewCreationDTO reviewDTO) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userId = userDetails.getId().toString();
 
         reviewDTO.setAuthorId(userId);
 
-        reviewService.createReview(reviewMapper.toEntity(reviewDTO));
+        Review review = reviewMapper.toEntity(reviewDTO);
+        review.setTime(System.currentTimeMillis());
+
+        reviewService.createReview(review);
 
         return HttpStatus.OK;
     }
 
     @GetMapping("/average/{housingId}")
-    public ResponseEntity<Float> getAverageRatingByHousingId(@PathVariable("housingId") String housingId) {
-        return ResponseEntity.ok(reviewService.getAverageRatingByHousingId(housingId));
+    public ResponseEntity<ReviewAverageDTO> getAverageRatingByHousingId(@PathVariable("housingId") String housingId) {
+        return ResponseEntity.ok(reviewMapper.toDTO(new ReviewAverage(housingId, reviewService.getAverageRatingByHousingId(housingId))));
     }
 
     @PostMapping("/averageMultiple")

@@ -8,6 +8,6 @@ import lombok.Setter;
 public class ReviewAverageDTO {
 
     private String housingId;
-    private float averageRating;
+    private float rating;
 
 }

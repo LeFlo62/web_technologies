@@ -1,3 +1,14 @@
-<div *ngFor="let item of reviews">
-    <app-review [review]="item"></app-review>
+<div class="container">
+    <!-- Write reviews -->
+    <div class="newReview">
+        <textarea id="newReviewTextarea" pInputTextarea placeholder="Ajouter un commentaire" [(ngModel)]="newReviewContent" (click)="onLoginVerification()"></textarea>
+        <div class="display-in-row">
+            <p-inputNumber class="ratingInput" placeholder="Note sur 5" [(ngModel)]="newReviewRating" showButton="true" inputId="minmax-buttons" [min]="0" [max]="5"> </p-inputNumber>
+            <p-button id="sendingButton" label="Envoyer" [disabled]="!newReviewContent||!newReviewRating" (click)="onPostReview()"></p-button>
+        </div>
+    </div>
+    <!-- Display reviews -->
+    <div class="reviews" *ngFor="let item of reviews">
+        <app-review [review]="item"></app-review>
+    </div>
 </div>
