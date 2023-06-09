@@ -53,6 +53,7 @@ import { MessengerComponent } from './components/messenger/messenger.component';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { AdminComponent } from './components/admin/admin.component';
 import { UsersComponent } from './components/admin/users/users.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { UsersComponent } from './components/admin/users/users.component';
     TabMenuModule,
     TableModule,
     MultiSelectModule,
-    DialogModule
+    DialogModule,
+    InputNumberModule
   ],
 
   providers: [

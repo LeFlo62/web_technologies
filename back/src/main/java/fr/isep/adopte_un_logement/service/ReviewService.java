@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +30,8 @@ public class ReviewService {
     }
 
     public List<ReviewAverage> getAverageRatingByHousingIds(List<String> housingIds) {
-        return reviewRepository.getAverageRatingByHousingIds(housingIds.stream().map(UUID::fromString).toList());
+        return reviewRepository.getAverageRatingByHousingIds(housingIds.stream().map(UUID::fromString).collect(Collectors.toList()))
+                .stream().map(tuple -> new ReviewAverage(tuple.get(0, UUID.class).toString(), ((float)tuple.get(1, Double.class).doubleValue()))).collect(Collectors.toList());
     }
 
     public List<Review> getReviewListByUserId(String housingId) {
