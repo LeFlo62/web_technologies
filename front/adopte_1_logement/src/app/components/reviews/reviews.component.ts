@@ -14,9 +14,12 @@ export class ReviewsComponent implements OnInit {
   housingId: string = '';
   reviews: Review[] | undefined;
   newReviewContent: string = '';
-  newReviewRating: number | any;
+  newReviewRating: number = 0;
   authUser: any;
-  authorId: string | any;
+  userId: string = '';
+  userName: string = '';
+  isAbleToComment: boolean = false;
+  isClicked: boolean = false;
      
   constructor( 
     private ref: DynamicDialogRef,
@@ -26,16 +29,25 @@ export class ReviewsComponent implements OnInit {
   ) {}
 
   ngOnInit(){
-    this.reviews = this.config.data.reviews;
     this.housingId = this.config.data.housingId;
+    this.reviewService.getReviewsByHousing(this.housingId).subscribe({
+      next: (res: any) => this.reviews = res.reverse(),
+      error: () => console.warn('Error while getting reviews')
+    });
     this.authUser = sessionStorage.getItem("auth-user");
-    this.authorId = JSON.parse(this.authUser).id;
+    this.userId = JSON.parse(this.authUser).id;
+    this.userName = `${JSON.parse(this.authUser).firstName} ${JSON.parse(this.authUser).lastName}`
   }
 
   onLoginVerification() {
     const userToken = sessionStorage.getItem('auth-token');
+    console.warn(userToken)
     if(userToken===null){
-      this.router.navigate(['/user']);
+      this.router.navigate(['/login']);
+      this.ref.close();
+    } else {
+      this.isAbleToComment = true;
+      this.isClicked = true;
     }
   }
 
@@ -45,9 +57,18 @@ export class ReviewsComponent implements OnInit {
     console.log(this.housingId)
     this.reviewService.addReview(this.housingId, this.newReviewContent, this.newReviewRating).subscribe({
       next: () => {
-        //this.reviews?.push(this.newReviewContent);
-        //this.newReviewContent = '';
-        //this.newReviewRating = null;
+        const newReview: Review = {
+          id: '',
+          authorId: '',
+          authorName: this.userName,
+          time: new Date(),
+          housingId: '',
+          content: this.newReviewContent,
+          rating: this.newReviewRating
+        }
+        this.reviews?.unshift(newReview);
+        this.newReviewContent = '';
+        this.newReviewRating = 0;
       },
       error: () => console.warn("Error occured in onPostReview function, couldn't post review")
     })

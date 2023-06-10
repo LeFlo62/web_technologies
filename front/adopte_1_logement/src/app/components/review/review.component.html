@@ -2,15 +2,11 @@
     <div class="header">
         <p-avatar icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
         <div class="author-date">
-            <strong>{{review.author}}</strong>
-            <p class="grey-font">Posté le {{review.date}}</p>
+            <strong>{{review.authorName}}</strong>
+            <p class="grey-font">Posté le {{dateString | date: 'dd/MM/yyyy'}}</p>
         </div>
         <div class="rating">
-            <p class="grey-font">{{review.usefulCounter}} </p>
-            <p class="counter space" *ngIf="!minimal" (click)="onIncrementCounter('useful')" >Utile</p>
-            <p>|</p>
-            <p class="counter space" *ngIf="!minimal" (click)="onIncrementCounter('useless')" >Pas utile</p>
-            <p class="grey-font"> {{review.uselessCounter}}</p>
+            <p-rating [(ngModel)]="review.rating" [readonly]="true" [cancel]="false"></p-rating>
         </div>
     </div>
     <div class="content">

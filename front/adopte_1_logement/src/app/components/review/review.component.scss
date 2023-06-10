@@ -1,5 +1,6 @@
 .box {
     width: 50rem;
+
     .header {
         display: flex;
         align-items: center;
@@ -13,18 +14,13 @@
         .rating {
             display: flex;
             margin-left: auto;
-
-            .counter:hover {
-                cursor: pointer;
-                text-decoration: underline;
-            }
         }
     }
     .content {
         margin-top: 1rem;
     }
     p {
-        margin: 5px ;
+        margin: 5px 0 0 0 ;
     }
     .grey-font {
         color: var(--greyFont);

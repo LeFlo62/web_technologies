@@ -11,7 +11,7 @@ export interface Review {
     id: string;
     authorId: string;
     authorName: string;
-    time: number;
+    time: any;
     housingId: string;
     content: string;
     rating: number;

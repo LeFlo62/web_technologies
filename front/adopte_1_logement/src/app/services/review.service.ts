@@ -12,7 +12,7 @@ export class ReviewService {
   
   constructor(private http : HttpClient) { }
 
-  getReviewsByHousing(id : number) : Observable<Review[]> {
+  getReviewsByHousing(id : string) : Observable<Review[]> {
     return this.http.get<Review[]>(this.url + 'list/' + id);
   }
 

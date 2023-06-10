@@ -4,7 +4,7 @@
             <i class="pi pi-arrow-left"></i>
             <p>Retour aux résultats</p>
         </div>
-        <p class="research">Rechercher</p>
+        <!-- <p class="research">Rechercher</p> -->
     </div>
     <h2>{{housingData.title}}</h2>
     <div class="content">
@@ -19,9 +19,9 @@
                 </ng-template>
             </p-carousel>
             <div class="tenants-review box">
-                <p>Notes des locataires : </p>
+                <h3>Notes des locataires : </h3>
                 <p-rating [(ngModel)]="housingData.rating" [readonly]="true" [cancel]="false"></p-rating>
-                <p>{{housingData.rating}}</p>
+                <p>{{housingData.rating | number:'1.1-1'}}</p>
                 <button pButton pRipple type="button" label="Voir les avis" class="p-button-sm p-button-text p-button-plain" (click)="onShowComments()"></button>
             </div>
             <div class="landlord-requests">
@@ -41,12 +41,15 @@
         </div>
         <div class="right-side">
             <div class="landlord-info">
-                <div class="landlord-description box">{{housingData.landlordDescription}}</div>
+                <div class="landlord-description box">
+                    <h3>Bailleur :</h3>
+                    <p>{{housingData.authorName}}</p>
+                </div>
                 <p-avatar icon="pi pi-user" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
             </div>
             <div class="buttons">
-                <button pButton label="Contacter le bailleur" class="p-button-success" style="width: 70%;" [routerLink]="'/message/' + housingData.authorId"></button>
-                <button pButton pRipple label="Favoris" class="favorites" styleClass="p-button-sm p-button-primary" icon="pi pi-plus" style="width: 25%;"></button>
+                <button pButton label="Contacter le bailleur" class="p-button-success" style="width: 100%;" [routerLink]="'/message/' + housingData.authorId"></button>
+                <!-- <button pButton pRipple label="Favoris" class="favorites" styleClass="p-button-sm p-button-primary" icon="pi pi-plus" style="width: 25%;"></button> -->
             </div>
             <div class="housing-description box">
                 <h3>Description :</h3>
